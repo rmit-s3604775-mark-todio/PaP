@@ -41,6 +41,9 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+// For Google Cloud App Engine
+$app->useStoragePath(env('APP_STORAGE', base_path() . '/storage'));
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application
