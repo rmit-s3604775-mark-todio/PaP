@@ -14,3 +14,10 @@ env_variables:
   DB_USERNAME: root
   DB_PASSWORD: 7hvwaEG7q0jxi3vt
   DB_SOCKET: "/cloudsql/pap-app-01:australia-southeast1:pap-db"
+
+handlers:
+- url: /css
+  static_dir: public/css
+
+- url: /js
+  static_dir: public/js
