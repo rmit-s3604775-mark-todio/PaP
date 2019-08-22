@@ -5,18 +5,29 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<body>
-		@section('profilesidebar')
+	<?php
+	//@section('profilesidebar')
 		
-		@show
-	
-	@section('content')
+	//@section('content')
 		// profile picture
 		// name
+		echo ("<h1>SampleUserName</h1>");
+		echo ("<br>");
 		// state
+		echo ("Victoria");
+		echo ("<br>");
+		// city
+		echo ("Melbourne");
+		echo ("<br>");
 		// country
+		echo ("Australia");
+		echo ("<br>");
 		// profile blurb
-	
+		echo ("This is my profile!");
+		echo ("<br>");
 
+	?>
+	
 	</body>		
 
 </html>
