@@ -5,17 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<body>
-
+	
+	<div id="sidebar">
+		@include('includes.profilesidebar')
+	</div>
 		
 		<?php
-		#@section('sidebar')
-		#echo "<img src="profilepic.png" alt="Profile Picture">";
-		#echo "<a href="editprofile">Edit Profile</a>";
-		#echo "<a href="products">Products</a>";
-		#echo "<a href="requests">Product Requests</a>";
-		#echo "<a href="reviews">Reviews</a>";
-		#echo "<a href="inbox">Inbox</a>";
-		#@show
 	
 	#@section('content')
 		

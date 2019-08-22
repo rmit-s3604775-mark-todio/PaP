@@ -5,9 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<body>
+	
+	<div id="profilesidebar">
+		@include('includes.sidebar')
+	</div>
+	
 	<?php
-	//@section('profilesidebar')
-		
 	//@section('content')
 		// profile picture
 		// name
