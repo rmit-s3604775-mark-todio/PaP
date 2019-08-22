@@ -7,7 +7,7 @@
 	<body>
 	
 	<div id="sidebar">
-		@include('includes.profilesidebar')
+		@section('profilesidebar')
 	</div>
 		
 		<?php
@@ -30,7 +30,7 @@
 			echo '<br/>';
 			echo Form::text('addressline2');
 			echo '<br/>';
-			echo Form::select('state', array('NSW' => 'New South Wales', 'QLD' => 'Queensland', 'SA' => 'South Australia', 'TAS' => 'Tasmania', 'VIC' => 'Victoria', 'WA' => 'Western Australia', 'ACT' => 'Australian Capital Territory'));
+			echo Form::text('state');
 			echo '<br/>';
 			echo Form::text('postcode');
 			echo '<br/>';
