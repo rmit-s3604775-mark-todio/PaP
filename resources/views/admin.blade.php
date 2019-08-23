@@ -3,18 +3,39 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Admin Dashboard</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                <div class="card-header">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <span class="col-6 text-left">
+                                Admin Dashboard
+                            </span>
+                            <span class="col-6 text-right">
+                                @component('components.who')
+                                @endcomponent
+                            </span>
+                        </div> 
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-3 nav-menu justify-content-center">
+                            @component('components.admin-menu')
+                            @endcomponent
                         </div>
-                    @endif
-
-                    You are logged in as an Admin!
+                        <div class="col-9">
+                            <div class="card-body">
+                                @if (session('status'))
+                                    <div class="alert alert-success" role="alert">
+                                        {{ session('status') }}
+                                    </div>
+                                @endif
+        
+                                You are logged in as an Admin!
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
