@@ -21,3 +21,6 @@ handlers:
 
 - url: /js
   static_dir: public/js
+
+skip_files:
+  - .env
