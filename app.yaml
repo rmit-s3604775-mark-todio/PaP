@@ -2,13 +2,16 @@ runtime: php72
 
 # Put production environment variables here.
 env_variables:
+
   # Applicaton key
   APP_KEY: base64:uBkIxf8LzynslZzCCnUCSnmQbLUzqAnT3hCy6z2qj6s=
+
   # Storage path
   APP_STORAGE: /tmp
   VIEW_COMPILED_PATH: /tmp
   CACHE_DRIVER: database
   SESSION_DRIVER: database
+
   ## Set these environment variables according to your CloudSQL configuration.
   DB_DATABASE: pap_db
   DB_USERNAME: root
@@ -23,6 +26,9 @@ env_variables:
   MAIL_PASSWORD: h8Hm3WYokIFa
   MAIL_ENCRYPTION: tls
 
+  ##Logging on GCP
+  LOG_CHANNEL: stackdriver
+
 handlers:
 - url: /css
   static_dir: public/css
@@ -30,5 +36,3 @@ handlers:
 - url: /js
   static_dir: public/js
 
-skip_files:
-  - .env

@@ -38,7 +38,13 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        parent::report($exception);
+        if (isset($_SERVER['GAE_SERVICE'])) {
+            // Ensure Stackdriver is initialized and handle the exception
+            Bootstrap::init();
+            Bootstrap::exceptionHandler($exception);
+        } else {
+            parent::report($exception);
+        }
     }
 
     /**
