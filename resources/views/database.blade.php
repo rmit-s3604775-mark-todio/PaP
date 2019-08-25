@@ -5,7 +5,7 @@
 	define("DB_USER", "root");
 	define("DB_PASS", "7hvwaEG7q0jxi3vt");
 	
-	$db = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+	$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 	
 	if (!$db) {
 		die('Could not connect: ' . mysql_error());

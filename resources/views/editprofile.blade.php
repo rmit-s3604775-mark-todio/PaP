@@ -14,6 +14,11 @@
 	
 	#@section('content')
 		
+		@include('database');
+		
+		# query username and the textbox is filled with the user details 
+		#$q = $db->query("SELECT * FROM user");
+		
 		echo Form::open(array('url' => 'foo/bar'));
 			echo '<br/>';
 			echo Form::text('firstname', 'First Name:');
