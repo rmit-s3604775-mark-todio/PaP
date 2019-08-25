@@ -12,8 +12,7 @@
                                 Admin Dashboard
                             </span>
                             <span class="col-6 text-right">
-                                @component('components.who')
-                                @endcomponent
+                                Welcome {{ Auth::user()->name }}
                             </span>
                         </div> 
                     </div>
