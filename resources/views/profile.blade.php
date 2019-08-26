@@ -6,7 +6,12 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Test Profile</div>
-				
+					<div class="container">
+						<div class="row">
+							<div class="col-3 nav-menu justify-content-center">
+								@component('components.profile-menu')
+								@endcomponent
+							</div>		
 	
 	<?php
 	
