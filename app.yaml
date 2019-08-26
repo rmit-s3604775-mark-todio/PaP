@@ -14,3 +14,21 @@ env_variables:
   DB_USERNAME: root
   DB_PASSWORD: 7hvwaEG7q0jxi3vt
   DB_SOCKET: "/cloudsql/pap-app-01:australia-southeast1:pap-db"
+
+  ## Set these enviroment variables according to mail server.
+  MAIL_DRIVER: smtp
+  MAIL_HOST: smtp.gmail.com
+  MAIL_PORT: 587
+  MAIL_USERNAME: papapphelp@gmail.com
+  MAIL_PASSWORD: h8Hm3WYokIFa
+  MAIL_ENCRYPTION: tls
+
+handlers:
+- url: /css
+  static_dir: public/css
+
+- url: /js
+  static_dir: public/js
+
+skip_files:
+  - .env
