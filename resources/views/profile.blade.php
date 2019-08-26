@@ -1,53 +1,64 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-	<body>
-	
-	<div id="profilesidebar">
-		@include('profilesidebar')
-	</div>
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Test Profile</div>
+				
 	
 	<?php
 	
-		@include('database');
-		
+	# session ID
+	
+	define("DB_HOST", "35.189.36.51");
+	define("DB_NAME", "pap_db");
+	define("DB_USER", "root");
+	define("DB_PASS", "7hvwaEG7q0jxi3vt");
+	
+	$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+	
+	if (!$conn) {
+		die('Could not connect: ' . mysql_error());
+	};
+	
 		# temporary username to query specific record
-		$username = 'test';
+		//$username = 'test';
 		
-		$result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
+		//$result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
 		
-		if(mysqli_num_rows($result) > 0) {
-			$row=mysqli_fetch_assoc($result))
-				
-			
-		
+		//if(mysqli_num_rows($result) > 0) {
+		//	$row=mysqli_fetch_assoc($result);
+							
 		// profile picture
 		// username, retrieves username depending on id from database
-		echo ($row['username']);
-		echo ("<br>");
 		// state
-		echo ($row['state']);
+		//echo $row['state'];
+		echo ("Victoria");
 		echo ("<br>");
 		// city
-		echo ($row['city']);
+		//echo $row['city'];
+		echo ("Melbourne");
 		echo ("<br>");
 		// country
-		echo ($row['country']);
+		//echo $row['country'];
+		echo ("Australia");
 		echo ("<br>");
 		// profile blurb
 		echo ("This is my profile!");
 		echo ("<br>");
-		}
-		else {
-			echo "Profile does not exist";
-		}
+		//}
+		//else {
+		//	echo "Profile does not exist";
+		//}
 		
 		mysqli_close($conn);
-	?>
-	
-	</body>		
+		?>
+			</div>
+		</div>
+	</div>
+</div>
+@endsection
 
-</html>
+

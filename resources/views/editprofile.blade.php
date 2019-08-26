@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-	<body>
-	
-	<div id="sidebar">
-		@section('profilesidebar')
-	</div>
-		
+@section('content')
 		<?php
 	
 	#@section('content')
 		
 		@include('database');
+		
 		
 		# query username and the textbox is filled with the user details 
 		#$q = $db->query("SELECT * FROM user");
@@ -47,8 +39,6 @@
 		echo Form::close();
 		
 	
-		?>
+		?>	
 
-	</body>			
-
-</html>
+@endsection
