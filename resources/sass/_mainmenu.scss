@@ -1,0 +1,24 @@
+$border: 1px solid rgba(0, 0, 0, 0.125);
+
+.nav-menu {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.main-menu {
+  border: $border;
+}
+
+.menu-item {
+  text-decoration: none;
+  color: black;
+  padding: 5px;
+  border-top: $border;
+}
+
+.menu-item:hover,
+.menu-item:active {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  background-color: #fff;
+}
