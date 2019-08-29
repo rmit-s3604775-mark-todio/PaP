@@ -43,10 +43,10 @@
             .content {
                 text-align: center;
             }
-
+<!--
             .title {
-                font-size: 84px;
-            }
+                
+            }-->
 
             .links > a {
                 color: #636b6f;
@@ -57,10 +57,17 @@
                 text-decoration: none;
                 text-transform: uppercase;
             }
+			
+			.image
+			{
+				position : flexible;
+				left: 50%;
+    			top: 50%;
+			}
 
-            .m-b-md {
+            <!--.m-b-md {
                 margin-bottom: 30px;
-            }
+            }-->
         </style>
     </head>
     <body>
@@ -80,8 +87,9 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+                <div class="image">
+					<!--url({{ URL::asset('images/Logo.png') }})-->
+					<img src="{{ asset('storage/Logo1.png') }}" />
                 </div>
 
                 <div class="links">
