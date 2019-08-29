@@ -2,6 +2,7 @@ $border: 1px solid rgba(0, 0, 0, 0.125);
 
 .nav-menu {
   background-color: rgba(0, 0, 0, 0.03);
+  border-right: $border;
 }
 
 .main-menu {
@@ -23,14 +24,14 @@ $border: 1px solid rgba(0, 0, 0, 0.125);
   background-color: #fff;
 }
 
+.avatar {
+  border-radius: 50%;
+}
+
 #menu-avatar {
   width: 90%;
   height: 90%;
   margin: 5px;
-}
-
-.avatar {
-  border-radius: 50%;
 }
 
 #header-avatar {

@@ -25,12 +25,32 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin');
+        return view('admin.home');
     }
 
     public function settings()
     {
-        return view('admin-settings');
+        return view('admin.settings');
+    }
+
+    public function users()
+    {
+        return view('admin.users');
+    }
+
+    public function administrators()
+    {
+        return view('admin.administrators');
+    }
+
+    public function products()
+    {
+        return view('admin.products');
+    }
+
+    public function messages()
+    {
+        return view('admin.messages');
     }
 
     public function update_avatar(Request $request)
@@ -49,6 +69,6 @@ class AdminController extends Controller
         $user->avatar = $filename;
         $user->save();
 
-        return view('admin-settings');
+        return view('admin.settings');
     }
 }

@@ -30,8 +30,8 @@
                                         {{ session('status') }}
                                     </div>
                                 @endif
-        
-                                You are logged in as an Admin!
+
+                                <h3>Products</h3>
                             </div>
                         </div>
                     </div>
