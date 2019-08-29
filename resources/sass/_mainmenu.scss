@@ -40,3 +40,9 @@ $border: 1px solid rgba(0, 0, 0, 0.125);
   top: 10px;
   left: 10px;
 }
+
+@media (max-width: 768px) {
+  .nav-menu {
+      display: none;
+  }
+}
