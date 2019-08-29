@@ -49,6 +49,7 @@
                                 </li>
                             @endif
                         @else
+                            <img id="header-avatar" class="avatar" src="/uploads/avatars/{{ Auth::user()->avatar }}">
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
