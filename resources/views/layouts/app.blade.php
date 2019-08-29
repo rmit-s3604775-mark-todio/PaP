@@ -35,7 +35,13 @@
                     <ul class="navbar-nav mr-auto">
 
                     </ul>
+                    <div class="header-center justify-content-end">
+                        @guest
 
+                        @else
+                        <img id="header-avatar" class="avatar" src="/uploads/avatars/{{ Auth::user()->avatar }}">
+                        @endguest
+                    </div>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -59,20 +65,20 @@
                                         <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
                                             {{ __('Home') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+                                        <a class="dropdown-item" href="{{ route('admin.settings') }}">
                                             {{ __('Settings') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+                                        <a class="dropdown-item" href="{{ route('admin.users') }}">
                                             {{ __('Users') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+                                        <a class="dropdown-item" href="{{ route('admin.administrators') }}">
                                             {{ __('Administrators') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+                                        <a class="dropdown-item" href="{{ route('admin.products') }}">
                                             {{ __('Products') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
-                                            {{ __('Inbox') }}
+                                        <a class="dropdown-item" href="{{ route('admin.messages') }}">
+                                            {{ __('Messages') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
@@ -108,20 +114,20 @@
                                         <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
                                             {{ __('Home') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+                                        <a class="dropdown-item" href="{{ route('admin.settings') }}">
                                             {{ __('Settings') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+                                        <a class="dropdown-item" href="{{ route('admin.users') }}">
                                             {{ __('Users') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+                                        <a class="dropdown-item" href="{{ route('admin.administrators') }}">
                                             {{ __('Administrators') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+                                        <a class="dropdown-item" href="{{ route('admin.products') }}">
                                             {{ __('Products') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
-                                            {{ __('Inbox') }}
+                                        <a class="dropdown-item" href="{{ route('admin.messages') }}">
+                                            {{ __('Messages') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('admin.logout') }}">
                                             {{ __('Logout') }}
