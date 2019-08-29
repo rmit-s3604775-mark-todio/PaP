@@ -59,7 +59,7 @@
                                         <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
                                             {{ __('Home') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+                                        <a class="dropdown-item" href="{{ route('admin.settings') }}">
                                             {{ __('Settings') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
@@ -108,7 +108,7 @@
                                         <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
                                             {{ __('Home') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+                                        <a class="dropdown-item" href="{{ route('admin.settings') }}">
                                             {{ __('Settings') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('admin.dashboard') }}">

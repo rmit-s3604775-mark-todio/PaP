@@ -21,6 +21,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 
 Route::prefix('admin')->group(function(){
+    Route::get('/settings', 'AdminController@settings')->name('admin.settings');
+    Route::post('/avatar', 'AdminController@update_avatar')->name('admin.avatar');
+
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::get('/', 'AdminController@index')->name('admin.dashboard');

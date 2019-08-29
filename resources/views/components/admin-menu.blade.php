@@ -1,12 +1,12 @@
-<div class="row profile-image">
-    <img src="/uploads/avatars/default.png" style="width: 90%; height: 90%; float: center; border-radius: 50%; margin: 5px;">
+<div class="row justify-content-center">
+    <img id="menu-avatar" class="avatar" src="/uploads/avatars/{{ Auth::user()->avatar }}">
 </div>
 <div class="row main-menu">
     <div class="col">
         <a href="{{ route('admin.dashboard') }}" class="row menu-item">
             {{ __('Home') }}
         </a>
-        <a href="" class="row menu-item">
+        <a href="{{ route('admin.settings') }}" class="row menu-item">
             {{ __('Settings') }}
         </a>
         <a href="" class="row menu-item">
