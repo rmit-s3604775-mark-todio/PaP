@@ -91,6 +91,9 @@
                                         <a class="dropdown-item" href="{{ route('home') }}">
                                             {{ __('Home') }}
                                         </a>
+                                        <a class="dropdown-item" href="{{ route('product-requests') }}">
+                                            {{ __('Product Requests') }}
+                                        </a>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
@@ -104,6 +107,9 @@
                                         </p>
                                         <a class="dropdown-item" href="{{ route('home') }}">
                                             {{ __('Home') }}
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('product-requests') }}">
+                                            {{ __('Product Requests') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('user.logout') }}">
                                             {{ __('Logout') }}
