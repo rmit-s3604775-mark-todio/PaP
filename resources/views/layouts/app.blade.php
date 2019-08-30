@@ -35,7 +35,13 @@
                     <ul class="navbar-nav mr-auto">
 
                     </ul>
+                    <div class="header-center justify-content-end">
+                        @guest
 
+                        @else
+                        <img id="header-avatar" class="avatar" src="/uploads/avatars/{{ Auth::user()->avatar }}">
+                        @endguest
+                    </div>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -55,11 +61,85 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                                    @if(Auth::guard('admin')->check() & !Auth::guard('web')->check())
+                                        <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+                                            {{ __('Home') }}
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('admin.settings') }}">
+                                            {{ __('Settings') }}
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('admin.users') }}">
+                                            {{ __('Users') }}
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('admin.administrators') }}">
+                                            {{ __('Administrators') }}
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('admin.products') }}">
+                                            {{ __('Products') }}
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('admin.messages') }}">
+                                            {{ __('Messages') }}
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+                                    @endif
+
+                                    @if(Auth::guard('web')->check() & !Auth::guard('admin')->check())
+                                        <a class="dropdown-item" href="{{ route('home') }}">
+                                            {{ __('Home') }}
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('product-requests') }}">
+                                            {{ __('Product Requests') }}
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+                                    @endif
+
+                                    @if(Auth::guard('admin')->check() & Auth::guard('web')->check())
+                                        <p class="dropdown-header">
+                                            {{ __('User') }}
+                                        </p>
+                                        <a class="dropdown-item" href="{{ route('home') }}">
+                                            {{ __('Home') }}
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('product-requests') }}">
+                                            {{ __('Product Requests') }}
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('user.logout') }}">
+                                            {{ __('Logout') }}
+                                        </a>
+                                        <p class="dropdown-header">
+                                            {{ __('Administrator') }}
+                                        </p>
+                                        <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+                                            {{ __('Home') }}
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('admin.settings') }}">
+                                            {{ __('Settings') }}
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('admin.users') }}">
+                                            {{ __('Users') }}
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('admin.administrators') }}">
+                                            {{ __('Administrators') }}
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('admin.products') }}">
+                                            {{ __('Products') }}
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('admin.messages') }}">
+                                            {{ __('Messages') }}
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('admin.logout') }}">
+                                            {{ __('Logout') }}
+                                        </a>
+                                    @endif
+                                    
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
