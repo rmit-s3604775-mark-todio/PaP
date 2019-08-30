@@ -41,34 +41,35 @@
 									};
 									
 										# temporary username to query specific record
-										//$username = 'test';
+										$username = 'testuser';
 										
-										//$result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
+										$result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
 										
-										//if(mysqli_num_rows($result) > 0) {
-										//	$row=mysqli_fetch_assoc($result);
+										if(mysqli_num_rows($result) > 0) {
+											$row=mysqli_fetch_assoc($result);
 															
-										// profile picture
 										// username, retrieves username depending on id from database
+										// name
+										echo ("<h1>");
+										echo $row['username'];
+										echo ("</h1><br>");
 										// state
-										//echo $row['state'];
-										echo ("Victoria, ");
-										echo ("<br>");
+										echo $row['state'];
+									
+										echo (", <br>");
 										// city
-										//echo $row['city'];
-										echo ("Melbourne");
-										echo ("<br>");
+										echo $row['city'];
+										echo (", <br>");
 										// country
-										//echo $row['country'];
-										echo ("Australia");
+										echo $row['country'];
 										echo ("<br>");
-										// profile blurb
+										// profile blurb; unsure if it should be on user table or another table
 										echo ("This is my profile!");
-										echo ("<br>");
-										//}
-										//else {
-										//	echo "Profile does not exist";
-										//}
+										echo ("<br> <br>");
+										}
+										else {
+											echo "Profile does not exist";
+										}
 										
 										mysqli_close($conn);
 									?>
