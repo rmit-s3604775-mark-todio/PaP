@@ -20,6 +20,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 
+Route::get('/product-requests', 'HomeController@product_requests')->name('product-requests');
+
 Route::prefix('admin')->group(function(){
     Route::get('/settings', 'AdminController@settings')->name('admin.settings');
     Route::post('/avatar', 'AdminController@update_avatar')->name('admin.avatar');
