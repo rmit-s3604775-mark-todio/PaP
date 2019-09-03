@@ -33,12 +33,15 @@ class ProductsController extends Controller
     public function create()
     {
         // create an item here and view it on view page
-		DB::table('products')->insert(
+	/*	DB::table('products')->insert(
 			['product_name'=>'Lenovo laptop', 'price'=>2000.10, 'quantity'=>1, 'quantity_remaining'=>'1', 'rating'=>5,'created_at'=>new DateTime(), 'updated_at'=>new DateTime()]
 			);
 		
 		$prod = DB::table('products')->get();
 		return $prod;
+	*/
+		return view('products.create');
+	//	return "hello world";
     }
 
     /**
@@ -49,7 +52,25 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+		$product = new product;
+		$this->validate($request,[
+			"product_name"=>'required',
+			"price"=>'required',
+			"quantity"=>'required'
+		]);
+		
+		
+		$product->product_name = $request->product_name;
+		$product->price = $request->price;
+		$product->quantity = $request->quantity;
+		$product->quantity_remaining = $request->quantity;
+		$product->created_at = new DateTime();
+		$product->updated_at = new DateTime();
+		$product->rating = 5;
+		$product->save();
+		return redirect('products');
+    //   return $request->all();
+	//	return "hello";
     }
 
     /**
@@ -60,7 +81,9 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        //
+		
+        $prod = DB::table('products')->get();
+		return $prod;
     }
 
     /**
