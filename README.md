@@ -18,6 +18,7 @@
     - [Messages *`(Not Yet Implemented)`*](#messages-not-yet-implemented)
   - [Administrator](#administrator)
     - [Loging In](#loging-in-1)
+      - [Forgot your password](#forgot-your-password)
     - [Home *`(Not Yet Implemented)`*](#home-not-yet-implemented)
     - [Settings *`(Partial Implementation)`*](#settings-partial-implementation)
       - [Profile Settings](#profile-settings)
@@ -32,6 +33,9 @@
 ### Loging In
 ![User Login Page](documentation/users/login.png)
 To log in as a user go to /login and the user will be presented with a login form. after loggin in the user will be redirected to their dashboard (/home). If the user tries to access their /home before loggin in the user will be redirected to the login page.
+
+If the user clicks `Forgot Your Password` they will be redirected to the following page where they will be required to input their email. After this the user will be emailed a unique link to reset their password.
+![Forgot Your Password Form](documentation/users/reset_pssword.png)
 
 ### Home
 ![User Home Page](documentation/users/home.png)
@@ -50,6 +54,10 @@ A user can create a product request by going to /product-requests and clicking o
 ### Loging In
 ![Admin Login Page](documentation/admin/login.png)
 To log in as an admin go to /admin/login and the user will be presented with a login form. After loggin in the user will be redirected to their dashboard (/admin). If the user tries to access their /admin before loggin in the user will be redirected to the admin login page.
+
+#### Forgot your password
+If the administrator clicks `Forgot Your Password` they will be redirected to the following page where they will be required to input their email. After this the administrator will be emailed a unique link to reset their password.
+![Forgot Your Password Form](documentation/admin/reset_pssword.png)
 
 ### Home *`(Not Yet Implemented)`*
 ![Home Page](documentation/admin/home.png)
