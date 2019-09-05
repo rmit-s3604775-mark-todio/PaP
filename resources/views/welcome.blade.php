@@ -43,10 +43,6 @@
             .content {
                 text-align: center;
             }
-<!--
-            .title {
-                
-            }-->
 
             .links > a {
                 color: #636b6f;
@@ -64,10 +60,6 @@
 				left: 50%;
     			top: 50%;
 			}
-
-            <!--.m-b-md {
-                margin-bottom: 30px;
-            }-->
         </style>
     </head>
     <body>
@@ -88,18 +80,7 @@
 
             <div class="content">
                 <div class="image">
-					<!--url({{ URL::asset('images/Logo.png') }})-->
-					<img src="{{ asset('storage/Logo1.png') }}" />
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+					<img src="{{ asset('images/Logo.png') }}" />
                 </div>
             </div>
         </div>
