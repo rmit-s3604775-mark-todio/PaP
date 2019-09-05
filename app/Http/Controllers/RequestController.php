@@ -15,7 +15,7 @@ class RequestController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth'); //use the web guard
+        $this->middleware('auth'); //use the default guard (web)
     }
 
     /**
