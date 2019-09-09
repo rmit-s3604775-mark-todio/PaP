@@ -36,4 +36,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Relationship with the Request Model
+     */
+    public function requests() {
+        $this->hasMany('App\ProductRequest');
+    }
 }
