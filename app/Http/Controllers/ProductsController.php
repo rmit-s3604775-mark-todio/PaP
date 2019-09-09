@@ -117,6 +117,10 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+		DB::table('products')->where('id', '=', $id)->delete();
+		
+		return redirect('products');
+     //   return view('products.index', compact('products'));
+	//	return $id;
     }
 }

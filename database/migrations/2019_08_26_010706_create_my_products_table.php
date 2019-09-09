@@ -18,7 +18,8 @@ class CreateMyProductsTable extends Migration
 			$table->string('product_name');
 			$table->decimal('price', 8,2);	// highest number 99,999,999.99
 			$table->integer('quantity');
-			$table->integer('quantity_remaining');
+			$table->string('brand');
+			$table->foreign('brand')->references(brand)->on('brands');
 			$table->double('rating');	// may need to change this data type
             $table->timestamps();
         });
