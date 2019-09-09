@@ -18,7 +18,7 @@ class CreateRequestTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('product_name');
-            $table->bigInteger('brand')->unsigned()->nullable();
+            $table->string('brand')->unsigned()->nullable();
             $table->foreign('brand')->references('brand')->on('brands');
             $table->string('condition')->nullable();
             $table->foreign('condition')->references('condition')->on('conditions');
