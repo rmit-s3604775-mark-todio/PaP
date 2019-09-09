@@ -18,8 +18,10 @@ class CreateRequestTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('product_name');
-            $table->string('brand')->nullable();
+            $table->bigInteger('brand_id')->unsigned()->nullable();
+            $table->foreign('brand_id')->references('id')->on('brands');
             $table->string('condition')->nullable();
+            $table->foreign('condition')->references('condition')->on('conditions');
             $table->double('min_price', 8, 2)->nullable();
             $table->double('max_price', 8, 2)->nullable();
             $table->timestamps();
