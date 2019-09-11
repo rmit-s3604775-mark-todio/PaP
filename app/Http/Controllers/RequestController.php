@@ -25,7 +25,7 @@ class RequestController extends Controller
      */
     public function index()
     {
-        //
+        return view('user.product-request');
     }
 
     /**
