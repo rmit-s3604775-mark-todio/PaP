@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\ProductRequest;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,8 @@ class RequestController extends Controller
      */
     public function index()
     {
-        //
+        $requests = ProductRequest::all();
+        return view('users.product-request', compact('requests'));
     }
 
     /**
@@ -35,7 +37,12 @@ class RequestController extends Controller
      */
     public function create()
     {
-        //
+        DB::table('requests')->insert(
+			['product_name'=>'Vivobook laptop', 'brand'=>'Asus', 'condition'=>'Used item, still functional', 'min_price'='1000.00', 'max_price'=>'1400.00']
+			);
+		
+		$reqt = DB::table('requests')->get();
+		return $reqt;
     }
 
     /**

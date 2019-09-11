@@ -32,8 +32,29 @@
                                 @endif
 
                                 <h3>Product Request</h3>
-        
-                                You are logged in as an User!
+       
+								This is your product request.
+								<br>
+								<br>
+								I wish to buy this product:
+								<br>
+								(Show the product table.)
+								<table style="background-color:yellow;">
+									<tr>
+										<th>Product Name</th>
+										<th>Brand</th>
+										<th>Condition</th>
+										<th>Min. Price</th>
+										<th>Max. Price</th>
+									</tr>
+									
+									<!--item name -->
+									<tr>
+										<td>{{$requests->brand}}</td>
+									</tr>
+								
+								
+								</table>
                             </div>
                         </div>
                     </div>
