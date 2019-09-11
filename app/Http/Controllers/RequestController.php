@@ -40,12 +40,7 @@ class RequestController extends Controller
      */
     public function create()
     {
-        $data = [
-            'brands' => DB::table('brands')->get(),
-            'conditions' => $conditions = DB::table('conditions')->get()
-        ];
-
-        return view('user.request.create', $data);
+        return view('user.request.create', [ 'brands' => DB::table('brands')->get(), 'conditions' => DB::table('conditions')->get()]);
     }
 
     /**

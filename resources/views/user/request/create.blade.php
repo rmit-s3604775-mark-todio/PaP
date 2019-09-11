@@ -14,12 +14,18 @@
                         </div>
                         <div class="row">Brand:
                             <select name="brnad" id="brand">
-                                <option value=""></option>
+                                <option value="none" selected disabled hidden>Please Select...</option>
+                                @foreach ($brands as $brand)
+                                <option value="{{ $brand->id }}">{{ $brand->brand }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="row">Condition:
                                 <select name="condition" id="condition">
-    
+                                    <option value="none" selected disabled hidden>Please Select...</option>
+                                    @foreach ($conditions as $condition)
+                                    <option value="{{ $condition->id }}">{{ $condition->condition }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         <div class="row">

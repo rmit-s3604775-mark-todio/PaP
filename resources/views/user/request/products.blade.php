@@ -56,9 +56,9 @@
                                             <td>${{ $request->min_price }}</td>
                                             <td>${{ $request->max_price }}</td>
 
-                                            <td><button> Details</button></td>
-                                            <td><button data-toggle="modal" data-target="#myModal">edit</button></td>
-                                            <td><button name="post"></button></td>
+                                            <td><button>Results</button></td>
+                                            <td><button data-toggle="modal" data-target="#myModal">Edit</button></td>
+                                            <td><button name="post">Delete</button></td>
                                             
                                             {{-- <td><button></button>
                                                 <form action="" method="post">
