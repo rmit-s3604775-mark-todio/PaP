@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\ProductRequest;
 use Illuminate\Http\Request;
+use Auth;
+use DB;
 
 class RequestController extends Controller
 {
@@ -25,7 +27,10 @@ class RequestController extends Controller
      */
     public function index()
     {
-        return view('user.product-request');
+        $user = Auth::user();
+        $requests = ProductRequest::where('user_id', $user->id)->get();
+
+        return view('user.request.products', compact('requests'));
     }
 
     /**
@@ -35,7 +40,12 @@ class RequestController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'brands' => DB::table('brands')->get(),
+            'conditions' => $conditions = DB::table('conditions')->get()
+        ];
+
+        return view('user.request.create', $data);
     }
 
     /**
@@ -46,7 +56,23 @@ class RequestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $productRequest = new ProductRequest;
+        $this->validate($request, [
+            "product_name" => 'required',
+            "max_price" => 'number',
+            "min_price" => 'number'
+        ]);
+
+        $productRequest->product_name = $request->product_name;
+        $productRequest->brand = $request->brand;
+        $productRequest->condition = $request->condition;
+        $productRequest->max_price = $request->max_price;
+        $productRequest->min_price = $request->min_price;
+        $productRequest->created_at = new DateTime();
+        $productRequest->updated_at = new DateTime();
+        
+        $productRequest->save();
+        return view('user.request.products');
     }
 
     /**
@@ -57,7 +83,8 @@ class RequestController extends Controller
      */
     public function show(ProductRequest $productRequest)
     {
-        //
+        $req = DB::table('requests')->where($productRequest)->get();
+        return $req;
     }
 
     /**

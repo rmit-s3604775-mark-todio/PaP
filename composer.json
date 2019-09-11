@@ -13,7 +13,8 @@
         "google/cloud-error-reporting": "^0.15.0",
         "google/cloud-logging": "^1.17",
         "laravel/framework": "5.8.*",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "intervention/image": "2.*"
     },
     "require-dev": {
         "filp/whoops": "^2.0",
