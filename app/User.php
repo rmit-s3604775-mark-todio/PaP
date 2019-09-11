@@ -40,4 +40,10 @@ class User extends Authenticatable
 	public function product(){
 		return $this->hasMany(Product::class);
 	}
+    /**
+     * Relationship with the Request Model
+     */
+    public function requests() {
+        $this->hasMany('App\ProductRequest');
+    }
 }
