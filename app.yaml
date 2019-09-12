@@ -4,7 +4,7 @@ runtime: php72
 env_variables:
 
   # Applicaton key
-  APP_KEY: base64:uBkIxf8LzynslZzCCnUCSnmQbLUzqAnT3hCy6z2qj6s=
+  APP_KEY: base64:xJztOxf/bJJ9icT4OKAlrBoSQid5QdtkMKJAm9Zl9q8=
 
   # Storage path
   APP_STORAGE: /tmp
@@ -36,3 +36,8 @@ handlers:
 - url: /js
   static_dir: public/js
 
+- url: /images
+  static_dir: public/images
+
+- url: /uploads
+  static_dir: public/uploads
