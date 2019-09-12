@@ -30,4 +30,9 @@ class HomeController extends Controller
     {
         return view('user.product-request');
     }
+
+    public function AuthRouteAPI(Request $request)
+    {
+        return $request->user();
+    }
 }
