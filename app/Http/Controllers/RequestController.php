@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use DB;
 use App\ProductRequest;
 use Illuminate\Http\Request;
+use Auth;
+use DB;
 
 class RequestController extends Controller
 {
@@ -26,8 +28,10 @@ class RequestController extends Controller
      */
     public function index()
     {
-        $requests = ProductRequest::all();
-        return view('users.product-request', compact('requests'));
+        $user = Auth::user();
+        $requests = ProductRequest::where('user_id', $user->id)->get();
+
+        return view('user.request.products', compact('requests'));
     }
 
     /**
@@ -37,12 +41,7 @@ class RequestController extends Controller
      */
     public function create()
     {
-        DB::table('requests')->insert(
-			['product_name'=>'Vivobook laptop', 'brand'=>'Asus', 'condition'=>'Used item, still functional', 'min_price'='1000.00', 'max_price'=>'1400.00']
-			);
-		
-		$reqt = DB::table('requests')->get();
-		return $reqt;
+        return view('user.request.create', [ 'brands' => DB::table('brands')->get(), 'conditions' => DB::table('conditions')->get()]);
     }
 
     /**
@@ -53,7 +52,23 @@ class RequestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $productRequest = new ProductRequest;
+        $this->validate($request, [
+            "product_name" => 'required',
+            "max_price" => 'number',
+            "min_price" => 'number'
+        ]);
+
+        $productRequest->product_name = $request->product_name;
+        $productRequest->brand = $request->brand;
+        $productRequest->condition = $request->condition;
+        $productRequest->max_price = $request->max_price;
+        $productRequest->min_price = $request->min_price;
+        $productRequest->created_at = new DateTime();
+        $productRequest->updated_at = new DateTime();
+        
+        $productRequest->save();
+        return view('user.request.products');
     }
 
     /**
@@ -64,7 +79,8 @@ class RequestController extends Controller
      */
     public function show(ProductRequest $productRequest)
     {
-        //
+        $req = DB::table('requests')->where($productRequest)->get();
+        return $req;
     }
 
     /**
