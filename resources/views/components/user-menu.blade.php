@@ -9,7 +9,7 @@
         <a href="" class="row menu-item">
             {{ __('Profile') }}
         </a>
-        <a href="" class="row menu-item">
+        <a href="{{ route('products.index') }}" class="row menu-item">
             {{ __('Products') }}
         </a>
         <a href="{{ route('product-requests') }}" class="row menu-item">

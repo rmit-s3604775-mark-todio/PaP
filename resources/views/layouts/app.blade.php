@@ -91,6 +91,9 @@
                                         <a class="dropdown-item" href="{{ route('home') }}">
                                             {{ __('Home') }}
                                         </a>
+										<a class="dropdown-item" href="{{ route('products.index') }}">
+                                            {{ __('Products') }}
+                                        </a>
                                         <a class="dropdown-item" href="{{ route('product-requests') }}">
                                             {{ __('Product Requests') }}
                                         </a>
@@ -107,6 +110,9 @@
                                         </p>
                                         <a class="dropdown-item" href="{{ route('home') }}">
                                             {{ __('Home') }}
+                                        </a>
+										<a class="dropdown-item" href="{{ route('products.index') }}">
+                                            {{ __('Products') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('product-requests') }}">
                                             {{ __('Product Requests') }}
