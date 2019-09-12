@@ -43,11 +43,11 @@
 								<table class="table">
 									<div>
 										<tr class="table-active">
-											<th>ID</th>
 											<th>Product Name</th>
 											<th>Price</th>
 											<th>Quantity</th>
-											<th>Quantity Remaining</th>
+											<th>Brand</th>
+											<th>Condition</th>
 											<th>Rating</th>
 											<th></th>
 											<th></th>
@@ -58,11 +58,11 @@
 									<div >
 										@foreach($products as $product)
 										<tr class="table-default">
-											<td>{{$product->id}}</td>
 											<td>{{$product->product_name}}</td>
 											<td>${{$product->price}}</td>
 											<td>{{$product->quantity}}</td>
-											<td>{{$product->quantity_remaining}}</td>
+											<td>{{$product->brand}}</td>
+											<td>{{$product->condition}}</td>
 											<td>{{$product->rating}}</td>
 											<td><a href="product/create">details</a></td>
 											<td><a data-toggle="modal" data-target="#myModal">edit</a></td>
@@ -95,7 +95,7 @@
 										<div class="modal-body">
 											<form class="form-horizontal" action="/products" method="post">
 											{{csrf_field()}}
-												Product Name: <input type="text" name="product_name" class="float-right"></input><br>
+												Product Name: <input type="text" name="product_name"></input><br>
 												Price: <input type="number" name="product_name"><br>
 												Quantity: <input type="number" name="product_name"><br>
 												<button type="submit" name="body" class="btn btn-success">Submit</button>

@@ -9,6 +9,7 @@ use DB;
 use DateTime;
 // model
 use App\product;
+use Auth;
 
 
 
@@ -21,8 +22,9 @@ class ProductsController extends Controller
      */
     public function index()
     {
-		$products = product::all();
-        return view('products.index', compact('products'));
+		$user = Auth::user();
+		$products = product::where('user_id', $user->id)->get();
+        return view('user.products.index', compact('products'));
     }
 
     /**
@@ -33,15 +35,7 @@ class ProductsController extends Controller
     public function create()
     {
         // create an item here and view it on view page
-	/*	DB::table('products')->insert(
-			['product_name'=>'Lenovo laptop', 'price'=>2000.10, 'quantity'=>1, 'quantity_remaining'=>'1', 'rating'=>5,'created_at'=>new DateTime(), 'updated_at'=>new DateTime()]
-			);
-		
-		$prod = DB::table('products')->get();
-		return $prod;
-	*/
-		return view('products.create');
-	//	return "hello world";
+		return view('user.products.create', [ 'brands' => DB::table('brands')->get(), 'conditions' => DB::table('conditions')->get()]);
     }
 
     /**
@@ -59,18 +53,23 @@ class ProductsController extends Controller
 			"quantity"=>'required'
 		]);
 		
+		$user = Auth::user();
 		
+		$product->user_id = $user->id;
+	//	$product->brand = DB::table('brands')->find($request->brand);
+    //    $product->condition = DB::table('conditions')->find($request->condition);
+	
+		$product->brand = $request->brand;
+        $product->condition = $request->condition;
+	
 		$product->product_name = $request->product_name;
 		$product->price = $request->price;
 		$product->quantity = $request->quantity;
-		$product->quantity_remaining = $request->quantity;
 		$product->created_at = new DateTime();
 		$product->updated_at = new DateTime();
 		$product->rating = 5;
 		$product->save();
 		return redirect('products');
-    //   return $request->all();
-	//	return "hello";
     }
 
     /**
@@ -120,7 +119,5 @@ class ProductsController extends Controller
 		DB::table('products')->where('id', '=', $id)->delete();
 		
 		return redirect('products');
-     //   return view('products.index', compact('products'));
-	//	return $id;
     }
 }

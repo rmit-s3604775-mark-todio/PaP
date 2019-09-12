@@ -17,19 +17,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-<<<<<<< HEAD
-
-// my routes
-
-// learning routes
-Route::resource('songs', 'SongsController');
 
 // project routes
 Route::resource('products', 'ProductsController');
-
-=======
 Route::resource('request', 'RequestController');
->>>>>>> develop
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
