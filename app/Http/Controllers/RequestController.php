@@ -58,8 +58,11 @@ class RequestController extends Controller
             "min_price" => 'number'
         ]);
 
+        $user = Auth::user();
+
         $productRequest->product_name = $request->product_name;
-        $productRequest->brand = $request->brand;
+        $productRequest->user_id = $user->id;
+        $productRequest->brand = DB::table('brands')->find($request->brand);
         $productRequest->condition = $request->condition;
         $productRequest->max_price = $request->max_price;
         $productRequest->min_price = $request->min_price;
