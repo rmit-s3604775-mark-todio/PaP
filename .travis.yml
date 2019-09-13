@@ -1,5 +1,5 @@
 # .travis.yml
-dist: precise
+dist: xenial
 
 language: php
 
@@ -23,4 +23,7 @@ before_script:
   - php artisan key:generate
 
 script:
-  - vendor/bin/phpunit
+  - vendor/bin/phpunit --coverage-text
+  - phpcs --ignore=app/Http/Controllers/Auth,app/Http/Controllers/Controller.php app/Http/Controllers
+  - npm run production
+  - jshint resources/assets/js/modules/*
