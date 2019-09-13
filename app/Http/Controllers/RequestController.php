@@ -6,7 +6,6 @@ use DB;
 use App\ProductRequest;
 use Illuminate\Http\Request;
 use Auth;
-use DB;
 
 class RequestController extends Controller
 {
@@ -112,8 +111,12 @@ class RequestController extends Controller
      * @param  \App\ProductRequest  $productRequest
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductRequest $productRequest)
+    public function destroy($id)
     {
-        //
+		DB::table('requests')->where('id', $id)->delete();
+		
+		/**return redirect('products');*/
+		
+		return redirect('product-request');
     }
 }

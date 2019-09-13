@@ -58,15 +58,16 @@
 
                                             <td><button>Results</button></td>
                                             <td><button data-toggle="modal" data-target="#myModal">Edit</button></td>
-                                            <td><button name="post">Delete</button></td>
+                                            {{--<td><button name="post">Delete</button></td>--}}
                                             
-                                            {{-- <td><button></button>
-                                                <form action="" method="post">
-                                                <input class="btn btn-default" type="submit" value="Delete" />
-                                                @method('delete')
+                                            
+											<td>
+                                                <form action="{{route('product-request.destroy', $request->id)}}" method="POST">
                                                 @csrf
-                                            </form>
-                                            </td> --}}
+												@method('DELETE')
+												<button type="submit" class="btn btn-danger">Delete</button>
+                                                </form>
+                                            </td>
                                         </tr>
                                         @endforeach
                                     </div>
