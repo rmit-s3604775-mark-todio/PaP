@@ -19,6 +19,12 @@ before_script:
   - sudo mysql -e 'CREATE DATABASE testing;'
   - composer self-update
   - composer install --no-interaction
+  - pear install pear/PHP_CodeSniffer
+  - phpenv rehash
+  - nvm install 7.7.1
+  - npm install npm@latest -g
+  - npm install -g jshint
+  - npm install
   - php artisan migrate:refresh --seed --no-interaction -vvv
   - php artisan key:generate
 
@@ -27,3 +33,10 @@ script:
   - phpcs --ignore=app/Http/Controllers/Auth,app/Http/Controllers/Controller.php app/Http/Controllers
   - npm run production
   - jshint resources/assets/js/modules/*
+
+notifications:
+  slack:
+    on_success: never
+    on_fail: always
+  email:
+    - s3485302@student.rmit.edu.au
