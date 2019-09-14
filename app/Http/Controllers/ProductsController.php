@@ -50,6 +50,8 @@ class ProductsController extends Controller
 		$this->validate($request,[
 			"product_name"=>'required',
 			"price"=>'required',
+			"quantity"=>'required',
+			"brand"=>'required',
 			"quantity"=>'required'
 		]);
 		
@@ -80,9 +82,8 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-		
         $prod = DB::table('products')->get();
-		return $prod;
+		return "show function";
     }
 
     /**
@@ -93,7 +94,10 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+		// show edit page
+		$item = product::find($id);
+        return view('user.products.edit', [ 'brands' => DB::table('brands')->get(), 'conditions' => DB::table('conditions')->get()], compact('item'));
+		
     }
 
     /**
@@ -105,7 +109,28 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+		$this->validate($request,[
+			"product_name"=>'required',
+			"price"=>'required',
+			"quantity"=>'required',
+			"rating"=>'required',
+			"brand"=>'required',
+			"condition"=>'required'
+			
+		]);
+	
+		$product = product::find($id);
+		
+		$product->product_name = $request->product_name;
+		$product->price = $request->price;
+		$product->quantity = $request->quantity;
+		$product->rating = $request->rating;
+		$product->brand = $request->brand;
+		$product->condition = $request->condition;
+		$product->updated_at = new DateTime();
+		$product->save();
+		
+		return redirect('products');
     }
 
     /**

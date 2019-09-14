@@ -43,6 +43,7 @@
 								<table class="table">
 									<div>
 										<tr class="table-active">
+											<th>ID</th>
 											<th>Product Name</th>
 											<th>Price</th>
 											<th>Quantity</th>
@@ -58,6 +59,7 @@
 									<div >
 										@foreach($products as $product)
 										<tr class="table-default">
+											<td>{{$product->id}}</td>
 											<td>{{$product->product_name}}</td>
 											<td>${{$product->price}}</td>
 											<td>{{$product->quantity}}</td>
@@ -65,7 +67,8 @@
 											<td>{{$product->condition}}</td>
 											<td>{{$product->rating}}</td>
 											<td><a href="product/create">details</a></td>
-											<td><a data-toggle="modal" data-target="#myModal">edit</a></td>
+										<!--	<td><a data-toggle="modal" data-target="#myModal">edit</a></td> -->
+											<td><a href="{{ route('products.edit', [$product])}}">edit</a></td>
 											
 											<td><form action="{{ url('/products', [$product]) }}" method="post">
 												<input class="btn btn-default" type="submit" value="Delete" />
@@ -98,7 +101,7 @@
 												Product Name: <input type="text" name="product_name"></input><br>
 												Price: <input type="number" name="product_name"><br>
 												Quantity: <input type="number" name="product_name"><br>
-												<button type="submit" name="body" class="btn btn-success">Submit</button>
+												<button type="submit" name="body" class="btn btn-success" value="edit">Submit</button>
 											</form>
 										</div>
 										<div class="modal-footer">
