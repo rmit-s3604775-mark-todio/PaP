@@ -48,10 +48,12 @@
 										
 										Rating: <input type="number" name="rating" class="form-control" value={{$item->rating}}>
 										
+										
+										
 										Brand:
 										<div class="row">
 											<select name="brand" id="brand">
-												<option value="{{ $item->brand }}" selected disabled hidden>{{ $item->brand }}</option>
+												<option value="{{ $item->brand }}" selected hidden>{{ $item->brand }}</option>
 												@foreach ($brands as $brand)
 												<option value="{{ $brand->brand }}">{{ $brand->brand }}</option>
 												@endforeach
@@ -61,7 +63,7 @@
 										Condition:
 										<div class="row">
 											<select name="condition" id="condition">
-												<option value="{{ $item->condition }}" selected disabled hidden>{{ $item->condition }}</option>
+												<option value="{{ $item->condition }}" selected hidden>{{ $item->condition }}</option>
 												@foreach ($conditions as $condition)
 												<option value="{{ $condition->condition }}">{{ $condition->condition }}</option>
 												@endforeach

@@ -32,10 +32,22 @@
                                     </div>
                                 @endif
 
-              
-      
-								<h1>Products</h1>
-								<a href="{{ route('products.create') }}" class="float-right" >Add new product</a>
+						
+								<div class="row">
+									<div class="col">
+										<h1>Products</h1>
+									</div>
+									
+									<div class="col">
+										<a href="{{ route('products.create') }}" class="float-right" >Add new product</a>
+										
+										<p>Print icon: <span class="glyphicon glyphicon-print"></span></p>    
+									</div>
+								</div>
+								
+								
+								
+								
 								<div>
 								
 								
@@ -66,15 +78,17 @@
 											<td>{{$product->brand}}</td>
 											<td>{{$product->condition}}</td>
 											<td>{{$product->rating}}</td>
-											<td><a href="product/create">details</a></td>
+											<td><button class="btn btn-info btn-xs" href="product/create">details</td>
 										<!--	<td><a data-toggle="modal" data-target="#myModal">edit</a></td> -->
-											<td><a href="{{ route('products.edit', [$product])}}">edit</a></td>
+											<td><button class="btn btn-warning btn-xs" href="{{ route('products.edit', [$product])}}">edit</button></td>
 											
 											<td><form action="{{ url('/products', [$product]) }}" method="post">
-												<input class="btn btn-default" type="submit" value="Delete" />
+												<button class="btn btn-danger btn-xs" type="submit" value="Delete">Delete
+												</button>
 												@method('delete')
 												@csrf
 											</form>
+											
 											</td>
 						
 										</tr>

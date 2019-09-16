@@ -114,8 +114,8 @@ class ProductsController extends Controller
 			"price"=>'required',
 			"quantity"=>'required',
 			"rating"=>'required',
-			"brand"=>'required',
-			"condition"=>'required'
+		//	"brand"=>'required',
+		//	"condition"=>'required'
 			
 		]);
 	
