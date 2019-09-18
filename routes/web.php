@@ -17,6 +17,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
+//Search Test
+Route::get('search', function() {
+    $products = App\Product::search('Nexus')->paginate(15);
+    //$products = App\product::where('product_name', 'like', '%'.'Nexus'.'%')->paginate(15);
+    // $products = app_path();
+    return $products;
+});
 
 // project routes
 Route::resource('products', 'ProductsController');
