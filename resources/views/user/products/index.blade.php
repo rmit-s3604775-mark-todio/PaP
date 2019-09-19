@@ -100,6 +100,11 @@
 									</div>
 								</div>
 								@endif
+								<div class="row justify-content-center">
+									<div class="links">
+										{{ $products->links() }}
+									</div>
+								</div>
 
 								<div class="container">
 								  <!-- Modal -->

@@ -33,7 +33,7 @@ class ProductsController extends Controller
     public function index()
     {
 		$user = Auth::user();
-		$products = product::where('user_id', $user->id)->paginate(15);
+		$products = product::where('user_id', $user->id)->paginate(10);
         return view('user.products.index', compact('products'));
     }
 
