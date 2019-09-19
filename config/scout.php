@@ -88,6 +88,15 @@ return [
     //     'secret' => env('ALGOLIA_SECRET', ''),
     // ],
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | TNT Search Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure your TNT Search settings.
+    |
+    */
     'tntsearch' => [
         'storage'  => storage_path(), //place where the index files will be stored
         'fuzziness' => env('TNTSEARCH_FUZZINESS', false),

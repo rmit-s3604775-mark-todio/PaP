@@ -131,6 +131,9 @@ class ProductsController extends Controller
 		return redirect('products');
     }
 
+    /**
+     * Search for products and return the products view.
+     */
     public function searchProduct(Request $request)
     {
         $this->validate($request, [
