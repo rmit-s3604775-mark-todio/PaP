@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\ProductRequest;
 use Illuminate\Http\Request;
 use Auth;
+use DateTime;
 
 class RequestController extends Controller
 {
@@ -53,23 +55,25 @@ class RequestController extends Controller
         $productRequest = new ProductRequest;
         $this->validate($request, [
             "product_name" => 'required',
-            "max_price" => 'number',
-            "min_price" => 'number'
+            "max_price" => 'numeric',
+            "min_price" => 'numeric'
         ]);
 
         $user = Auth::user();
 
         $productRequest->product_name = $request->product_name;
         $productRequest->user_id = $user->id;
-        $productRequest->brand = DB::table('brands')->find($request->brand);
-        $productRequest->condition = $request->condition;
+        $productRequest->brand = $request->brand;
+        $productRequest->condition = $request->condition; //DB::table('conditions')->find($request->condition);
         $productRequest->max_price = $request->max_price;
         $productRequest->min_price = $request->min_price;
         $productRequest->created_at = new DateTime();
         $productRequest->updated_at = new DateTime();
         
         $productRequest->save();
-        return view('user.request.products');
+		return redirect('product-request');
+		
+        //return view('user.request.products');
     }
 
     /**

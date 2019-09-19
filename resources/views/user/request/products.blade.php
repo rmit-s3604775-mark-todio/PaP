@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -30,7 +32,43 @@
                                         {{ session('status') }}
                                     </div>
                                 @endif
-
+								<!--
+								<form action="{{URL::to('/search')}}" method="POST" role="search">
+									{{ csrf_field() }}
+									<div class="input-group">
+										<input type="text" class="form-control" name="search" placeholder="Search users"> 
+										<span class="input-group-btn">
+											<button type="submit" class="btn btn-default">
+												<span class="glyphicon glyphicon-search"></span>
+												
+											</button>
+										</span>
+									</div>
+								</form>
+								@if(isset($details))
+								<div class="container">
+									<p>The search results for {{$query}} are :</p>
+									<table class="table">
+										<div>
+											<tr>
+												<th>Product Name</th>
+												<th>Brand</th>
+											</tr>
+										</div>
+										<div>
+											@foreach ($requests as $request)
+											<tr class="table-default">
+												<td>{{ $request->product_name }}</td>
+												<td>{{ $request->brand }}</td>
+											</tr>
+											@endforeach
+										</div>
+								</div>
+								@elseif(isset($message))
+									<p>{{ $message }}</p>
+								@endif
+								-->
+								
                                 <h3>Product Request</h3>
                                 <a href="{{ route('product-request.create') }}" class="float-right">Create Request</a>
 
@@ -58,7 +96,8 @@
 
                                             <td><button>Results</button></td>
                                             <td><button data-toggle="modal" data-target="#myModal">Edit</button></td>
-                                            {{--<td><button name="post">Delete</button></td>--}}
+                                            
+											{{--<td><button name="post">Delete</button></td>--}}
                                             
                                             
 											<td>
