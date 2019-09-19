@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::resource('product-request', 'RequestController');
 
+Route::resource('products', 'ProductsController');
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 
