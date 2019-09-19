@@ -16,6 +16,16 @@ use Auth;
 class ProductsController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth'); //use the default guard (web)
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -23,7 +33,7 @@ class ProductsController extends Controller
     public function index()
     {
 		$user = Auth::user();
-		$products = product::where('user_id', $user->id)->get();
+		$products = product::where('user_id', $user->id)->paginate(15);
         return view('user.products.index', compact('products'));
     }
 
@@ -119,5 +129,15 @@ class ProductsController extends Controller
 		DB::table('products')->where('id', '=', $id)->delete();
 		
 		return redirect('products');
+    }
+
+    public function searchProduct(Request $request)
+    {
+        $this->validate($request, [
+            'search' => ['required'],
+        ]);
+
+        $products = Product::search($request->search)->paginate(15);
+        return view('user.products.index', compact('products'));
     }
 }
