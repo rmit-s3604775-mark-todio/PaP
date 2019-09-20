@@ -28,6 +28,7 @@
     - [Administrators *`(Not Yet Implemented)`*](#administrators-not-yet-implemented)
     - [Products *`(Not Yet Implemented)`*](#products-not-yet-implemented)
     - [Messages *`(Not Yet Implemented)`*](#messages-not-yet-implemented-1)
+  - [Search](#search)
 
 ## User
 ### Loging In
@@ -91,6 +92,7 @@ Here the administrator will be able to see all the product that are currently fo
 Here the administrator will be able to send and receive messages for users and other administrators.
 
 
-
-
-
+## Search
+The search for the application uses TNT search driver with the Laravel scout wrapper. TNTSearch is a fully featured full text search engine written entirely in PHP. It's simple configuration allows you to add an amazing search experience to your site in just minutes. </br>
+[TNT Search Driver README.md](https://github.com/teamtnt/laravel-scout-tntsearch-driver/blob/master/README.md) </br>
+[TNT Search README.md](https://github.com/teamtnt/tntsearch/blob/master/README.md)
