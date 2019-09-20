@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
+//Search Test
+Route::post('search', 'ProductsController@searchProduct')->name('product.search');
 
 // project routes
 Route::resource('products', 'ProductsController');
