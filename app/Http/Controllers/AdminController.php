@@ -34,30 +34,60 @@ class AdminController extends Controller
         return view('admin.settings');
     }
 
+    /**
+     * Users Page
+     * 
+     * Returns the users view with all the users paginated.
+     * 
+     * @return view admin.users
+     */
     public function users()
     {
-        return view('admin.users');
+        $users = User::paginate(15);
+        return view('admin.users', compact('users'));
     }
 
+    /**
+     * user Search
+     * 
+     * returns the admin.user view with the search results
+     * 
+     * @param Request $request
+     * @return view admin.user
+     */
     public function userSearch(Request $request)
     {
-        # code...
+        $this->validate($request, [
+            'search' => ['required'],
+        ]);
+
+        $users = User::search($request->search)->paginate(15);
+        return view('admin.user', compact('users'));
     }
 
+    /**
+     * Administrators
+     * 
+     * Returns the administrators view
+     * 
+     * @return view admin.administrators
+     */
     public function administrators()
     {
         return view('admin.administrators');
     }
 
+    /**
+     * Products
+     * 
+     * Returns the products view with all the products paginated.
+     * 
+     * @return view admin.products
+     */
     public function products()
     {
         $products = product::paginate(15);
         return view('admin.products', compact('products'));
-    }
-
-    public function productCreate()
-    {
-        # code...
     }
 
     /**
@@ -72,6 +102,14 @@ class AdminController extends Controller
         return $this->products();
     }
 
+    /**
+     * Product Search
+     * 
+     * Return the admin products page with the search results.
+     * 
+     * @param Request $request
+     * @return view admin.products
+     */
     public function productSearch(Request $request)
     {
         $this->validate($request, [
