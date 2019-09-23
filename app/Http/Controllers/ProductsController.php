@@ -145,4 +145,10 @@ class ProductsController extends Controller
 		
 		return redirect('products');
     }
+	
+	public function details($id)
+	{
+		$item = product::find($id);
+		return view('user.products.details', compact('item'));
+	}
 }

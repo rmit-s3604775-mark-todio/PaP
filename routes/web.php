@@ -19,8 +19,11 @@ Auth::routes();
 
 
 // project routes
+Route::get('/details/{product}', 'ProductsController@details');
 Route::resource('products', 'ProductsController');
 Route::resource('request', 'RequestController');
+
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/user/logout', 'Auth\LoginController@userLogout')->name('user.logout');

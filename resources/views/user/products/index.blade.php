@@ -78,7 +78,7 @@
 											<td>{{$product->brand}}</td>
 											<td>{{$product->condition}}</td>
 											<td>{{$product->rating}}</td>
-											<td><button class="btn btn-info btn-xs" href="product/create">details</td>
+											<td><a href="{{ url('/details', [$product])}}"><button class="btn btn-info btn-xs" >details</button></a></td>
 										<!--	<td><a data-toggle="modal" data-target="#myModal">edit</a></td> -->
 											<td><button class="btn btn-warning btn-xs" href="{{ route('products.edit', [$product])}}">edit</button></td>
 											
