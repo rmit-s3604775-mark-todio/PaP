@@ -91,10 +91,10 @@
                                         <a class="dropdown-item" href="{{ route('home') }}">
                                             {{ __('Home') }}
                                         </a>
-										<a class="dropdown-item" href="{{ route('products.index') }}">
+										                    <a class="dropdown-item" href="{{ route('products.index') }}">
                                             {{ __('Products') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('product-requests') }}">
+                                        <a class="dropdown-item" href="{{ route('product-request.index') }}">
                                             {{ __('Product Requests') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
@@ -111,10 +111,10 @@
                                         <a class="dropdown-item" href="{{ route('home') }}">
                                             {{ __('Home') }}
                                         </a>
-										<a class="dropdown-item" href="{{ route('products.index') }}">
+										                    <a class="dropdown-item" href="{{ route('products.index') }}">
                                             {{ __('Products') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('product-requests') }}">
+                                        <a class="dropdown-item" href="{{ route('product-request.index') }}">
                                             {{ __('Product Requests') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('user.logout') }}">
