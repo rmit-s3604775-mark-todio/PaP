@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Image;
+use App\product;
 
 class AdminController extends Controller
 {
@@ -38,6 +39,11 @@ class AdminController extends Controller
         return view('admin.users');
     }
 
+    public function userSearch(Request $request)
+    {
+        # code...
+    }
+
     public function administrators()
     {
         return view('admin.administrators');
@@ -45,7 +51,35 @@ class AdminController extends Controller
 
     public function products()
     {
-        return view('admin.products');
+        $products = product::paginate(15);
+        return view('admin.products', compact('products'));
+    }
+
+    public function productCreate()
+    {
+        # code...
+    }
+
+    /**
+     * Destroy Product
+     * 
+     * @param int $id id of the product to delete
+     * @return view admin.products
+     */
+    public function productDestroy($id)
+    {
+        product::where('id', '=', $id)->delete();
+        return $this->products();
+    }
+
+    public function productSearch(Request $request)
+    {
+        $this->validate($request, [
+            'search' => ['required'],
+        ]);
+
+        $products = Product::search($request->search)->paginate(15);
+        return view('admin.products', compact('products'));
     }
 
     public function messages()

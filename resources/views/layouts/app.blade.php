@@ -68,13 +68,13 @@
                                         <a class="dropdown-item" href="{{ route('admin.settings') }}">
                                             {{ __('Settings') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('admin.users') }}">
+                                        <a class="dropdown-item" href="{{ route('admin.user') }}">
                                             {{ __('Users') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('admin.administrators') }}">
                                             {{ __('Administrators') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('admin.products') }}">
+                                        <a class="dropdown-item" href="{{ route('admin.product') }}">
                                             {{ __('Products') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('admin.messages') }}">
@@ -129,13 +129,13 @@
                                         <a class="dropdown-item" href="{{ route('admin.settings') }}">
                                             {{ __('Settings') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('admin.users') }}">
+                                        <a class="dropdown-item" href="{{ route('admin.user') }}">
                                             {{ __('Users') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('admin.administrators') }}">
                                             {{ __('Administrators') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('admin.products') }}">
+                                        <a class="dropdown-item" href="{{ route('admin.product') }}">
                                             {{ __('Products') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('admin.messages') }}">
