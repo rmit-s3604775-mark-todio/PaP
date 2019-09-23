@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use DB;
 use App\ProductRequest;
 use Illuminate\Http\Request;
 use Auth;
-use DateTime;
+use DateTime;//Either this one disappear or I delete it in the past. But either way, I put this back in. (Ega)
+use DB;
 
 class RequestController extends Controller
 {
@@ -40,7 +40,8 @@ class RequestController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {//This function is for calling create.blade file. Because brand and condition is dropdown menu, it needs to be able to show
+	//the content in this database, that's why both of this table is called.
         return view('user.request.create', [ 'brands' => DB::table('brands')->get(), 'conditions' => DB::table('conditions')->get()]);
     }
 
@@ -53,10 +54,10 @@ class RequestController extends Controller
     public function store(Request $request)
     {
         $productRequest = new ProductRequest;
-        $this->validate($request, [
+        $this->validate($request, [//This is for validating, basically like ensuring you put the right type or value.
             "product_name" => 'required',
-            "max_price" => 'numeric',
-            "min_price" => 'numeric'
+            "max_price" => 'numeric',//This one is previously 'number'. But 'number' is apparently the wrong variable.
+            "min_price" => 'numeric' //numeric is the correct variable
         ]);
 
         $user = Auth::user();
@@ -64,7 +65,7 @@ class RequestController extends Controller
         $productRequest->product_name = $request->product_name;
         $productRequest->user_id = $user->id;
         $productRequest->brand = $request->brand;
-        $productRequest->condition = $request->condition; //DB::table('conditions')->find($request->condition);
+        $productRequest->condition = $request->condition; //DB::table('conditions')->find($request->condition); (old code)
         $productRequest->max_price = $request->max_price;
         $productRequest->min_price = $request->min_price;
         $productRequest->created_at = new DateTime();
@@ -73,8 +74,9 @@ class RequestController extends Controller
         $productRequest->save();
 		return redirect('product-request');
 		
-        //return view('user.request.products');
+        //return view('user.request.products'); (no need)
     }
+
 
     /**
      * Display the specified resource.
@@ -91,12 +93,16 @@ class RequestController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ProductRequest  $productRequest
+     * @param $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProductRequest $productRequest)
-    {
-        //
+	 
+	 
+    public function edit($id)
+    {//I am going to put edit in this. This will be used to edit the existing data. 
+	//Basically you can change the product name, brands, condition, minimal price, and maximum price.
+        $item = request::find($id);
+        return view('user.request.edit', [ 'brands' => DB::table('brands')->get(), 'conditions' => DB::table('conditions')->get()], compact('item'));
     }
 
     /**
@@ -106,19 +112,33 @@ class RequestController extends Controller
      * @param  \App\ProductRequest  $productRequest
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProductRequest $productRequest)
+    public function update(Request $request, ProductRequest $id)
     {
-        //
+        $this->validate($request,[
+			"product_name"=>'required',
+			"max_price" => 'numeric',//This one is previously 'number'. But 'number' is apparently the wrong variable.
+            "min_price" => 'numeric' //numeric is the correct variable
+		]);
+	
+		$requests = request::find($id);
+		
+		$requests->product_name = $request->product_name;
+		$requests->brand = $request->brand;
+		$requests->condition = $request->condition;
+		$requests->updated_at = new DateTime();
+		$requests->save();
+		
+		return redirect('product-request');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ProductRequest  $productRequest
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    { //This is also my part (Ega). This will remove a data in Product request. This will also be removed from database
 		DB::table('requests')->where('id', $id)->delete();
 		
 		/**return redirect('products');*/

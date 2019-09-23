@@ -32,7 +32,8 @@
                                         {{ session('status') }}
                                     </div>
                                 @endif
-								<!--
+								<!-- Yeah, I thought I'm the one making this function, but apparently this is Brenton's job. 
+								//That's why this is here and commented.
 								<form action="{{URL::to('/search')}}" method="POST" role="search">
 									{{ csrf_field() }}
 									<div class="input-group">
@@ -94,14 +95,23 @@
                                             <td>${{ $request->min_price }}</td>
                                             <td>${{ $request->max_price }}</td>
 
-                                            <td><button>Results</button></td>
-                                            <td><button data-toggle="modal" data-target="#myModal">Edit</button></td>
+                                            <td>
+												<a href="">
+												<button>Results</button>
+												</a>
+											</td>
+                                            <td>
+												<a class="btn btn-warning btn-xs" href="{{ route('product-request.edit', [$request])}}">
+													Edit
+												</a>
+											</td>
                                             
-											{{--<td><button name="post">Delete</button></td>--}}
+											<!--I (Ega) modify the delete button-->
+											<!--<td><button name="post">Delete</button></td>-->
                                             
                                             
 											<td>
-                                                <form action="{{route('product-request.destroy', $request->id)}}" method="POST">
+                                                <form action= "{{route('product-request.destroy', $request->id)}}" method="POST">
                                                 @csrf
 												@method('DELETE')
 												<button type="submit" class="btn btn-danger">Delete</button>

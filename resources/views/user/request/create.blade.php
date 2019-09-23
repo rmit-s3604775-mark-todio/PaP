@@ -3,7 +3,7 @@
 @section('content')
 	<div>
 		<h1>Create new request</h1>
-		
+		<!--I modified this blade to make it functional (Ega)-->
         <form class="form-horizontal" action="/product-request" method="post">
 		{{csrf_field()}}
 			<fieldset>
@@ -18,6 +18,7 @@
                                 <option selected disabled hidden>Please Select...</option>
                                 @foreach ($brands as $brand)
                                 <option value="{{ $brand->brand }}">{{ $brand->brand }}</option>
+								<!--^Apparently I didn't notice that I should have changed id to brand-->
                                 @endforeach
                             </select>
                         </div>
@@ -26,6 +27,7 @@
                                     <option selected disabled hidden>Please Select...</option>
                                     @foreach ($conditions as $condition)
                                     <option value="{{ $condition->condition }}">{{ $condition->condition }}</option>
+									<!--This too just like above.-->
                                     @endforeach
                                 </select>
                         </div>
