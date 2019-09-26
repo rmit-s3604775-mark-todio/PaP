@@ -101,7 +101,7 @@ class RequestController extends Controller
     public function edit($id)
     {//I am going to put edit in this. This will be used to edit the existing data. 
 	//Basically you can change the product name, brands, condition, minimal price, and maximum price.
-        $item = request::find($id);
+        $item = ProductRequest::find($id);
         return view('user.request.edit', [ 'brands' => DB::table('brands')->get(), 'conditions' => DB::table('conditions')->get()], compact('item'));
     }
 
@@ -109,10 +109,10 @@ class RequestController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ProductRequest  $productRequest
+     * @param  \App\ProductRequest  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProductRequest $id)
+    public function update(Request $request, $id)
     {
         $this->validate($request,[
 			"product_name"=>'required',
@@ -120,12 +120,15 @@ class RequestController extends Controller
             "min_price" => 'numeric' //numeric is the correct variable
 		]);
 	
-		$requests = request::find($id);
+		$requests = ProductRequest::find($id);
 		
 		$requests->product_name = $request->product_name;
 		$requests->brand = $request->brand;
 		$requests->condition = $request->condition;
+		$requests->min_price = $request->min_price;
+		$requests->max_price = $request->max_price;
 		$requests->updated_at = new DateTime();
+		
 		$requests->save();
 		
 		return redirect('product-request');

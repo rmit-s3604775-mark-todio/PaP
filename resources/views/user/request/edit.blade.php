@@ -67,9 +67,8 @@
 										Max Price: <input type="number" name="max_price" class="form-control" value={{$item->max_price}}>
 										
 										<div class="col text-center">
-												<button type="submit" class="btn btn-success mx-auto">Submit</button>
-											</div>
-												
+											<button type="submit" class="btn btn-success mx-auto">Submit</button>
+										</div>
 									</div>
 									
 									
