@@ -10,11 +10,23 @@ use DateTime;
 // model
 use App\product;
 use Auth;
+use App\ProductImage;
+use Image;
 
 
 
 class ProductsController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth'); //use the default guard (web)
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +35,7 @@ class ProductsController extends Controller
     public function index()
     {
 		$user = Auth::user();
-		$products = product::where('user_id', $user->id)->get();
+		$products = product::where('user_id', $user->id)->paginate(10);
         return view('user.products.index', compact('products'));
     }
 
@@ -52,26 +64,48 @@ class ProductsController extends Controller
 			"price"=>'required',
 			"quantity"=>'required',
 			"brand"=>'required',
-			"quantity"=>'required'
-		]);
+      "quantity"=>'required'
+    ]);
+
+    $images_array = array();
+    
+    if($request->has('images'))
+    {
+        
+        foreach($request->images as $image)
+        {
+            $i = $image;
+            $filename = time() . '.' . $i->getClientOriginalExtension();
+            $images_array[] = $filename;
+            Image::make($i)->resize(400, 400)->save( public_path('/uploads/products/'. $filename) );
+        }
+    }
 		
 		$user = Auth::user();
 		
 		$product->user_id = $user->id;
 	//	$product->brand = DB::table('brands')->find($request->brand);
     //    $product->condition = DB::table('conditions')->find($request->condition);
-	
+    
+    // $Product_image->filename=json_encode($data)
+
+        $product->images = json_encode($images_array);
 		$product->brand = $request->brand;
         $product->condition = $request->condition;
-	
 		$product->product_name = $request->product_name;
 		$product->price = $request->price;
 		$product->quantity = $request->quantity;
 		$product->created_at = new DateTime();
 		$product->updated_at = new DateTime();
 		$product->rating = 5;
-		$product->save();
-		return redirect('products');
+        $product->save();
+    
+
+        // $image = $request->file('images');
+        // $filename = time() . '.' . $image->getClientOriginalExtension();
+        return $images_array;
+
+		// return redirect('products');
     }
 
     /**
@@ -114,9 +148,8 @@ class ProductsController extends Controller
 			"price"=>'required',
 			"quantity"=>'required',
 			"rating"=>'required',
-		//	"brand"=>'required',
-		//	"condition"=>'required'
-			
+			"brand"=>'required',
+			"condition"=>'required'
 		]);
 	
 		$product = product::find($id);
@@ -128,9 +161,11 @@ class ProductsController extends Controller
 		$product->brand = $request->brand;
 		$product->condition = $request->condition;
 		$product->updated_at = new DateTime();
-		$product->save();
+    $product->save();
+    
+    
 		
-		return redirect('products');
+    return redirect('products');
     }
 
     /**
@@ -145,10 +180,22 @@ class ProductsController extends Controller
 		
 		return redirect('products');
     }
-	
-	public function details($id)
-	{
-		$item = product::find($id);
-		return view('user.products.details', compact('item'));
-	}
+    
+    public function details($id)
+    {
+      $item = product::find($id);
+      return view('user.products.details', compact('item'));
+    }
+    /**
+     * Search for products and return the products view.
+     */
+    public function searchProduct(Request $request)
+    {
+        $this->validate($request, [
+            'search' => ['required'],
+        ]);
+
+        $products = Product::search($request->search)->paginate(15);
+        return view('user.products.index', compact('products'));
+    }
 }

@@ -36,7 +36,7 @@
 								<a href="{{ route('products.index') }}">Go back</a>
 								<h1>Create new item</h1>
 								
-								<form class="form-horizontal" action="/products" method="post">
+								<form class="form-horizontal" action="/products" method="post" enctype="multipart/form-data">
 								{{csrf_field()}}
 									<fieldset>
 										<div class="form-group">
@@ -62,6 +62,10 @@
 														<option value="{{ $condition->condition }}">{{ $condition->condition }}</option>
 														@endforeach
 													</select>
+												</div>
+
+												<div>
+													<input type="file" name="images[]" class="form-control" multiple required/>
 												</div>
 												
 												<button type="submit" class="btn btn-success">Submit</button>

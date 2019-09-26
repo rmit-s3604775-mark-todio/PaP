@@ -34,15 +34,15 @@
 
 								{{-- insert code here --}}
 						  
-								<h1>{{$item->product_name}}</h1>
-								
-								<img id="header-avatar" class="avatar" src="/uploads/products">
-								
-								<h2>Description</h2>
-								
-								<h4>Min Price</h4>
-								<h4>Max Price</h4>
-								<h4>Quantity</h4>
+                                <h1>{{$item->product_name}}</h1>
+
+                                @foreach (json_decode($item->images) as $image)
+                                <img id="menu-avatar" class="avatar" src="/uploads/products/{{ $image }}">
+                                @endforeach
+                                
+                                    
+
+
 								
 						
 									  

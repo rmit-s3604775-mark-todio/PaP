@@ -36,7 +36,7 @@
 						  
 								<a href="{{ route('products.index') }}">Go back</a>
 								<h1 class="text-center">Edit {{$item->product_name}}</h1>
-								<form action="{{ url('/products', [$item]) }}" method="post">
+								<form action="{{ route('products.update', [$item]) }}" method="post">
 									{{csrf_field()}}
 									{{method_field('PUT')}}
 									<div>

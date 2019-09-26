@@ -32,72 +32,82 @@
                                     </div>
                                 @endif
 
-						
+              
 								<div class="row">
-									<div class="col">
+									<div class="col float-left">
 										<h1>Products</h1>
 									</div>
-									
-									<div class="col">
-										<a href="{{ route('products.create') }}" class="float-right" >Add new product</a>
-										
-										<p>Print icon: <span class="glyphicon glyphicon-print"></span></p>    
+									<div class="col float-end">
+										<form action="{{ route('product.search') }}" method="post">
+											@csrf
+											<div class="row">
+												<input id="search" class="form-controll @error('search') is-invalid @enderror" type="text" name="search" required>
+												<button type="submit" class="btn btn-primary">Search</button>
+												@error('search')
+													<span class="invalid-feedback" role="alert">
+														<strong>{{ $message }}</strong>
+													</span>
+												@enderror
+											</div>											
+										</form>
+									</div>
+									<div class="col float-right">
+										<a href="{{ route('products.create') }}"><button>Add new product</button></a>
 									</div>
 								</div>
-								
-								
-								
-								
-								<div>
-								
-								
-								
-								<table class="table">
-									<div>
-										<tr class="table-active">
-											<th>ID</th>
-											<th>Product Name</th>
-											<th>Price</th>
-											<th>Quantity</th>
-											<th>Brand</th>
-											<th>Condition</th>
-											<th>Rating</th>
-											<th></th>
-											<th></th>
-											<th></th>
-										</tr>
+								<div class="row">
+									<div class="col">
+										<table class="table">
+											<tr class="table-active">
+												<th>Product Name</th>
+												<th>Price</th>
+												<th>Quantity</th>
+												<th>Brand</th>
+												<th>Condition</th>
+												<th>Rating</th>
+												<th></th>
+												<th></th>
+												<th></th>
+											</tr>
+											@if (!$products->isEmpty())
+												@foreach($products as $product)
+													<tr class="table-default">
+														<td>{{$product->product_name}}</td>
+														<td>${{$product->price}}</td>
+														<td>{{$product->quantity}}</td>
+														<td>{{$product->brand}}</td>
+														<td>{{$product->condition}}</td>
+														<td>{{$product->rating}}</td>
+														<td><a href="{{ url('/details', [$product])}}"><button class="btn btn-info btn-xs" >details</button></a></td>
+														<td><a href="{{ route('products.edit', [$product])}}"><button class="btn btn-warning btn-xs">edit</button></a></td>
+														
+														<td><form action="{{ url('/products', [$product]) }}" method="post">
+															<button class="btn btn-danger btn-xs" type="submit" value="Delete">Delete
+															</button>
+															@method('delete')
+															@csrf
+															</form>
+														
+														</td>
+													</tr>
+												@endforeach
+											@endif
+										</table>
 									</div>
-									
-									<div >
-										@foreach($products as $product)
-										<tr class="table-default">
-											<td>{{$product->id}}</td>
-											<td>{{$product->product_name}}</td>
-											<td>${{$product->price}}</td>
-											<td>{{$product->quantity}}</td>
-											<td>{{$product->brand}}</td>
-											<td>{{$product->condition}}</td>
-											<td>{{$product->rating}}</td>
-											<td><a href="{{ url('/details', [$product])}}"><button class="btn btn-info btn-xs" >details</button></a></td>
-										<!--	<td><a data-toggle="modal" data-target="#myModal">edit</a></td> -->
-											<td><button class="btn btn-warning btn-xs" href="{{ route('products.edit', [$product])}}">edit</button></td>
-											
-											<td><form action="{{ url('/products', [$product]) }}" method="post">
-												<button class="btn btn-danger btn-xs" type="submit" value="Delete">Delete
-												</button>
-												@method('delete')
-												@csrf
-											</form>
-											
-											</td>
-						
-										</tr>
-										@endforeach
+								</div>
+								@if ($products->isEmpty())
+								<div class="row">
+									<div class="col text-center">
+										<h3>No Products Found</h3>
 									</div>
-								</table>
-								
-								
-								
+								</div>
+								@endif
+								<div class="row justify-content-center">
+									<div class="links">
+										{{ $products->links() }}
+									</div>
+								</div>
+
 								<div class="container">
 								  <!-- Modal -->
 								  <div class="modal fade" id="myModal" role="dialog">
