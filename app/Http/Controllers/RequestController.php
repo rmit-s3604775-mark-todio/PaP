@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\ProductRequest;
 use Illuminate\Http\Request;
+use Auth;
+use DateTime;
 
 class RequestController extends Controller
 {
@@ -25,7 +28,10 @@ class RequestController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+        $requests = ProductRequest::where('user_id', $user->id)->get();
+
+        return view('user.request.products', compact('requests'));
     }
 
     /**
@@ -35,7 +41,7 @@ class RequestController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.request.create', [ 'brands' => DB::table('brands')->get(), 'conditions' => DB::table('conditions')->get()]);
     }
 
     /**
@@ -46,7 +52,28 @@ class RequestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $productRequest = new ProductRequest;
+        $this->validate($request, [
+            "product_name" => 'required',
+            "max_price" => 'numeric',
+            "min_price" => 'numeric'
+        ]);
+
+        $user = Auth::user();
+
+        $productRequest->product_name = $request->product_name;
+        $productRequest->user_id = $user->id;
+        $productRequest->brand = $request->brand;
+        $productRequest->condition = $request->condition; //DB::table('conditions')->find($request->condition);
+        $productRequest->max_price = $request->max_price;
+        $productRequest->min_price = $request->min_price;
+        $productRequest->created_at = new DateTime();
+        $productRequest->updated_at = new DateTime();
+        
+        $productRequest->save();
+		return redirect('product-request');
+		
+        //return view('user.request.products');
     }
 
     /**
@@ -57,7 +84,8 @@ class RequestController extends Controller
      */
     public function show(ProductRequest $productRequest)
     {
-        //
+        $req = DB::table('requests')->where($productRequest)->get();
+        return $req;
     }
 
     /**
@@ -89,8 +117,12 @@ class RequestController extends Controller
      * @param  \App\ProductRequest  $productRequest
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductRequest $productRequest)
+    public function destroy($id)
     {
-        //
+		DB::table('requests')->where('id', $id)->delete();
+		
+		/**return redirect('products');*/
+		
+		return redirect('product-request');
     }
 }
