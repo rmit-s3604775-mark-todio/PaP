@@ -48,7 +48,11 @@ Route::prefix('admin')->name('admin.')->group(function(){
     //Administrator admin routes
     //These are the routes that allow the administrator ato access and modify the administrator accounts
     Route::get('/administrators', 'AdminController@administrators')->name('administrators');
-    
+    Route::get('/register', 'AdminRegisterController@showRegistrationForm')->name('register');
+    Route::post('/register', 'AdminRegisterController@register')->name('register');
+    Route::delete('/destroy/{admin}', 'AdminRegisterController@destroy')->name('destroy');
+    Route::post('/administrators/search', 'AdminController@search')->name('search');
+
     //Message inbox route
     Route::get('/messages', 'AdminController@messages')->name('messages');
 

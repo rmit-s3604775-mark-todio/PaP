@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Auth;
 use Image;
 use App\product;
+use App\User;
+use App\Admin;
 
 class AdminController extends Controller
 {
@@ -74,7 +76,27 @@ class AdminController extends Controller
      */
     public function administrators()
     {
-        return view('admin.administrators');
+        $admins = Admin::where('id', '!=', Auth::user()->id)->paginate(5);
+        return view('admin.administrators', compact('admins'));
+    }
+
+    /**
+     * Administrator Search
+     * 
+     * Returns the administrators view with the search results
+     * 
+     * @param Request $request
+     * @return view admin.administrators
+     * 
+     */
+    public function search(Request $request)
+    {
+        $this->validate($request, [
+            'search' => ['required'],
+        ]);
+
+        $admins = Admin::search($request->search)->paginate(5);
+        return view('admin.administrators', compact('admins'));
     }
 
     /**

@@ -1,0 +1,22 @@
+.avatar {
+    border-radius: 50%;
+}
+
+.avatar-lg {
+    width: 90%;
+    height: 90%;
+    margin: 5px;
+}
+
+.avatar-sm {
+    width: 32px;
+    height: 32px;
+    top: 10px;
+    left: 10px;
+}
+
+@media (max-width: 768px) {
+    #header-avatar {
+        display: none;
+    }
+}
