@@ -39,7 +39,7 @@
                         @guest
 
                         @else
-                        <img id="header-avatar" class="avatar" src="/uploads/avatars/{{ Auth::user()->avatar }}">
+                        <img class="avatar avatar-sm" src="/uploads/avatars/{{ Auth::user()->avatar }}">
                         @endguest
                     </div>
                     <!-- Right Side Of Navbar -->
@@ -68,13 +68,13 @@
                                         <a class="dropdown-item" href="{{ route('admin.settings') }}">
                                             <i class="fa fa-cog fa-fw"></i>{{ __('Settings') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('admin.users') }}">
+                                        <a class="dropdown-item" href="{{ route('admin.user') }}">
                                             <i class="fa fa-user fa-fw"></i>{{ __('Users') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('admin.administrators') }}">
                                             <i class="fa fa-user-o fa-fw"></i>{{ __('Administrators') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('admin.products') }}">
+                                        <a class="dropdown-item" href="{{ route('admin.product') }}">
                                             <i class="fa fa-mobile fa-fw"></i>{{ __('Products') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('admin.messages') }}">
@@ -129,13 +129,13 @@
                                         <a class="dropdown-item" href="{{ route('admin.settings') }}">
                                             <i class="fa fa-cog fa-fw"></i>{{ __('Settings') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('admin.users') }}">
+                                        <a class="dropdown-item" href="{{ route('admin.user') }}">
                                             <i class="fa fa-user fa-fw"></i>{{ __('Users') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('admin.administrators') }}">
                                             <i class="fa fa-user-o fa-fw"></i>{{ __('Administrators') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('admin.products') }}">
+                                        <a class="dropdown-item" href="{{ route('admin.product') }}">
                                             <i class="fa fa-mobile fa-fw"></i>{{ __('Products') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('admin.messages') }}">

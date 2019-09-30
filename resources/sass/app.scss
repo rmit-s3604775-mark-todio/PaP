@@ -8,7 +8,13 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+@import 'mainmenu';
+
+@import 'search';
+
 //Font Awesome
 @import "node_modules/font-awesome/scss/font-awesome.scss";
 
-@import 'mainmenu';
+@import 'buttons';
+
+@import 'avatar';

@@ -10,14 +10,14 @@
 **********
 - [PaP (People and Phones)](#pap-people-and-phones)
   - [User](#user)
-    - [Loging In](#loging-in)
+    - [User Login](#user-login)
     - [Home](#home)
     - [Profile](#profile)
     - [Products](#products)
     - [Product Requests](#product-requests)
     - [Messages *`(Not Yet Implemented)`*](#messages-not-yet-implemented)
   - [Administrator](#administrator)
-    - [Loging In](#loging-in-1)
+    - [Admin Login](#admin-login)
       - [Forgot your password](#forgot-your-password)
     - [Home *`(Not Yet Implemented)`*](#home-not-yet-implemented)
     - [Settings *`(Partial Implementation)`*](#settings-partial-implementation)
@@ -25,15 +25,15 @@
     - [Users *`(Not Yet Implemented)`*](#users-not-yet-implemented)
       - [Accounts](#accounts)
       - [Products](#products-1)
-    - [Administrators *`(Not Yet Implemented)`*](#administrators-not-yet-implemented)
+    - [Administrators](#administrators)
     - [Products *`(Not Yet Implemented)`*](#products-not-yet-implemented)
     - [Messages *`(Not Yet Implemented)`*](#messages-not-yet-implemented-1)
   - [Search](#search)
 
 ## User
-### Loging In
+### User Login
 ![User Login Page](documentation/users/login.png)
-To log in as a user go to /login and the user will be presented with a login form. after loggin in the user will be redirected to their dashboard (/home). If the user tries to access their /home before loggin in the user will be redirected to the login page.
+To log in as a user go to /login and the user will be presented with a login form. after logging in the user will be redirected to their dashboard (/home). If the user tries to access their /home before logging in the user will be redirected to the login page.
 
 If the user clicks `Forgot Your Password` they will be redirected to the following page where they will be required to input their email. After this the user will be emailed a unique link to reset their password.
 ![Forgot Your Password Form](documentation/users/reset_pssword.png)
@@ -52,8 +52,9 @@ A user can create a product request by going to /product-requests and clicking o
 ### Messages *`(Not Yet Implemented)`*
 
 ## Administrator
-### Loging In
+### Admin Login
 ![Admin Login Page](documentation/admin/login.png)
+
 To log in as an admin go to /admin/login and the user will be presented with a login form. After loggin in the user will be redirected to their dashboard (/admin). If the user tries to access their /admin before loggin in the user will be redirected to the admin login page.
 
 #### Forgot your password
@@ -77,9 +78,10 @@ Here the administrator will be able to see and search all subscribed users. They
 #### Products
 The administrator will also be able to see the products that each of the users currently have for sale and will be able to monitor the products. e.g. they will be able to remove any unauthorized products and take the appropriate disciplinary action.
 
-### Administrators *`(Not Yet Implemented)`*
+### Administrators
 ![Administrators Page](documentation/admin/administrators.png)
-Here the administrator will be avle to see all current administrator and will be able to add, remove and suspend administrator accounts.
+
+Here the administrator will be able to see all current administrator and will be able to add, remove administrator accounts. The Administrators page is accessed via the administrator dashboard. To login to the administrator dashboard see: [Admin Login](#admin-login)
 
 
 ### Products *`(Not Yet Implemented)`*
