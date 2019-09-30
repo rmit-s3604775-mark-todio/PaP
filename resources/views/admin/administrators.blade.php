@@ -31,7 +31,72 @@
                                     </div>
                                 @endif
 
-                                <h3>Administrators</h3>
+                                <div class="row">
+                                    <div class="col">
+                                        <h3>Administrators</h3>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row float-right">
+                                            <div class="col">
+                                                <form class="searchForm d-inline" action="{{ route('admin.search') }}" method="POST">
+                                                    @csrf
+                                                    <input id="search" class="input-search @error('search') is-invalid @enderror" type="text" name="search" placeholder="Search for..." required />
+                                                    <button type="submit" class="submit-search">Search</button>
+                                                    @error('search')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror								
+                                                </form>
+                                                <a href="{{ route('admin.register') }}">
+                                                    <button class="fa fa-plus btn btn-create"></button>
+                                                </a>
+                                            </div>	
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <table class="table">
+                                            <tr class="table-active">
+                                                <th>Avatar</th>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Date Registerd</th>
+                                                <th></th>
+                                            </tr>
+                                            @if (!$admins->isEmpty())
+                                                @foreach ($admins as $admin)
+                                                    <tr>
+                                                        <td><img class="avatar avatar-sm" src="/uploads/avatars/{{ $admin->avatar }}"></td>
+                                                        <td>{{$admin->name}}</td>
+                                                        <td>{{$admin->email}}</td>
+                                                        <td>{{$admin->created_at}}</td>
+                                                        <td>
+                                                            <form action="{{ route('admin.destroy', $admin->id) }}" method="post">
+                                                                @method('DELETE')
+                                                                @csrf
+                                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+                                        </table>
+                                    </div>
+                                </div>
+                                @if ($admins->isEmpty())
+								<div class="row">
+									<div class="col text-center">
+										<h3>No Other Administrators Found</h3>
+									</div>
+								</div>
+								@endif
+								<div class="row justify-content-center">
+									<div class="links">
+										{{ $admins->links() }}
+									</div>
+								</div>
                             </div>
                         </div>
                     </div>
