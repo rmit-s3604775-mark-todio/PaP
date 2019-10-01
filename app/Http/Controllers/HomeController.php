@@ -83,10 +83,29 @@ class HomeController extends Controller
             $user->save();
         }
 
-        if ($request->has('address_line_2') & $request->address_line_2 != null) {
-            $user = Auth::user();
-            $user->address_line_2 = $request->address_line_2;
-            $user->save();
+        /**
+         * Checked, Blank
+         * - Ignore
+         * 
+         * Checked, Filled
+         * 
+         * Unckecked, Blank
+         * 
+         * Unckecked, Filled
+         * 
+         */
+        if ($request->has('blank')) {
+            if ($request->has('address_line_2')) {
+                $user = Auth::user();
+                $user->address_line_2 = $request->address_line_2;
+                $user->save();
+            }
+        } else {
+            if ($request->has('address_line_2') & $request->address_line_2 != null) {
+                $user = Auth::user();
+                $user->address_line_2 = $request->address_line_2;
+                $user->save();
+            }
         }
 
         if ($request->has('state_province') & $request->state_province != null) {

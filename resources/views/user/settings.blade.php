@@ -132,13 +132,19 @@
                                         <div class="col-md-5">
                                             <input id="address_line_2" type="text" class="form-control @error('address_line_2') is-invalid @enderror" name="address_line_2" placeholder="{{ Auth::user()->address_line_2 }}" value="{{ old('address_line_2') }}" autocomplete="address_line_2">
                                             
+                                            @if (Auth::user()->address_line_2 == null)
+                                                <input type="checkbox" class="form-check-inline" id="blank" name="blank" value="blank" checked>Blank
+                                            @else
+                                                <input type="checkbox" class="form-check-inline" id="blank" name="blank" value="blank">Blank
+                                            @endif
+                                            
                                             @error('address_line_2')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
-            
                                         </div>
+
                                     </div>
             
                                     <div class="form-group row">
