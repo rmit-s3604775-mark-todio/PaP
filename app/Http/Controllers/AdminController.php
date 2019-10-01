@@ -32,6 +32,11 @@ class AdminController extends Controller
         return view('admin.home');
     }
 
+    /**
+     * Returns the settings view
+     * 
+     * @return view admin.settings
+     */
     public function settings()
     {
         return view('admin.settings');
@@ -68,6 +73,12 @@ class AdminController extends Controller
         return view('admin.users', compact('users'));
     }
 
+    /**
+     * Deletes the user account
+     * 
+     * @param int $id id of the account to be deleted
+     * @return Redirect::back
+     */
     public function userDestroy($id)
     {
         User::where('id', '=', $id)->delete();
@@ -151,11 +162,22 @@ class AdminController extends Controller
         return view('admin.products', compact('products'));
     }
 
+    /**
+     * Administrator Messages view
+     * 
+     * @return view admin.messages
+     */
     public function messages()
     {
         return view('admin.messages');
     }
 
+    /**
+     * Update Administrators Profile details
+     * 
+     * @param Request $request
+     * @return Redirect::route admin.setings
+     */
     public function update(Request $request)
     {
 
