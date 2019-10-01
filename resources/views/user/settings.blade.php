@@ -133,9 +133,9 @@
                                             <input id="address_line_2" type="text" class="form-control @error('address_line_2') is-invalid @enderror" name="address_line_2" placeholder="{{ Auth::user()->address_line_2 }}" value="{{ old('address_line_2') }}" autocomplete="address_line_2">
                                             
                                             @if (Auth::user()->address_line_2 == null)
-                                                <input type="checkbox" class="form-check-inline" id="blank" name="blank" value="blank" checked>Blank
+                                                <input type="checkbox" class="form-check-inline" id="blank" name="blank" value="blank" checked onclick="checkboxStatus()">Blank
                                             @else
-                                                <input type="checkbox" class="form-check-inline" id="blank" name="blank" value="blank">Blank
+                                                <input type="checkbox" class="form-check-inline" id="blank" name="blank" value="blank" onclick="checkboxStatus()">Blank
                                             @endif
                                             
                                             @error('address_line_2')
@@ -224,4 +224,21 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById("address_line_2").onload = checkboxStatus();
+
+    function checkboxStatus() {
+        var checkbox = document.getElementById("blank");
+        var addressline2 = document.getElementById("address_line_2");
+
+        if (checkbox.checked == true) {
+            addressline2.disabled = true;
+        } else {
+            addressline2.disabled = false;
+        }
+
+    }
+
+</script>
 @endsection

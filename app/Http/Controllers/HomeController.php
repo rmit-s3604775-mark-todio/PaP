@@ -95,11 +95,9 @@ class HomeController extends Controller
          * 
          */
         if ($request->has('blank')) {
-            if ($request->has('address_line_2')) {
-                $user = Auth::user();
-                $user->address_line_2 = $request->address_line_2;
-                $user->save();
-            }
+            $user = Auth::user();
+            $user->address_line_2 = null;
+            $user->save();
         } else {
             if ($request->has('address_line_2') & $request->address_line_2 != null) {
                 $user = Auth::user();
