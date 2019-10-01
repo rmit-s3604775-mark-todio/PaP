@@ -64,7 +64,7 @@ class AdminController extends Controller
         ]);
 
         $users = User::search($request->search)->paginate(15);
-        return view('admin.user', compact('users'));
+        return view('admin.users', compact('users'));
     }
 
     /**
