@@ -43,7 +43,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
     //Administrator Settings Page and avatar route
     Route::get('/settings', 'AdminController@settings')->name('settings');
-    Route::post('/avatar', 'AdminController@update_avatar')->name('avatar');
+    Route::post('/update', 'AdminController@update')->name('update');
 
     //Administrator admin routes
     //These are the routes that allow the administrator ato access and modify the administrator accounts
