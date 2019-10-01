@@ -42,7 +42,7 @@ trait RegisterAdmins
 
         $admins = Admin::where('id', '!=', Auth::user()->id)->paginate(5);
         return $this->registered($request, $admin)
-                        ?: view('admin.administrators', compact('admins'));
+                        ?: redirect()->route('admin.administrators', compact('admins'))->withStatus('Added Administrator');
     }
 
     public function destroy($id)
