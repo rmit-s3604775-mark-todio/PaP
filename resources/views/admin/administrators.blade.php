@@ -91,12 +91,14 @@
 										<h3>No Other Administrators Found</h3>
 									</div>
 								</div>
-								@endif
-								<div class="row justify-content-center">
-									<div class="links">
-										{{ $admins->links() }}
-									</div>
-								</div>
+                                @endif
+                                @if (!$admins->isEmpty())
+                                <div class="row justify-content-center">
+                                    <div class="links">
+                                        {{ $admins->links() }}
+                                    </div>
+                                </div>
+                                @endif
                             </div>
                         </div>
                     </div>
