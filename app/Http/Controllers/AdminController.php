@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Auth;
 use Image;
 use App\product;
@@ -67,6 +68,13 @@ class AdminController extends Controller
         return view('admin.users', compact('users'));
     }
 
+    public function userDestroy($id)
+    {
+        User::where('id', '=', $id)->delete();
+        $users = User::paginate(15);
+        return back()->withStatus('Deleted')->with(compact('users'));
+    }
+
     /**
      * Administrators
      * 
@@ -96,7 +104,7 @@ class AdminController extends Controller
         ]);
 
         $admins = Admin::search($request->search)->paginate(5);
-        return view('admin.administrators', compact('admins'));
+        return view('admin.administrators')->with(compact('admins'));
     }
 
     /**
@@ -121,7 +129,8 @@ class AdminController extends Controller
     public function productDestroy($id)
     {
         product::where('id', '=', $id)->delete();
-        return $this->products();
+        $products = product::paginate(15);
+        return back()->withStatus('Deleted')->with(compact('products'));
     }
 
     /**
@@ -147,22 +156,45 @@ class AdminController extends Controller
         return view('admin.messages');
     }
 
-    public function update_avatar(Request $request)
+    public function update(Request $request)
     {
 
         $this->validate($request, [
-            'avatar-file' => ['required', 'mimes:jpg,jpeg,png,gif', 'max:5000'],
+            'avatar' => ['mimes:jpg,jpeg,png,gif', 'max:5000', 'nullable'],
+            'name' => ['string', 'max:255', 'nullable'],
+            'email' => ['string', 'email', 'max:255', 'unique:admins', 'nullable'],
+            'password' => ['string', 'min:8', 'confirmed', 'nullable'],
         ]);
-
-        $avatar = $request->file('avatar-file');
-        $filename = time() . '.' . $avatar->getClientOriginalExtension();
-
-        Image::make($avatar)->resize(300, 300)->save( public_path('/uploads/avatars/'. $filename) );
         
-        $user = Auth::user();
-        $user->avatar = $filename;
-        $user->save();
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $filename = time() . '.' . $avatar->getClientOriginalExtension();
 
-        return view('admin.settings');
+            Image::make($avatar)->resize(300, 300)->save( public_path('/uploads/avatars/'. $filename) );
+            
+            $user = Auth::user();
+            $user->avatar = $filename;
+            $user->save();
+        }
+
+        if ($request->has('name') & $request->name != null) {
+            $user = Auth::user();
+            $user->name = $request->name;
+            $user->save();
+        }
+
+        if ($request->has('email') & $request->email != null) {
+            $user = Auth::user();
+            $user->email = $request->email;
+            $user->save();
+        }
+
+        if ($request->has('password') & $request->password != null) {
+            $user = Auth::user();
+            $user->password = Hash::make($request->password);
+            $user->save();
+        }
+
+        return redirect()->route('admin.settings');
     }
 }

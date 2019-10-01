@@ -49,7 +49,7 @@ trait RegisterAdmins
     {
         DB::table('admins')->where('id', '=', $id)->delete();
         $admins = Admin::where('id', '!=', Auth::user()->id)->paginate(5);
-        return view('admin.administrators', compact('admins'));
+        return back()->withStatus('Deleted')->with(compact('admins'));
     }
 
     /**
