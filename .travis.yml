@@ -25,7 +25,8 @@ before_script:
   - npm install npm@latest -g
   - npm install -g jshint
   - npm install
-  - php artisan migrate:reset --seed --no-interaction -vvv
+  - php artisan migrate:reset --no-interaction -vvv
+  - php artisan migrate --seed --no-interaction -vvv
   - php artisan key:generate
 
 script:
