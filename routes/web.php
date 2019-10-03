@@ -20,7 +20,14 @@ Auth::routes();
 Route::resource('product-request', 'RequestController');
 Route::post('search', 'ProductsController@searchProduct')->name('product.search');
 
+// project routes
+Route::get('/details/{product}', 'ProductsController@details');
 Route::resource('products', 'ProductsController');
+
+// product images
+Route::get('/product_image','Product_ImageController@create')->name('image.create');
+Route::post('/product_image','Product_ImageController@store')->name('image.store');
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/settings', 'HomeController@settings')->name('settings');

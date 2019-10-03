@@ -10,6 +10,8 @@ use DateTime;
 // model
 use App\product;
 use Auth;
+use App\ProductImage;
+use Image;
 
 
 
@@ -60,26 +62,50 @@ class ProductsController extends Controller
 		$this->validate($request,[
 			"product_name"=>'required',
 			"price"=>'required',
-			"quantity"=>'required'
-		]);
+			"quantity"=>'required',
+			"brand"=>'required',
+      "quantity"=>'required',
+      "description"=>'required'
+    ]);
+
+    $images_array = array();
+    
+    $user = Auth::user();
+    $product->user_id = $user->id;
+    
+    if($request->has('images'))
+    {
+        foreach($request->images as $image)
+        {       
+            $filename =  time() . "-". $image->getClientOriginalName();
+            $images_array[] = $filename;
+            Image::make($image)->resize(200, 200)->save( public_path('/uploads/products/'. $filename) );
+        }
+        $product->images = json_encode($images_array);
+    }
+    else
+    {
+        $images_array[] = "defaultPhone.png";
+        $product->images = json_encode($images_array);
+    }
 		
-		$user = Auth::user();
 		
-		$product->user_id = $user->id;
-	//	$product->brand = DB::table('brands')->find($request->brand);
-    //    $product->condition = DB::table('conditions')->find($request->condition);
 	
+    // $product->user_id = $user->id;
+    
+    
 		$product->brand = $request->brand;
-        $product->condition = $request->condition;
-	
+    $product->condition = $request->condition;
 		$product->product_name = $request->product_name;
 		$product->price = $request->price;
 		$product->quantity = $request->quantity;
 		$product->created_at = new DateTime();
-		$product->updated_at = new DateTime();
+    $product->updated_at = new DateTime();
+    $product->description = $request->description;
 		$product->rating = 5;
-		$product->save();
-		return redirect('products');
+    $product->save();
+
+		 return redirect('products');
     }
 
     /**
@@ -90,9 +116,8 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-		
         $prod = DB::table('products')->get();
-		return $prod;
+		return "show function";
     }
 
     /**
@@ -103,7 +128,13 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+		// show edit page
+        $item = product::find($id);
+     //   return $item;
+
+
+        return view('user.products.edit', [ 'brands' => DB::table('brands')->get(), 'conditions' => DB::table('conditions')->get()], compact('item'));
+		
     }
 
     /**
@@ -115,7 +146,30 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      return $request;
+		$this->validate($request,[
+			"product_name"=>'required',
+			"price"=>'required',
+			"quantity"=>'required',
+			"rating"=>'required',
+			"brand"=>'required',
+      "condition"=>'required'
+		]);
+	
+		$product = product::find($id);
+		
+		$product->product_name = $request->product_name;
+		$product->price = $request->price;
+		$product->quantity = $request->quantity;
+		$product->rating = $request->rating;
+		$product->brand = $request->brand;
+		$product->condition = $request->condition;
+		$product->updated_at = new DateTime();
+    $product->save();
+    
+    
+		
+    return redirect('products');
     }
 
     /**
@@ -130,7 +184,12 @@ class ProductsController extends Controller
 		
 		return redirect('products');
     }
-
+    
+    public function details($id)
+    {
+      $item = product::find($id);
+      return view('user.products.details', compact('item'));
+    }
     /**
      * Search for products and return the products view.
      */

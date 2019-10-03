@@ -32,32 +32,38 @@
                                     </div>
                                 @endif
 
-						  <div>
+								{{-- insert code here --}}
 								<a class="btn btn-primary" href="{{ route('products.index') }}">Go back</a>
-								<h1>Create new item</h1>
-								
-								<form class="form-horizontal" action="/products" method="post" enctype="multipart/form-data">
-								{{csrf_field()}}
+								<h1 class="text-center">Edit {{$item->product_name}}</h1>
+								<form action="{{ route('products.update', [$item]) }}" method="post">
+									{{csrf_field()}}
+									{{method_field('PUT')}}
+
 									<fieldset>
 										<div class="form-group">
-											<label for="product_name">Product Name</label>
-											<input type="text" name="product_name" class="form-control">
-										</div>
-
+												<label for="product_name">Product name</label>
+												<input type="text" name="product_name" class="form-control" value="{!! $item->product_name !!}">
+										</div> 
+									
 										<div class="form-group">
 												<label for="price">Price</label>
-												<input type="number" name="price" class="form-control">
-										</div>
+												<input type="number" name="price" class="form-control" value={{$item->price}}>
+										</div> 
 
 										<div class="form-group">
-												<label for="quanity">Quantity</label>
-												<input type="number" name="quantity" class="form-control">
-										</div>
+												<label for="quantity">Quantity</label>
+												<input type="number" name="quantity" class="form-control" value={{$item->quantity}}>
+										</div> 
+
+										<div class="form-group">
+												<label for="quantity">Quantity</label>
+												<input type="number" name="quantity" class="form-control" value={{$item->quantity}}>
+										</div> 
 
 										<div class="form-group">
 											<label for="brand">Brand</label>
-											<select name="brand" id="brand" class="form-control">
-												<option value="none" selected disabled hidden>Please Select...</option>
+											<select name="brand" id="brand">
+												<option value="{{ $item->brand }}" selected hidden>{{ $item->brand }}</option>
 												@foreach ($brands as $brand)
 												<option value="{{ $brand->brand }}">{{ $brand->brand }}</option>
 												@endforeach
@@ -66,8 +72,8 @@
 
 										<div class="form-group">
 											<label for="condition">Condition</label>
-											<select name="condition" id="condition" class="form-control">
-												<option value="none" selected disabled hidden>Please Select...</option>
+											<select name="condition" id="condition">
+												<option value="{{ $item->condition }}" selected hidden>{{ $item->condition }}</option>
 												@foreach ($conditions as $condition)
 												<option value="{{ $condition->condition }}">{{ $condition->condition }}</option>
 												@endforeach
@@ -76,27 +82,31 @@
 
 										<div class="form-group">
 											<label for="description">Description</label>
-											<textarea rows="4" name="description" class="form-control" ></textarea>
+										<textarea rows="4" name="description" class="form-control">{{$item->description}}</textarea>
 										</div>
 
-										<div class="form-group">
-											<label for="images">Images</label>
-											<input type="file" name="images[]" class="form-control" multiple/>
+										<div class="col text-center">
+											<button type="submit" class="btn btn-success mx-auto">Submit</button>
 										</div>
-
-										<button type="submit" class="btn btn-success">Submit</button>
+												
+									
+									<fieldset> 
+									
+									
 								
-									</fieldset>
-							</form>
-							@if (count($errors)>0)
+								
+								
+								</form>
+								
+								@if (count($errors)>0)
 								<div class="alert alert-danger">
 								@foreach($errors->all() as $error)
 									<pre>{{$error}}</pre>
 								@endforeach
 								</div>
-							@endif
-							
-							</div>
+								@endif
+								
+						
 									  
 									</div>
 								  </div>

@@ -78,14 +78,16 @@
 														<td>{{$product->brand}}</td>
 														<td>{{$product->condition}}</td>
 														<td>{{$product->rating}}</td>
-														<td><a href="products.create">details</a></td>
-														<td><a data-toggle="modal" data-target="#myModal">edit</a></td>
+														<td><a href="{{ url('/details', [$product])}}"><button class="btn btn-info btn-xs" >details</button></a></td>
+														<td><a href="{{ route('products.edit', [$product])}}"><button class="btn btn-warning btn-xs">edit</button></a></td>
 														
-														<td><form action="{{ url('products', [$product]) }}" method="post">
-															<button class="btn btn-default" type="submit">Delete</button>
+														<td><form action="{{ url('/products', [$product]) }}" method="post">
+															<button class="btn btn-danger btn-xs" type="submit" value="Delete">Delete
+															</button>
 															@method('delete')
 															@csrf
-														</form>
+															</form>
+														
 														</td>
 													</tr>
 												@endforeach
@@ -123,7 +125,7 @@
 												Product Name: <input type="text" name="product_name"></input><br>
 												Price: <input type="number" name="product_name"><br>
 												Quantity: <input type="number" name="product_name"><br>
-												<button type="submit" name="body" class="btn btn-success">Submit</button>
+												<button type="submit" name="body" class="btn btn-success" value="edit">Submit</button>
 											</form>
 										</div>
 										<div class="modal-footer">
