@@ -16,7 +16,9 @@ cache:
 
 before_script:
   - cp .env.travis .env
-  - sudo mysql -e 'CREATE DATABASE pap_testing;'
+  - sudo mysql -e 'CREATE DATABASE pap_testing; update user set authentication_string=PASSWORD('root') where User='root'; update user set plugin='mysql_native_password';'
+  - sudo mysql_upgrade -u root -p123123
+  - sudo service mysql restart
   - composer self-update
   - composer install --no-interaction
   - pear install pear/PHP_CodeSniffer
@@ -25,8 +27,7 @@ before_script:
   - npm install npm@latest -g
   - npm install -g jshint
   - npm install
-  - php artisan migrate:reset --no-interaction -vvv
-  - php artisan migrate --seed --no-interaction -vvv
+  - php artisan migrate:reset --seed --no-interaction -vvv
   - php artisan key:generate
 
 script:
