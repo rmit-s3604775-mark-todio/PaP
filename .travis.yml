@@ -24,6 +24,7 @@ before_script:
   - nvm install 8.0.0 --latest-npm
   - npm install npm@latest -g
   - npm install -g jshint
+  - npm install font-awesome
   - npm install
   - php artisan migrate:reset --no-interaction -vvv
   - php artisan migrate --seed --no-interaction -vvv
@@ -31,7 +32,7 @@ before_script:
 
 script:
   - vendor/bin/phpunit --coverage-text
-  - phpcs --ignore=app/Http/Controllers/Auth,app/Http/Controllers/Controller.php app/Http/Controllers
+  # - phpcs --ignore=app/Http/Controllers/Auth,app/Http/Controllers/Controller.php app/Http/Controllers
   - npm run production
   - jshint resources/assets/js/modules/*
 
