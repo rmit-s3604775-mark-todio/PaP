@@ -15,6 +15,17 @@
     left: 10px;
 }
 
+.logo-sm {
+    height: 32px;
+}
+
+.logo-lg
+{
+    position : flexible;
+    left: 50%;
+    top: 50%;
+}
+
 @media (max-width: 768px) {
     #header-avatar {
         display: none;

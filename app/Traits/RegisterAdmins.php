@@ -21,6 +21,13 @@ trait RegisterAdmins
         return view('admin.register');
     }
 
+    /**
+     * 
+     * Register a new administrator
+     * 
+     * @param Request $request
+     * @return Redirect route admin.administrators
+     */
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
@@ -42,14 +49,19 @@ trait RegisterAdmins
 
         $admins = Admin::where('id', '!=', Auth::user()->id)->paginate(5);
         return $this->registered($request, $admin)
-                        ?: view('admin.administrators', compact('admins'));
+                        ?: redirect()->route('admin.administrators', compact('admins'))->withStatus('Added Administrator');
     }
 
+    /**
+     * Delete administrator account
+     * 
+     * @return Redirect::back
+     */
     public function destroy($id)
     {
         DB::table('admins')->where('id', '=', $id)->delete();
         $admins = Admin::where('id', '!=', Auth::user()->id)->paginate(5);
-        return view('admin.administrators', compact('admins'));
+        return back()->withStatus('Deleted')->with(compact('admins'));
     }
 
     /**

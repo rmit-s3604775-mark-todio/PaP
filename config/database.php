@@ -91,6 +91,18 @@ return [
             'prefix_indexes' => true,
         ],
 
+        'testing' => [
+            'driver'    => 'mysql',
+            'host'      => env('DB_TEST_HOST', 'localhost'),
+            'database'  => env('DB_TEST_DATABASE', 'pap_testing'),
+            'username'  => env('DB_TEST_USERNAME', 'root'),
+            'password'  => env('DB_TEST_PASSWORD', 'root'),
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+            'strict'    => false,
+        ],
+
     ],
 
     /*

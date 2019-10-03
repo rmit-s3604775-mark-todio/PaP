@@ -30,6 +30,8 @@ Route::post('/product_image','Product_ImageController@store')->name('image.store
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/settings', 'HomeController@settings')->name('settings');
+Route::post('/update', 'HomeController@update')->name('update');
 Route::get('/user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 
 Route::get('/product-requests', 'HomeController@product_requests')->name('product-requests');
@@ -50,7 +52,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
     //Administrator Settings Page and avatar route
     Route::get('/settings', 'AdminController@settings')->name('settings');
-    Route::post('/avatar', 'AdminController@update_avatar')->name('avatar');
+    Route::post('/update', 'AdminController@update')->name('update');
 
     //Administrator admin routes
     //These are the routes that allow the administrator ato access and modify the administrator accounts
