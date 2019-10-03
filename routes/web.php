@@ -23,6 +23,8 @@ Route::post('search', 'ProductsController@searchProduct')->name('product.search'
 Route::resource('products', 'ProductsController');
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/settings', 'HomeController@settings')->name('settings');
+Route::post('/update', 'HomeController@update')->name('update');
 Route::get('/user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 
 Route::get('/product-requests', 'HomeController@product_requests')->name('product-requests');

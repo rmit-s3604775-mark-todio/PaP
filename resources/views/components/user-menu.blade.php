@@ -6,8 +6,8 @@
         <a href="{{ route('home') }}" class="row menu-item">
             {{ __('Home') }}
         </a>
-        <a href="" class="row menu-item">
-            {{ __('Profile') }}
+        <a href="{{ route('settings') }}" class="row menu-item">
+            {{ __('Settings') }}
         </a>
         <a href="{{ route('products.index') }}" class="row menu-item">
             {{ __('Products') }}

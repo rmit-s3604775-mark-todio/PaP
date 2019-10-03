@@ -91,6 +91,9 @@
                                         <a class="dropdown-item" href="{{ route('home') }}">
                                             <i class="fa fa-home fa-fw"></i>{{ __('Home') }}
                                         </a>
+                                        <a class="dropdown-item" href="{{ route('settings') }}">
+                                            <i class="fa fa-cog fa-fw"></i>{{ __('Settings') }}
+                                        </a>
 										<a class="dropdown-item" href="{{ route('products.index') }}">
                                             <i class="fa fa-mobile fa-fw"></i>{{ __('Products') }}
                                         </a>
@@ -110,6 +113,9 @@
                                         </p>
                                         <a class="dropdown-item" href="{{ route('home') }}">
                                             <i class="fa fa-home fa-fw"></i>{{ __('Home') }}
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('settings') }}">
+                                            <i class="fa fa-cog fa-fw"></i>{{ __('Settings') }}
                                         </a>
 										<a class="dropdown-item" href="{{ route('products.index') }}">
                                             <i class="fa fa-mobile fa-fw"></i>{{ __('Products') }}

@@ -217,6 +217,6 @@ class AdminController extends Controller
             $user->save();
         }
 
-        return redirect()->route('admin.settings');
+        return redirect()->route('admin.settings')->withStatus('Updated Successfully');
     }
 }
