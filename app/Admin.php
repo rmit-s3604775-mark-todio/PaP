@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Laravel\Scout\Searchable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,6 +11,7 @@ use App\Notifications\AdminResetPasswordNotification;
 class Admin extends Authenticatable
 {
     use Notifiable;
+    use Searchable;
 
     protected $guard = 'admin';
 
@@ -19,7 +21,7 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'avatar',
     ];
 
     /**

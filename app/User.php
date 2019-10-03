@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Laravel\Scout\Searchable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -9,6 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
+    use Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'username', 'address_line_1', 'address_line_2', 'state_province', 'post_code', 'city', 'country',
+        'name', 'avatar', 'email', 'password', 'username', 'address_line_1', 'address_line_2', 'state_province', 'post_code', 'city', 'country',
     ];
 
     /**
