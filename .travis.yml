@@ -16,9 +16,7 @@ cache:
 
 before_script:
   - cp .env.travis .env
-  - sudo mysql -e 'CREATE DATABASE pap_testing; update user set authentication_string=PASSWORD('root') where User='root'; update user set plugin='mysql_native_password';'
-  - sudo mysql_upgrade -u root -p123123
-  - sudo service mysql restart
+  - sudo mysql -e 'CREATE DATABASE pap_testing;'
   - composer self-update
   - composer install --no-interaction
   - pear install pear/PHP_CodeSniffer
