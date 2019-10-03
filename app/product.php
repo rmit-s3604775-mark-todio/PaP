@@ -7,7 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-	use Searchable;
+    use Searchable;
+    
+     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'user_id', 'product_name', 'images', 'price', 'quantity', 'brand', 'condition', 'rating'
+    ];
 
 	/**
      * Get the indexable data array for the model.

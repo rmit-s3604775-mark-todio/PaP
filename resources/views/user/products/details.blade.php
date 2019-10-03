@@ -32,18 +32,62 @@
                                     </div>
                                 @endif
 
-								{{-- insert code here --}}
-						  
-                                <h1>{{$item->product_name}}</h1>
+                                {{-- insert code here --}}
+                                <a class="btn btn-primary" href="{{ route('products.index') }}">Go back</a>
+                                <div class="card">
+                                <h1 class="card-header">{{$item->product_name}}</h1>
 
-                                @foreach (json_decode($item->images) as $image)
-                                <img id="menu-avatar" class="avatar" src="/uploads/products/{{ $image }}">
-                                @endforeach
+                                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                        <ol class="carousel-indicators">
+                                            @foreach (json_decode($item->images) as $image)
+                                                @if ($loop->first)
+                                                    <li data-target="#carouselExampleIndicators" data-slide-to="{{$loop->index}}" class="active"></li>
+                                                @else
+                                                    <li data-target="#carouselExampleIndicators" data-slide-to="{{$loop->index}}"></li>
+                                                @endif
+                                            @endforeach
+                                        </ol>
+                                        <div class="carousel-inner">
+                                            @foreach (json_decode($item->images) as $image)
+                                                @if ($loop->first)
+                                                <div class="carousel-item active product-container text-center">
+                                                        <img class="product-item" src="/uploads/products/{{ $image }}" alt="{{$loop->iteration}} slide">
+                                                    </div>
+                                                @else
+                                                    <div class="carousel-item product-container text-center">
+                                                        <img width="450" height="300" class="product-item" src="/uploads/products/{{ $image }}" alt="{{$loop->iteration}} slide">
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </div>
+
+                                    <h5 class="card-header">Description</h5>
+                                    <div class="card-body">
+                                         {!! nl2br(e($item->description)) !!}
+                                        <div>
+                                            <span>Price: ${{$item->price}} </span>
+                                        </div>
+
+                                        <div>
+                                            <span>Quantity: {{$item->quantity}}  </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+         
                                 
-                                    
 
-
-								
+                               
 						
 									  
 									</div>

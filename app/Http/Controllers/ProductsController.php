@@ -64,48 +64,48 @@ class ProductsController extends Controller
 			"price"=>'required',
 			"quantity"=>'required',
 			"brand"=>'required',
-      "quantity"=>'required'
+      "quantity"=>'required',
+      "description"=>'required'
     ]);
 
     $images_array = array();
     
+    $user = Auth::user();
+    $product->user_id = $user->id;
+    
     if($request->has('images'))
     {
-        
         foreach($request->images as $image)
-        {
-            $i = $image;
-            $filename = time() . '.' . $i->getClientOriginalExtension();
+        {       
+            $filename =  time() . "-". $image->getClientOriginalName();
             $images_array[] = $filename;
-            Image::make($i)->resize(400, 400)->save( public_path('/uploads/products/'. $filename) );
+            Image::make($image)->resize(200, 200)->save( public_path('/uploads/products/'. $filename) );
         }
+        $product->images = json_encode($images_array);
+    }
+    else
+    {
+        $images_array[] = "defaultPhone.png";
+        $product->images = json_encode($images_array);
     }
 		
-		$user = Auth::user();
 		
-		$product->user_id = $user->id;
-	//	$product->brand = DB::table('brands')->find($request->brand);
-    //    $product->condition = DB::table('conditions')->find($request->condition);
+	
+    // $product->user_id = $user->id;
     
-    // $Product_image->filename=json_encode($data)
-
-        $product->images = json_encode($images_array);
+    
 		$product->brand = $request->brand;
-        $product->condition = $request->condition;
+    $product->condition = $request->condition;
 		$product->product_name = $request->product_name;
 		$product->price = $request->price;
 		$product->quantity = $request->quantity;
 		$product->created_at = new DateTime();
-		$product->updated_at = new DateTime();
+    $product->updated_at = new DateTime();
+    $product->description = $request->description;
 		$product->rating = 5;
-        $product->save();
-    
+    $product->save();
 
-        // $image = $request->file('images');
-        // $filename = time() . '.' . $image->getClientOriginalExtension();
-        return $images_array;
-
-		// return redirect('products');
+		 return redirect('products');
     }
 
     /**
@@ -129,7 +129,10 @@ class ProductsController extends Controller
     public function edit($id)
     {
 		// show edit page
-		$item = product::find($id);
+        $item = product::find($id);
+     //   return $item;
+
+
         return view('user.products.edit', [ 'brands' => DB::table('brands')->get(), 'conditions' => DB::table('conditions')->get()], compact('item'));
 		
     }
@@ -143,13 +146,14 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
+      return $request;
 		$this->validate($request,[
 			"product_name"=>'required',
 			"price"=>'required',
 			"quantity"=>'required',
 			"rating"=>'required',
 			"brand"=>'required',
-			"condition"=>'required'
+      "condition"=>'required'
 		]);
 	
 		$product = product::find($id);

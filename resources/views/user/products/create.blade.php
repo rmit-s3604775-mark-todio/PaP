@@ -33,44 +33,59 @@
                                 @endif
 
 						  <div>
-								<a href="{{ route('products.index') }}">Go back</a>
+								<a class="btn btn-primary" href="{{ route('products.index') }}">Go back</a>
 								<h1>Create new item</h1>
 								
 								<form class="form-horizontal" action="/products" method="post" enctype="multipart/form-data">
 								{{csrf_field()}}
 									<fieldset>
 										<div class="form-group">
-											<div class="col-lg-10">
-												Product Name: <input type="text" name="product_name"></input><br>
-												Price: <input type="number" name="price"><br>
-												Quantity: <input type="number" name="quantity"><br>
-												
-
-												
-												<div class="row">Brand:
-													<select name="brand" id="brand">
-														<option value="none" selected disabled hidden>Please Select...</option>
-														@foreach ($brands as $brand)
-														<option value="{{ $brand->brand }}">{{ $brand->brand }}</option>
-														@endforeach
-													</select>
-												</div>
-												<div class="row">Condition:
-													<select name="condition" id="condition">
-														<option value="none" selected disabled hidden>Please Select...</option>
-														@foreach ($conditions as $condition)
-														<option value="{{ $condition->condition }}">{{ $condition->condition }}</option>
-														@endforeach
-													</select>
-												</div>
-
-												<div>
-													<input type="file" name="images[]" class="form-control" multiple required/>
-												</div>
-												
-												<button type="submit" class="btn btn-success">Submit</button>
-											</div>
+											<label for="product_name">Product Name</label>
+											<input type="text" name="product_name" class="form-control">
 										</div>
+
+										<div class="form-group">
+												<label for="price">Price</label>
+												<input type="number" name="price" class="form-control">
+										</div>
+
+										<div class="form-group">
+												<label for="quanity">Quantity</label>
+												<input type="number" name="quantity" class="form-control">
+										</div>
+
+										<div class="form-group">
+											<label for="brand">Brand</label>
+											<select name="brand" id="brand" class="form-control">
+												<option value="none" selected disabled hidden>Please Select...</option>
+												@foreach ($brands as $brand)
+												<option value="{{ $brand->brand }}">{{ $brand->brand }}</option>
+												@endforeach
+											</select>
+										</div>
+
+										<div class="form-group">
+											<label for="condition">Condition</label>
+											<select name="condition" id="condition" class="form-control">
+												<option value="none" selected disabled hidden>Please Select...</option>
+												@foreach ($conditions as $condition)
+												<option value="{{ $condition->condition }}">{{ $condition->condition }}</option>
+												@endforeach
+											</select>
+										</div>
+
+										<div class="form-group">
+											<label for="description">Description</label>
+											<textarea rows="4" name="description" class="form-control" ></textarea>
+										</div>
+
+										<div class="form-group">
+											<label for="images">Images</label>
+											<input type="file" name="images[]" class="form-control" multiple/>
+										</div>
+
+										<button type="submit" class="btn btn-success">Submit</button>
+								
 									</fieldset>
 							</form>
 							@if (count($errors)>0)

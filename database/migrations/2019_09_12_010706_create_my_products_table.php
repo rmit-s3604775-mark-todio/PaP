@@ -18,7 +18,7 @@ class CreateMyProductsTable extends Migration
 			$table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('product_name');
-            $table->string('images');
+            $table->string('images')->default('defaultPhone.png');
 			$table->decimal('price', 8,2);	// highest number 99,999,999.99
 			$table->integer('quantity');
 			
@@ -27,7 +27,8 @@ class CreateMyProductsTable extends Migration
 			$table->foreign('brand')->references('brand')->on('brands');
             $table->string('condition');
             $table->foreign('condition')->references('condition')->on('conditions');
-			
+            
+            $table->string('description');
             $table->double('rating');	// may need to change this data type
             
             $table->timestamps();
