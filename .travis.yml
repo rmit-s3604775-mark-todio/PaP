@@ -1,0 +1,44 @@
+# .travis.yml
+dist: xenial
+
+language: php
+
+php:
+  - 7.2
+
+services:
+  - mysql
+
+cache:
+  directories:
+    - node_modules
+    - vendor
+
+before_script:
+  - cp .env.travis .env
+  - sudo mysql -e 'CREATE DATABASE pap_testing;'
+  - composer self-update
+  - composer install --no-interaction
+  - pear install pear/PHP_CodeSniffer
+  - phpenv rehash
+  - nvm install 8.0.0 --latest-npm
+  - npm install npm@latest -g
+  - npm install -g jshint
+  - npm install font-awesome
+  - npm install
+  - php artisan migrate:reset --no-interaction -vvv
+  - php artisan migrate --seed --no-interaction -vvv
+  - php artisan key:generate
+
+script:
+  - vendor/bin/phpunit --coverage-text
+  # - phpcs --ignore=app/Http/Controllers/Auth,app/Http/Controllers/Controller.php app/Http/Controllers
+  - npm run production
+  - jshint resources/assets/js/modules/*
+
+notifications:
+  slack:
+    on_success: never
+    on_fail: always
+  email:
+    - s3485302@student.rmit.edu.au

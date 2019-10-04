@@ -24,23 +24,6 @@ $border: 1px solid rgba(0, 0, 0, 0.125);
   background-color: #fff;
 }
 
-.avatar {
-  border-radius: 50%;
-}
-
-#menu-avatar {
-  width: 90%;
-  height: 90%;
-  margin: 5px;
-}
-
-#header-avatar {
-  width: 32px;
-  height: 32px;
-  top: 10px;
-  left: 10px;
-}
-
 @media (max-width: 768px) {
   .nav-menu {
       display: none;

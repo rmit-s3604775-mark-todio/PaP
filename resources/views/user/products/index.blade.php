@@ -32,29 +32,31 @@
                                     </div>
                                 @endif
 
-              
 								<div class="row">
-									<div class="col float-left">
-										<h1>Products</h1>
-									</div>
-									<div class="col float-end">
-										<form action="{{ route('product.search') }}" method="post">
-											@csrf
-											<div class="row">
-												<input id="search" class="form-controll @error('search') is-invalid @enderror" type="text" name="search" required>
-												<button type="submit" class="btn btn-primary">Search</button>
-												@error('search')
-													<span class="invalid-feedback" role="alert">
-														<strong>{{ $message }}</strong>
-													</span>
-												@enderror
-											</div>											
-										</form>
-									</div>
-									<div class="col float-right">
-										<a href="{{ route('products.create') }}"><button>Add new product</button></a>
-									</div>
+                                    <div class="col">
+                                        <h3>Products</h3>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row float-right">
+                                            <div class="col">
+                                                <form class="searchForm d-inline" action="{{ route('product.search') }}" method="POST">
+                                                    @csrf
+                                                    <input id="search" class="input-search @error('search') is-invalid @enderror" type="text" name="search" placeholder="Search for..." required />
+                                                    <button type="submit" class="submit-search">Search</button>
+                                                    @error('search')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror								
+                                                </form>
+                                                <a href="{{ route('products.create') }}">
+                                                    <button class="fa fa-plus btn btn-create"></button>
+                                                </a>
+                                            </div>	
+                                        </div>
+                                    </div>
 								</div>
+								
 								<div class="row">
 									<div class="col">
 										<table class="table">
@@ -78,14 +80,31 @@
 														<td>{{$product->brand}}</td>
 														<td>{{$product->condition}}</td>
 														<td>{{$product->rating}}</td>
-														<td><a href="products.create">details</a></td>
-														<td><a data-toggle="modal" data-target="#myModal">edit</a></td>
+														<td>
+															<a href="{{ url('/details', [$product])}}" data-toggle="tooltip" title="Details">
+																<button class="btn btn-secondary" >
+																	<i class="fa fa-info"></i>
+																</button>
+															</a>
+														</td>
+														<td>
+															<a href="{{ route('products.edit', [$product])}}" data-toggle="tooltip" title="Edit">
+																<button class="btn btn-secondary">
+																	<i class="fa fa-edit"></i>
+																</button>
+															</a>
+														</td>
 														
-														<td><form action="{{ url('products', [$product]) }}" method="post">
-															<button class="btn btn-default" type="submit">Delete</button>
-															@method('delete')
+														<td><form action="{{ url('/products', [$product]) }}" method="post">
 															@csrf
-														</form>
+															@method('delete')
+															
+															<button class="btn btn-danger btn-xs" type="submit" value="Delete" data-toggle="tooltip" title="Delete">
+																<i class="fa fa-trash"></i>
+															</button>
+															
+															</form>
+														
 														</td>
 													</tr>
 												@endforeach
@@ -123,7 +142,7 @@
 												Product Name: <input type="text" name="product_name"></input><br>
 												Price: <input type="number" name="product_name"><br>
 												Quantity: <input type="number" name="product_name"><br>
-												<button type="submit" name="body" class="btn btn-success">Submit</button>
+												<button type="submit" name="body" class="btn btn-success" value="edit">Submit</button>
 											</form>
 										</div>
 										<div class="modal-footer">

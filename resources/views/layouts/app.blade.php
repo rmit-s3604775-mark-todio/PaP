@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ __('PaP') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <img class="logo-sm" src="{{ asset('images/Logo.png') }}" alt="PaP"/>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -39,7 +39,7 @@
                         @guest
 
                         @else
-                        <img id="header-avatar" class="avatar" src="/uploads/avatars/{{ Auth::user()->avatar }}">
+                        <img class="avatar avatar-sm" src="/uploads/avatars/{{ Auth::user()->avatar }}">
                         @endguest
                     </div>
                     <!-- Right Side Of Navbar -->
@@ -63,44 +63,47 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     @if(Auth::guard('admin')->check() & !Auth::guard('web')->check())
                                         <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
-                                            {{ __('Home') }}
+                                            <i class="fa fa-home fa-fw"></i>{{ __('Home') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('admin.settings') }}">
-                                            {{ __('Settings') }}
+                                            <i class="fa fa-cog fa-fw"></i>{{ __('Settings') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('admin.users') }}">
-                                            {{ __('Users') }}
+                                        <a class="dropdown-item" href="{{ route('admin.user') }}">
+                                            <i class="fa fa-user fa-fw"></i>{{ __('Users') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('admin.administrators') }}">
-                                            {{ __('Administrators') }}
+                                            <i class="fa fa-user-o fa-fw"></i>{{ __('Administrators') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('admin.products') }}">
-                                            {{ __('Products') }}
+                                        <a class="dropdown-item" href="{{ route('admin.product') }}">
+                                            <i class="fa fa-mobile fa-fw"></i>{{ __('Products') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('admin.messages') }}">
-                                            {{ __('Messages') }}
+                                            <i class="fa fa-paper-plane-o fa-fw"></i>{{ __('Messages') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
+                                            <i class="fa fa-sign-out fa-fw"></i>{{ __('Logout') }}
                                         </a>
                                     @endif
 
                                     @if(Auth::guard('web')->check() & !Auth::guard('admin')->check())
                                         <a class="dropdown-item" href="{{ route('home') }}">
-                                            {{ __('Home') }}
+                                            <i class="fa fa-home fa-fw"></i>{{ __('Home') }}
                                         </a>
-										                    <a class="dropdown-item" href="{{ route('products.index') }}">
-                                            {{ __('Products') }}
+                                        <a class="dropdown-item" href="{{ route('settings') }}">
+                                            <i class="fa fa-cog fa-fw"></i>{{ __('Settings') }}
+                                        </a>
+										<a class="dropdown-item" href="{{ route('products.index') }}">
+                                            <i class="fa fa-mobile fa-fw"></i>{{ __('Products') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('product-request.index') }}">
-                                            {{ __('Product Requests') }}
+                                            <i class="fa fa-search fa-fw"></i>{{ __('Product Search') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
+                                            <i class="fa fa-sign-out fa-fw"></i>{{ __('Logout') }}
                                         </a>
                                     @endif
 
@@ -109,40 +112,43 @@
                                             {{ __('User') }}
                                         </p>
                                         <a class="dropdown-item" href="{{ route('home') }}">
-                                            {{ __('Home') }}
+                                            <i class="fa fa-home fa-fw"></i>{{ __('Home') }}
                                         </a>
-										                    <a class="dropdown-item" href="{{ route('products.index') }}">
-                                            {{ __('Products') }}
+                                        <a class="dropdown-item" href="{{ route('settings') }}">
+                                            <i class="fa fa-cog fa-fw"></i>{{ __('Settings') }}
+                                        </a>
+										<a class="dropdown-item" href="{{ route('products.index') }}">
+                                            <i class="fa fa-mobile fa-fw"></i>{{ __('Products') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('product-request.index') }}">
-                                            {{ __('Product Requests') }}
+                                            <i class="fa fa-search fa-fw"></i>{{ __('Product Search') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('user.logout') }}">
-                                            {{ __('Logout') }}
+                                            <i class="fa fa-sign-out fa-fw"></i>{{ __('Logout') }}
                                         </a>
                                         <p class="dropdown-header">
                                             {{ __('Administrator') }}
                                         </p>
                                         <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
-                                            {{ __('Home') }}
+                                            <i class="fa fa-home fa-fw"></i>{{ __('Home') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('admin.settings') }}">
-                                            {{ __('Settings') }}
+                                            <i class="fa fa-cog fa-fw"></i>{{ __('Settings') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('admin.users') }}">
-                                            {{ __('Users') }}
+                                        <a class="dropdown-item" href="{{ route('admin.user') }}">
+                                            <i class="fa fa-user fa-fw"></i>{{ __('Users') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('admin.administrators') }}">
-                                            {{ __('Administrators') }}
+                                            <i class="fa fa-user-o fa-fw"></i>{{ __('Administrators') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('admin.products') }}">
-                                            {{ __('Products') }}
+                                        <a class="dropdown-item" href="{{ route('admin.product') }}">
+                                            <i class="fa fa-mobile fa-fw"></i>{{ __('Products') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('admin.messages') }}">
-                                            {{ __('Messages') }}
+                                            <i class="fa fa-paper-plane-o fa-fw"></i>{{ __('Messages') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('admin.logout') }}">
-                                            {{ __('Logout') }}
+                                            <i class="fa fa-sign-out fa-fw"></i>{{ __('Logout') }}
                                         </a>
                                     @endif
                                     

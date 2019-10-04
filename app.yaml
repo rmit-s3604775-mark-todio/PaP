@@ -41,3 +41,6 @@ handlers:
 
 - url: /uploads
   static_dir: public/uploads
+
+- url: /fonts
+  static_dir: public/fonts

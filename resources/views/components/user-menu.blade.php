@@ -6,21 +6,21 @@
         <a href="{{ route('home') }}" class="row menu-item">
             {{ __('Home') }}
         </a>
-        <a href="" class="row menu-item">
-            {{ __('Profile') }}
+        <a href="{{ route('settings') }}" class="row menu-item">
+            {{ __('Settings') }}
         </a>
         <a href="{{ route('products.index') }}" class="row menu-item">
             {{ __('Products') }}
         </a>
         <a href="{{ route('product-request.index') }}" class="row menu-item">
-            {{ __('Product Requests') }}
+            {{ __('Product Searches') }}
         </a>
-        <a href="" class="row menu-item">
+        {{-- <a href="" class="row menu-item">
             {{  __('Reviews') }}
-        </a>
-        <a href="" class="row menu-item">
+        </a> --}}
+        {{-- <a href="" class="row menu-item">
             {{ __('Messages') }}
-        </a>
+        </a> --}}
     </div>
     
 </div>

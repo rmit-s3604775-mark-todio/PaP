@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>PaP</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -53,13 +53,6 @@
                 text-decoration: none;
                 text-transform: uppercase;
             }
-			
-			.image
-			{
-				position : flexible;
-				left: 50%;
-    			top: 50%;
-			}
         </style>
     </head>
     <body>
@@ -79,7 +72,7 @@
             @endif
 
             <div class="content">
-                <div class="image">
+                <div class="logo-lg">
 					<img src="{{ asset('images/Logo.png') }}" />
                 </div>
             </div>
