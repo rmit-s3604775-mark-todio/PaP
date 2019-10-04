@@ -94,14 +94,13 @@
                                                 </a>
                                             </td>
                                             
-                                            
 											<td>
                                                 <form action="{{route('product-request.destroy', $request->id)}}" method="POST">
-                                                @csrf
-												@method('DELETE')
-												<button type="submit" class="btn btn-danger" data-toggle="tooltip" title="Delete">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger" data-toggle="tooltip" title="Delete">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
                                                 </form>
                                             </td>
                                         </tr>
