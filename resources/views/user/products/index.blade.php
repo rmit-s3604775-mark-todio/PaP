@@ -32,29 +32,31 @@
                                     </div>
                                 @endif
 
-              
 								<div class="row">
-									<div class="col float-left">
-										<h1>Products</h1>
-									</div>
-									<div class="col float-end">
-										<form action="{{ route('product.search') }}" method="post">
-											@csrf
-											<div class="row">
-												<input id="search" class="form-controll @error('search') is-invalid @enderror" type="text" name="search" required>
-												<button type="submit" class="btn btn-primary">Search</button>
-												@error('search')
-													<span class="invalid-feedback" role="alert">
-														<strong>{{ $message }}</strong>
-													</span>
-												@enderror
-											</div>											
-										</form>
-									</div>
-									<div class="col float-right">
-										<a href="{{ route('products.create') }}"><button>Add new product</button></a>
-									</div>
+                                    <div class="col">
+                                        <h3>Products</h3>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row float-right">
+                                            <div class="col">
+                                                <form class="searchForm d-inline" action="{{ route('product.search') }}" method="POST">
+                                                    @csrf
+                                                    <input id="search" class="input-search @error('search') is-invalid @enderror" type="text" name="search" placeholder="Search for..." required />
+                                                    <button type="submit" class="submit-search">Search</button>
+                                                    @error('search')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror								
+                                                </form>
+                                                <a href="{{ route('products.create') }}">
+                                                    <button class="fa fa-plus btn btn-create"></button>
+                                                </a>
+                                            </div>	
+                                        </div>
+                                    </div>
 								</div>
+								
 								<div class="row">
 									<div class="col">
 										<table class="table">
@@ -78,14 +80,29 @@
 														<td>{{$product->brand}}</td>
 														<td>{{$product->condition}}</td>
 														<td>{{$product->rating}}</td>
-														<td><a href="{{ url('/details', [$product])}}"><button class="btn btn-info btn-xs" >details</button></a></td>
-														<td><a href="{{ route('products.edit', [$product])}}"><button class="btn btn-warning btn-xs">edit</button></a></td>
+														<td>
+															<a href="{{ url('/details', [$product])}}" data-toggle="tooltip" title="Details">
+																<button class="btn btn-secondary" >
+																	<i class="fa fa-info"></i>
+																</button>
+															</a>
+														</td>
+														<td>
+															<a href="{{ route('products.edit', [$product])}}" data-toggle="tooltip" title="Edit">
+																<button class="btn btn-secondary">
+																	<i class="fa fa-edit"></i>
+																</button>
+															</a>
+														</td>
 														
 														<td><form action="{{ url('/products', [$product]) }}" method="post">
-															<button class="btn btn-danger btn-xs" type="submit" value="Delete">Delete
-															</button>
-															@method('delete')
 															@csrf
+															@method('delete')
+															
+															<button class="btn btn-danger btn-xs" type="submit" value="Delete" data-toggle="tooltip" title="Delete">
+																<i class="fa fa-trash"></i>
+															</button>
+															
 															</form>
 														
 														</td>

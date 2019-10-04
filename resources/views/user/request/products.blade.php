@@ -32,46 +32,31 @@
                                         {{ session('status') }}
                                     </div>
                                 @endif
-								<!--
-								<form action="{{URL::to('/search')}}" method="POST" role="search">
-									{{ csrf_field() }}
-									<div class="input-group">
-										<input type="text" class="form-control" name="search" placeholder="Search users"> 
-										<span class="input-group-btn">
-											<button type="submit" class="btn btn-default">
-												<span class="glyphicon glyphicon-search"></span>
-												
-											</button>
-										</span>
-									</div>
-								</form>
-								@if(isset($details))
-								<div class="container">
-									<p>The search results for {{$query}} are :</p>
-									<table class="table">
-										<div>
-											<tr>
-												<th>Product Name</th>
-												<th>Brand</th>
-											</tr>
-										</div>
-										<div>
-											@foreach ($requests as $request)
-											<tr class="table-default">
-												<td>{{ $request->product_name }}</td>
-												<td>{{ $request->brand }}</td>
-											</tr>
-											@endforeach
-										</div>
-								</div>
-								@elseif(isset($message))
-									<p>{{ $message }}</p>
-								@endif
-								-->
-								
-                                <h3>Product Request</h3>
-                                <a href="{{ route('product-request.create') }}" class="float-right">Create Request</a>
-
+                                <div class="row">
+                                    <div class="col">
+                                        <h3>Product Searches</h3>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row float-right">
+                                            <div class="col">
+                                                {{-- <form class="searchForm d-inline" action="{{ route('admin.search') }}" method="POST">
+                                                    @csrf
+                                                    <input id="search" class="input-search @error('search') is-invalid @enderror" type="text" name="search" placeholder="Search for..." required />
+                                                    <button type="submit" class="submit-search">Search</button>
+                                                    @error('search')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror								
+                                                </form> --}}
+                                                <a href="{{ route('product-request.create') }}">
+                                                    <button class="fa fa-plus btn btn-create"></button>
+                                                </a>
+                                            </div>	
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                 <table class="table">
                                     <div>
                                         <tr class="table-active">
@@ -94,17 +79,29 @@
                                             <td>${{ $request->min_price }}</td>
                                             <td>${{ $request->max_price }}</td>
 
-                                            <td><button>Results</button></td>
-                                            <td><button data-toggle="modal" data-target="#myModal">Edit</button></td>
-                                            
-											{{--<td><button name="post">Delete</button></td>--}}
+                                            <td>
+                                                <a href="" data-toggle="tooltip" title="Results">
+                                                    <button class="btn navbar-btn btn-secondary">
+                                                        <i class="fa fa-list"></i>
+                                                    </button>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="" data-toggle="tooltip" title="Edit">
+                                                    <button class="btn btn-secondary">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
+                                                </a>
+                                            </td>
                                             
                                             
 											<td>
                                                 <form action="{{route('product-request.destroy', $request->id)}}" method="POST">
                                                 @csrf
 												@method('DELETE')
-												<button type="submit" class="btn btn-danger">Delete</button>
+												<button type="submit" class="btn btn-danger" data-toggle="tooltip" title="Delete">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
                                                 </form>
                                             </td>
                                         </tr>
