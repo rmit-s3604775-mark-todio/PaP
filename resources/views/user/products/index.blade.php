@@ -1,5 +1,6 @@
+{{-- this is a comment --}}
+{{-- navigation bar --}}
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -9,7 +10,7 @@
                     <div class="container">
                         <div class="row justify-content-center">
                             <span class="col-6 text-left">
-                                Admin Dashboard
+                                Dashboard
                             </span>
                             <span class="col-6 text-right">
                                 Welcome {{ Auth::user()->name }}
@@ -20,7 +21,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-3 nav-menu justify-content-center">
-                            @component('components.admin-menu')
+                            @component('components.user-menu')
                             @endcomponent
                         </div>
                         <div class="col-9">
@@ -31,25 +32,27 @@
                                     </div>
                                 @endif
 
-                                <div class="row">
-									<div class="col">
-										<h3>Products</h3>
+              
+								<div class="row">
+									<div class="col float-left">
+										<h1>Products</h1>
 									</div>
-									<div class="row">
-                                        <div class="col justify-content-right">
-                                            <form class="searchForm" action="{{ route('admin.product.search') }}" method="post">
-                                                @csrf
-                                                <div class="col">
-                                                    <input id="search" class="input-search @error('search') is-invalid @enderror" type="text" name="search" placeholder="Search for..." required />
-                                                    <button type="submit" class="submit-search">Search</button>
-                                                    @error('search')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>											
-                                            </form>
-                                        </div>
+									<div class="col float-end">
+										<form action="{{ route('product.search') }}" method="post">
+											@csrf
+											<div class="row">
+												<input id="search" class="form-controll @error('search') is-invalid @enderror" type="text" name="search" required>
+												<button type="submit" class="btn btn-primary">Search</button>
+												@error('search')
+													<span class="invalid-feedback" role="alert">
+														<strong>{{ $message }}</strong>
+													</span>
+												@enderror
+											</div>											
+										</form>
+									</div>
+									<div class="col float-right">
+										<a href="{{ route('products.create') }}"><button>Add new product</button></a>
 									</div>
 								</div>
 								<div class="row">
@@ -64,6 +67,7 @@
 												<th>Rating</th>
 												<th></th>
 												<th></th>
+												<th></th>
 											</tr>
 											@if (!$products->isEmpty())
 												@foreach($products as $product)
@@ -74,10 +78,11 @@
 														<td>{{$product->brand}}</td>
 														<td>{{$product->condition}}</td>
 														<td>{{$product->rating}}</td>
-														<td><a href=""><button class="btn btn-info">Details</button></a></td>
+														<td><a href="products.create">details</a></td>
+														<td><a data-toggle="modal" data-target="#myModal">edit</a></td>
 														
-														<td><form action="{{ route('admin.product.destroy', [$product]) }}" method="post">
-															<button class="btn btn-danger" type="submit">Delete</button>
+														<td><form action="{{ url('products', [$product]) }}" method="post">
+															<button class="btn btn-default" type="submit">Delete</button>
 															@method('delete')
 															@csrf
 														</form>
@@ -99,6 +104,35 @@
 									<div class="links">
 										{{ $products->links() }}
 									</div>
+								</div>
+
+								<div class="container">
+								  <!-- Modal -->
+								  <div class="modal fade" id="myModal" role="dialog">
+									<div class="modal-dialog">
+									
+									  <!-- Modal content-->
+									  <div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title">Edit product</h4>
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+										</div>
+										<div class="modal-body">
+											<form class="form-horizontal" action="/products" method="post">
+											{{csrf_field()}}
+												Product Name: <input type="text" name="product_name"></input><br>
+												Price: <input type="number" name="product_name"><br>
+												Quantity: <input type="number" name="product_name"><br>
+												<button type="submit" name="body" class="btn btn-success">Submit</button>
+											</form>
+										</div>
+										<div class="modal-footer">
+										  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+										</div>
+									  </div>
+									  
+									</div>
+								  </div>
 								</div>
                             </div>
                         </div>

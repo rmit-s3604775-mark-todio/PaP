@@ -32,18 +32,78 @@
                                 @endif
         
                                 <h3>Settings</h3>
-
-                                <h4>{{ Auth::user()->name }}'s Profile Settings</h4>
-                                <form enctype="multipart/form-data" action="{{ route('admin.avatar') }}" method="post">
+                                <form enctype="multipart/form-data" action="{{ route('admin.update') }}" method="post">
                                     @csrf
+                                    @method("post")
 
-                                    <label for="avatar-file">Update Avatar Image</label>
-                                    <input type="file" name="avatar-file">
-                                    <p>Max image size is 5 Mb</p>
-                                    {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> --}}
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Submit') }}
-                                    </button>
+                                    <div class="form-group row">
+                                        <label for="avatar" class="col-md-4 col-form-label text-md-right">Avatar Image</label>
+
+                                        <div class="col-md-5">
+                                            <input type="file" name="avatar" id="avatar" class="form-control-file @error('avatar') is-invalid @enderror">
+                                            @error('avatar')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+
+                                        <div class="col-md-5">
+                                            <input id="name" name="name" type="text" class="form-control @error('name') is-invalid @enderror" autocomplete="name" placeholder="{{ Auth::user()->name }}" value="{{ old('name') }}">
+                                        </div>
+                                        @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
+
+                                        <div class="col-md-5">
+                                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="{{ Auth::user()->email }}" value="{{ old('email') }}" autocomplete="email">
+                                            
+                                            @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+            
+                                        <div class="col-md-5">
+                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password" placeholder="Password...">
+            
+                                            @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+            
+                                        <div class="col-md-5">
+                                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password" placeholder="Confirm Password...">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-0">
+                                        <div class="col-md-8 offset-md-4">
+                                            <button type="submit" class="btn btn-primary">
+                                                {{ __('Update') }}
+                                            </button>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
                         </div>
