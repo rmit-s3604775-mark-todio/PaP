@@ -56,8 +56,10 @@ class ProductSearchController extends Controller
         $productRequest = new ProductRequest;
         $this->validate($request, [ //This is for validating, basically like ensuring you put the right type or value.
             "product_name" => ['required'],
-            "max_price" => ['nullable', 'numeric'],
-            "min_price" => ['nullable', 'numeric']
+            "brand" => ['nullable', 'exists:brands,brand'],
+            "condition" => ['nullable', 'exists:conditions,condition'],
+            "max_price" => ['nullable', 'numeric', 'lte:999999', 'gte:min_price'],
+            "min_price" => ['nullable', 'numeric', 'lte:max_price', 'gte:0']
         ]);
 
         $user = Auth::user();
@@ -113,9 +115,11 @@ class ProductSearchController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-			"product_name"=>'required',
-			"max_price" => 'numeric',//This one is previously 'number'. But 'number' is apparently the wrong variable.
-            "min_price" => 'numeric' //numeric is the correct variable
+            "product_name"=> ['required'],
+            "brand" => ['nullable', 'exists:brands,brand'],
+            "condition" => ['nullable', 'exists:conditions,condition'],
+			"max_price" => ['nullable', 'numeric', 'lte:999999', 'gte:min_price'],
+            "min_price" => ['nullable', 'numeric', 'lte:max_price', 'gte:0']
 		]);
 	
 		$requests = ProductRequest::find($id);

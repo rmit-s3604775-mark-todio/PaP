@@ -30,58 +30,94 @@
                                     </div>
                                 @endif
 
-                                <div>
-                                    <h3>Create new request</h3>
-                                    
-                                    <form class="form-horizontal" action="{{ route('product-search.store') }}" method="post">
-                                    {{csrf_field()}}
-                                        <fieldset>
-                                            <div class="form-group">
-                                                <div class="col-lg-10">
-                                                    <div class="row">
-                                                        Product Name: 
-                                                        <input type="text" name="product_name"/>
-                                                    </div>
-                                                    <div class="row">Brand:
-                                                        <select name="brand" id="brand">
-                                                            <option selected disabled hidden>Please Select...</option>
-                                                            @foreach ($brands as $brand)
-                                                            <option value="{{ $brand->brand }}">{{ $brand->brand }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="row">Condition:
-                                                            <select name="condition" id="condition">
-                                                                <option selected disabled hidden>Please Select...</option>
-                                                                @foreach ($conditions as $condition)
-                                                                <option value="{{ $condition->condition }}">{{ $condition->condition }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                    </div>
-                                                    <div class="row">
-                                                        Min Price: <input type="number" name="min_price"/>
-                                                    </div>	
-                                                    <div class="row">
-                                                        Max Price: <input type="number" name="max_price"/>
-                                                    </div>
-                                                    
-                                                    <div class="row">
-                                                        <button type="submit" value="Enter" class="btn btn-success">Submit</button>
-                                                    </div>
-                                                    
-                                                </div>
-                                            </div>
-                                        </fieldset>
-                                </form>
-                                @if (count($errors)>0)
-                                    <div class="alert alert-danger">
-                                    @foreach($errors->all() as $error)
-                                        <pre>{{$error}}</pre>
-                                    @endforeach
+                                <h3>Create New Product Search</h3>
+                                <form action="{{ route('product-search.store') }}" method="post">
+                                    @csrf
+                                    @method("post")
+
+                                    <div class="form-group row">
+                                        <label for="product_name" class="col-md-4 col-form-label text-md-right">Product Name</label>
+
+                                        <div class="col-md-5">
+                                            <input type="text" name="product_name" id="product_name" class="form-control @error('product_name') is-invalid @enderror" value="{{ old('product_name') }}" required/>
+                                        </div>
+                                        @error('product_name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
-                                @endif
-                                
-                                </div>
+
+                                    <div class="form-group row">
+                                        <label for="brand" class="col-md-4 col-form-label text-md-right">Brand</label>
+
+                                        <div class="col-md-5">
+                                            <select name="brand" id="brand" class="form-control @error('brand') is-invalid @enderror">
+                                                <option selected disabled hidden>Please Select...</option>
+                                                @foreach ($brands as $brand)
+                                                <option value="{{ $brand->brand }}">{{ $brand->brand }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        @error('brand')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="condition" class="col-md-4 col-form-label text-md-right">Condition</label>
+
+                                        <div class="col-md-5">
+                                            <select name="condition" id="condition" class="form-control @error('condition') is-invalid @enderror">
+                                                <option selected disabled hidden>Please Select...</option>
+                                                @foreach ($conditions as $condition)
+                                                <option value="{{ $condition->condition }}">{{ $condition->condition }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        @error('condition')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="min_price" class="col-md-4 col-form-label text-md-right">Min Price</label>
+
+                                        <div class="col-md-5">
+                                            <input type="number" name="min_price" id="min_price" class="form-control @error('min_price') is-invalid @enderror" value="{{ old('min_price') }}"/>
+                                        </div>
+                                        @error('min_price')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="max_price" class="col-md-4 col-form-label text-md-right">Max Price</label>
+
+                                        <div class="col-md-5">
+                                            <input type="number" name="max_price" id="max_price" class="form-control @error('max_price') is-invalid @enderror" value="{{ old('max_price') }}"/>
+                                        </div>
+                                        @error('max_price')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group row mb-0">
+                                        <div class="col-md-8 offset-md-4">
+                                            <button type="submit" class="btn btn-primary">
+                                                {{ __('Submit') }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
