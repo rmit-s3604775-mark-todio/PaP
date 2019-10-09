@@ -189,12 +189,7 @@ class ProductSearchController extends Controller
         $ps = ProductRequest::find($id);
         
         if($ps->user_id != Auth::user()->id) {
-            $results = [null];
-            $ps = null;
-            return view('user.request.results')
-                        ->with(compact('results'))
-                        ->with(compact('ps'))
-                        ->withError('Invalid Request');
+            return redirect()->back()->withError('Invalid Request');
         } else {
             $results = $this->match($ps)->orderBy('created_at', 'asc')->paginate(15);
             return view('user.request.results')

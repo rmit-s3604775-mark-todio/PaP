@@ -36,22 +36,6 @@
                                     <div class="col">
                                         <h3>Product Search Matches</h3>
                                     </div>
-                                    <div class="col">
-                                        <div class="row float-right">
-                                            <div class="col">
-                                                {{-- <form class="searchForm d-inline" action="{{ route('admin.search') }}" method="POST">
-                                                    @csrf
-                                                    <input id="search" class="input-search @error('search') is-invalid @enderror" type="text" name="search" placeholder="Search for..." required />
-                                                    <button type="submit" class="submit-search">Search</button>
-                                                    @error('search')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror								
-                                                </form> --}}
-                                            </div>
-                                        </div>                                 
-                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
@@ -70,9 +54,7 @@
                                                     </div>
                                                     @endif
                                                 @endforeach
-                                            
                                         </div>
-                                        
                                     </div>               
                                 </div>
                                 <div class="row">
@@ -115,12 +97,13 @@
                                             <h3>No Products Found</h3>
                                         </div>
                                     </div>
-                                    @endif
+                                    @else
                                     <div class="row justify-content-center">
                                         <div class="links">
                                             {{ $results->links() }}
                                         </div>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
