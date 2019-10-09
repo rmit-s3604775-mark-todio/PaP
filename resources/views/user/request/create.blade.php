@@ -33,7 +33,7 @@
                                 <div>
                                     <h3>Create new request</h3>
                                     
-                                    <form class="form-horizontal" action="/product-request" method="post">
+                                    <form class="form-horizontal" action="{{ route('product-search.store') }}" method="post">
                                     {{csrf_field()}}
                                         <fieldset>
                                             <div class="form-group">

@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\ProductRequest;
+use App\product;
 use Illuminate\Http\Request;
 use Auth;
-use DateTime;//Either this one disappear or I delete it in the past. But either way, I put this back in. (Ega)
 use DB;
 
-class RequestController extends Controller
+class ProductSearchController extends Controller
 {
 
     /**
@@ -54,10 +54,10 @@ class RequestController extends Controller
     public function store(Request $request)
     {
         $productRequest = new ProductRequest;
-        $this->validate($request, [//This is for validating, basically like ensuring you put the right type or value.
-            "product_name" => 'required',
-            "max_price" => 'numeric',//This one is previously 'number'. But 'number' is apparently the wrong variable.
-            "min_price" => 'numeric' //numeric is the correct variable
+        $this->validate($request, [ //This is for validating, basically like ensuring you put the right type or value.
+            "product_name" => ['required'],
+            "max_price" => ['nullable', 'numeric'],
+            "min_price" => ['nullable', 'numeric']
         ]);
 
         $user = Auth::user();
@@ -65,14 +65,12 @@ class RequestController extends Controller
         $productRequest->product_name = $request->product_name;
         $productRequest->user_id = $user->id;
         $productRequest->brand = $request->brand;
-        $productRequest->condition = $request->condition; //DB::table('conditions')->find($request->condition); (old code)
+        $productRequest->condition = $request->condition;
         $productRequest->max_price = $request->max_price;
         $productRequest->min_price = $request->min_price;
-        $productRequest->created_at = new DateTime();
-        $productRequest->updated_at = new DateTime();
         
         $productRequest->save();
-		return redirect('product-request');
+		return redirect()->route('product-search.index');
 		
         //return view('user.request.products'); (no need)
     }
@@ -131,7 +129,7 @@ class RequestController extends Controller
 		
 		$requests->save();
 		
-		return redirect('product-request');
+		return redirect()->route('product-search.index');
     }
 
     /**
@@ -146,6 +144,63 @@ class RequestController extends Controller
 		
 		/**return redirect('products');*/
 		
-		return redirect('product-request');
+		return redirect()->route('product-search.index');
+    }
+
+    /**
+     * Matching of products to product search (aka product request)
+     * 
+     * @param ProductRequest $ps
+     * @return Eloquent $results
+     */
+    public function match(ProductRequest $ps)
+    {
+        $productConstraint = new product;
+        $productConstraint = $productConstraint->where('user_id', '!=', Auth::user()->id);
+
+        if($ps->max_price != null) {
+            $productConstraint = $productConstraint->where('price', '<=', 150);
+        }
+
+        if($ps->min_price != null) {
+            $productConstraint = $productConstraint->where('price', '>=', $ps->min_price);
+        }
+
+        if($ps->brand != null) {
+            $productConstraint = $productConstraint->where('brand', $ps->brand);
+        }
+
+        if($ps->condition != null) {
+            $productConstraint = $productConstraint->where('condition', $ps->condition);
+        }
+
+        $results = product::search($ps->product_name)->constrain($productConstraint);
+        return $results;
+    }
+
+    /**
+     * Returns the result of the match
+     * 
+     * @param $id
+     * @return View user.request.results
+     */
+    public function results($id)
+    {
+        $ps = ProductRequest::find($id);
+        
+        if($ps->user_id != Auth::user()->id) {
+            $results = [null];
+            $ps = null;
+            return view('user.request.results')
+                        ->with(compact('results'))
+                        ->with(compact('ps'))
+                        ->withError('Invalid Request');
+        } else {
+            $results = $this->match($ps)->orderBy('created_at', 'asc')->paginate(15);
+            return view('user.request.results')
+                        ->with(compact('results'))
+                        ->with(compact('ps'))
+                        ->withStatus('Success');
+        }
     }
 }

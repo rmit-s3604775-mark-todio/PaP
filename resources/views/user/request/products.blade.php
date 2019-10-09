@@ -32,6 +32,11 @@
                                         {{ session('status') }}
                                     </div>
                                 @endif
+                                @if (session('error'))
+                                    <div class="alert alert-error" role="alert">
+                                        {{ session('error') }}
+                                    </div>
+                                @endif
                                 <div class="row">
                                     <div class="col">
                                         <h3>Product Searches</h3>
@@ -49,7 +54,7 @@
                                                         </span>
                                                     @enderror								
                                                 </form> --}}
-                                                <a href="{{ route('product-request.create') }}">
+                                                <a href="{{ route('product-search.create') }}">
                                                     <button class="fa fa-plus btn btn-create"></button>
                                                 </a>
                                             </div>	
@@ -76,36 +81,25 @@
                                             <td>{{ $request->product_name }}</td>
                                             <td>{{ $request->brand }}</td>
                                             <td>{{ $request->condition }}</td>
-                                            <td>${{ $request->min_price }}</td>
-                                            <td>${{ $request->max_price }}</td>
+                                            <td>
+                                                @if ($request->min_price != null)
+                                                    ${{ $request->min_price }}
+                                                @endif
+                                                
+                                            </td>
+                                            <td>
+                                                @if ($request->max_price != null)
+                                                    ${{ $request->max_price }}
+                                                @endif
+                                            </td>
 
                                             <td>
-<<<<<<< HEAD
-												<a href="">
-												<button>Results</button>
-												</a>
-											</td>
-                                            <td>
-												<a class="btn btn-warning btn-xs" href="{{ route('product-request.edit', [$request])}}">
-													Edit
-												</a>
-											</td>
-                                            
-											<!--I (Ega) modify the delete button-->
-											<!--<td><button name="post">Delete</button></td>-->
-                                            
-                                            
-											<td>
-                                                <form action= "{{route('product-request.destroy', $request->id)}}" method="POST">
-                                                @csrf
-												@method('DELETE')
-												<button type="submit" class="btn btn-danger">Delete</button>
-=======
-                                                <a href="" data-toggle="tooltip" title="Results">
-                                                    <button class="btn navbar-btn btn-secondary">
+                                                <form action="{{ route('product-search.results', $request->id) }}" method="post">
+                                                    @csrf
+                                                    <button type="submit" class="btn navbar-btn btn-secondary" data-toggle="tooltip" title="Results">
                                                         <i class="fa fa-list"></i>
                                                     </button>
-                                                </a>
+                                                </form>
                                             </td>
                                             <td>
                                                 <a href="" data-toggle="tooltip" title="Edit">
@@ -116,18 +110,18 @@
                                             </td>
                                             
 											<td>
-                                                <form action="{{route('product-request.destroy', $request->id)}}" method="POST">
+                                                <form action="{{route('product-search.destroy', $request->id)}}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger" data-toggle="tooltip" title="Delete">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
->>>>>>> develop
                                                 </form>
                                             </td>
                                         </tr>
                                         @endforeach
                                     </div>
+                                </table>
                             </div>
                         </div>
                     </div>
