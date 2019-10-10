@@ -96,17 +96,18 @@
                                             <td>
                                                 <form action="{{ route('product-search.results', $request->id) }}" method="post">
                                                     @csrf
-                                                    <button type="submit" class="btn navbar-btn btn-secondary" data-toggle="tooltip" title="Results">
+                                                    <button type="submit" class="btn btn-secondary" data-toggle="tooltip" title="Results">
                                                         <i class="fa fa-list"></i>
                                                     </button>
                                                 </form>
                                             </td>
                                             <td>
-                                                <a href="" data-toggle="tooltip" title="Edit">
-                                                    <button class="btn btn-secondary">
+                                                <form action="{{ route('product-search.edit', $request->id) }}" method="get">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-secondary" data-toggle="tooltip" title="Edit">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
-                                                </a>
+                                                </form>
                                             </td>
                                             
 											<td>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\ProductRequest;
 use App\product;
 use Illuminate\Http\Request;
+use App\Rules\gtenn;
+use App\Rules\ltenn;
 use Auth;
 use DB;
 
@@ -58,8 +60,8 @@ class ProductSearchController extends Controller
             "product_name" => ['required'],
             "brand" => ['nullable', 'exists:brands,brand'],
             "condition" => ['nullable', 'exists:conditions,condition'],
-            "max_price" => ['nullable', 'numeric', 'lte:999999', 'gte:min_price'],
-            "min_price" => ['nullable', 'numeric', 'lte:max_price', 'gte:0']
+            "max_price" => ['nullable', 'numeric', 'max:999999', new gtenn("Min Price", $request->min_price)],
+            "min_price" => ['nullable', 'numeric', 'min:0', new ltenn("Max Price", $request->max_price)]
         ]);
 
         $user = Auth::user();
@@ -99,10 +101,15 @@ class ProductSearchController extends Controller
 	 
 	 
     public function edit($id)
-    {//I am going to put edit in this. This will be used to edit the existing data. 
-	//Basically you can change the product name, brands, condition, minimal price, and maximum price.
-        $item = ProductRequest::find($id);
-        return view('user.request.edit', [ 'brands' => DB::table('brands')->get(), 'conditions' => DB::table('conditions')->get()], compact('item'));
+    {
+        $req = ProductRequest::find($id);
+        $brands = DB::table('brands')->get();
+        $conditions = DB::table('conditions')->get();
+
+        return view('user.request.edit')
+                    ->with(compact('brands'))
+                    ->with(compact('conditions'))
+                    ->with(compact('req'));
     }
 
     /**
@@ -114,24 +121,37 @@ class ProductSearchController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request,[
+
+        $this->validate($request, [
             "product_name"=> ['required'],
-            "brand" => ['nullable', 'exists:brands,brand'],
-            "condition" => ['nullable', 'exists:conditions,condition'],
-			"max_price" => ['nullable', 'numeric', 'lte:999999', 'gte:min_price'],
-            "min_price" => ['nullable', 'numeric', 'lte:max_price', 'gte:0']
-		]);
+            "brand" => ['nullable'],
+            "condition" => ['nullable'],
+            "max_price" => ['nullable', 'numeric', 'max:999999', new gtenn("Min Price", $request->min_price)],
+            "min_price" => ['nullable', 'numeric', 'min:0', new ltenn("Max Price", $request->max_price)]
+        ]);
 	
-		$requests = ProductRequest::find($id);
+		$req = ProductRequest::find($id);
 		
-		$requests->product_name = $request->product_name;
-		$requests->brand = $request->brand;
-		$requests->condition = $request->condition;
-		$requests->min_price = $request->min_price;
-		$requests->max_price = $request->max_price;
-		$requests->updated_at = new DateTime();
+        $req->product_name = $request->product_name;
+        
+        if($request->brand != "None") {
+            $brand = DB::table('brands')->where('brand', $request->brand)->first();
+            $req->brand = $brand->brand;
+        } else {
+            $req->brand = null;
+        }
+
+        if ($request->condition != "None") {
+            $condition = DB::table('conditions')->where('condition', $request->condition)->first();
+            $req->condition = $condition->condition;
+        } else {
+            $req->condition = null;
+        }
+        
+		$req->min_price = $request->min_price;
+		$req->max_price = $request->max_price;
 		
-		$requests->save();
+		$req->save();
 		
 		return redirect()->route('product-search.index');
     }
