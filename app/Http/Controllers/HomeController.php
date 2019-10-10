@@ -144,4 +144,9 @@ class HomeController extends Controller
 
         return redirect()->route('settings')->withStatus('Updated Successfully');
     }
+
+    public function AuthRouteAPI(Request $request)
+    {
+        return $request->user();
+    }
 }
