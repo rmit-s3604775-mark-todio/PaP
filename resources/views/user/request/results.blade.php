@@ -41,69 +41,67 @@
                                     <div class="col">
                                         <div class="col" style="border: 1px solid lightgrey">
                                             <h5>Matched Based On:</h5>
-                                            
-                                                @foreach ($ps->toArray() as $key => $value)
-                                                    @if ($value != null & $key != 'id' & $key != 'user_id' & $key != 'created_at' & $key != 'updated_at')
-                                                    <div class="row">
-                                                        <div class="col-2">
-                                                            {{ucwords(str_replace('_', ' ', $key))}}:
-                                                        </div>
-                                                        <div class="col-2">
-                                                            {{$value}}
-                                                        </div>
+                                            @foreach ($ps->toArray() as $key => $value)
+                                                @if ($value != null & $key != 'id' & $key != 'user_id' & $key != 'created_at' & $key != 'updated_at')
+                                                <div class="row">
+                                                    <div class="col-2">
+                                                        {{ucwords(str_replace('_', ' ', $key))}}:
                                                     </div>
-                                                    @endif
-                                                @endforeach
+                                                    <div class="col-2">
+                                                        {{$value}}
+                                                    </div>
+                                                </div>
+                                                @endif
+                                            @endforeach
                                         </div>
                                     </div>               
                                 </div>
                                 <div class="row">
-                                        <div class="col">
-                                            <table class="table">
-                                                <tr class="table-active">
-                                                    <th>Product Name</th>
-                                                    <th>Price</th>
-                                                    <th>Quantity</th>
-                                                    <th>Brand</th>
-                                                    <th>Condition</th>
-                                                    <th>Rating</th>
-                                                    <th></th>
-                                                </tr>
-                                                @if (!$results->isEmpty())
-                                                    @foreach($results as $product)
-                                                        <tr class="table-default">
-                                                            <td>{{$product->product_name}}</td>
-                                                            <td>${{$product->price}}</td>
-                                                            <td>{{$product->quantity}}</td>
-                                                            <td>{{$product->brand}}</td>
-                                                            <td>{{$product->condition}}</td>
-                                                            <td>{{$product->rating}}</td>
-                                                            <td>
-                                                                <a href="{{ url('/details', [$product])}}" data-toggle="tooltip" title="Details">
-                                                                    <button class="btn btn-secondary" >
-                                                                        <i class="fa fa-info"></i>
-                                                                    </button>
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                @endif
-                                            </table>
+                                    <div class="col">
+                                        <table class="table">
+                                            <tr class="table-active">
+                                                <th>Product Name</th>
+                                                <th>Price</th>
+                                                <th>Quantity</th>
+                                                <th>Brand</th>
+                                                <th>Condition</th>
+                                                <th>Rating</th>
+                                                <th></th>
+                                            </tr>
+                                            @if (!$results->isEmpty())
+                                                @foreach($results as $product)
+                                                    <tr class="table-default">
+                                                        <td>{{$product->product_name}}</td>
+                                                        <td>${{$product->price}}</td>
+                                                        <td>{{$product->quantity}}</td>
+                                                        <td>{{$product->brand}}</td>
+                                                        <td>{{$product->condition}}</td>
+                                                        <td>{{$product->rating}}</td>
+                                                        <td>
+                                                            <a href="{{ url('/details', [$product])}}" data-toggle="tooltip" title="Details">
+                                                                <button class="btn btn-secondary" >
+                                                                    <i class="fa fa-info"></i>
+                                                                </button>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+                                        </table>
+                                        @if ($results->isEmpty())
+                                        <div class="row">
+                                            <div class="col text-center">
+                                                <h3>No Products Found</h3>
+                                            </div>
                                         </div>
-                                    </div>
-                                    @if ($results->isEmpty())
-                                    <div class="row">
-                                        <div class="col text-center">
-                                            <h3>No Products Found</h3>
+                                        @else
+                                        <div class="row justify-content-center">
+                                            <div class="links">
+                                                {{ $results->links() }}
+                                            </div>
                                         </div>
+                                        @endif
                                     </div>
-                                    @else
-                                    <div class="row justify-content-center">
-                                        <div class="links">
-                                            {{ $results->links() }}
-                                        </div>
-                                    </div>
-                                    @endif
                                 </div>
                             </div>
                         </div>

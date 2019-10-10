@@ -31,7 +31,7 @@ class ProductSearchController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $requests = ProductRequest::where('user_id', $user->id)->get();
+        $requests = ProductRequest::where('user_id', $user->id)->paginate(15);
 
         return view('user.request.products', compact('requests'));
     }
