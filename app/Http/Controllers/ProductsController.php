@@ -195,10 +195,9 @@ class ProductsController extends Controller
         if(empty($updatedValues)){
           $updatedValues[] = "defaultPhone.png";
           $product->images = json_encode($updatedValues);
+        }else{
+          $product->images = json_encode($updatedValues);
         }
-
-
-        $product->images = json_encode($updatedValues);
       }
 
 		$this->validate($request,[
@@ -254,41 +253,5 @@ class ProductsController extends Controller
 
         $products = Product::search($request->search)->paginate(15);
         return view('user.products.index', compact('products'));
-    }
-
-    // delete phone images
-    public function deleteImage(Request $fileImages, $id){
-        $product = product::find($id);
-
-        $files = Storage::files(public_path('/uploads/products/'));
-        return $files;
-
-        
-
-        // checks if file exists
-        // if($fileImages->has('images'))
-        // {
-        //     foreach($request->images as $image)
-        //     {       
-
-              
-              
-        //       $filename =  time() . "-". $image->getClientOriginalName();
-        //         $images_array[] = $filename;
-        //         Image::make($image)->resize(null, 300, function($constraint){
-        //           $constraint->aspectRatio();
-        //         })->save( public_path('/uploads/products/'. $filename) );
-        //     }
-        //     $product->images = json_encode($images_array);
-        // }
-        // else
-        // {
-        //     $images_array[] = "defaultPhone.png";
-        //     $product->images = json_encode($images_array);
-        // }
-
-
-
-        // return reload edit page
     }
 }

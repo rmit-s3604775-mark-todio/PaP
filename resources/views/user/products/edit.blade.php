@@ -213,9 +213,6 @@
 		dict["image_".concat(num.toString())] = "not_selected";
 	@endforeach
 
-	// saved uploads
-	var glob_fileUploads = [];
-
 	function selectedImage(idnumber) {
         var image = document.getElementById("image_".concat(idnumber));
 		

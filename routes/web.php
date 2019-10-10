@@ -25,7 +25,6 @@ Route::post('/product-search/results/{id}', 'ProductSearchController@results')->
 // project routes
 Route::get('/details/{product}', 'ProductsController@details')->name('product.details');
 // test method
-Route::delete('/deleteImage/{product}, ProductsController@edit')->name('products.destroyImage');
 Route::resource('products', 'ProductsController');
 Route::post('search', 'ProductsController@searchProduct')->name('product.search');
 
