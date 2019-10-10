@@ -31,7 +31,6 @@
                                 @endif
 
 						  <div>
-								<a class="btn btn-primary" href="{{ route('products.index') }}">Go back</a>
 								<h1>Create new item</h1>
 								
 								<form class="form-horizontal" action="/products" method="post" enctype="multipart/form-data">
@@ -44,7 +43,7 @@
 
 										<div class="form-group">
 												<label for="price">Price</label>
-												<input type="number" name="price" class="form-control">
+												<input type="decimal" name="price" class="form-control">
 										</div>
 
 										<div class="form-group">

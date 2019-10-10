@@ -23,7 +23,8 @@ Route::post('/product-search/results/{id}', 'ProductSearchController@results')->
 
 
 // project routes
-Route::get('/details/{product}', 'ProductsController@details');
+Route::get('/details/{product}', 'ProductsController@details')->name('product.details');
+// test method
 Route::resource('products', 'ProductsController');
 Route::post('search', 'ProductsController@searchProduct')->name('product.search');
 
