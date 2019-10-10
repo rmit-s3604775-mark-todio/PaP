@@ -74,10 +74,18 @@
 														<td>{{$product->brand}}</td>
 														<td>{{$product->condition}}</td>
 														<td>{{$product->rating}}</td>
-														<td><a href=""><button class="btn btn-info">Details</button></a></td>
+														<td>
+															<a href="{{ url('/details', [$product])}}" data-toggle="tooltip" title="Details">
+																<button class="btn btn-secondary" >
+																	<i class="fa fa-info"></i>
+																</button>
+															</a>
+														</td>
 														
 														<td><form action="{{ route('admin.product.destroy', [$product]) }}" method="post">
-															<button class="btn btn-danger" type="submit">Delete</button>
+															<button class="btn btn-danger" type="submit" data-toggle="tooltip" title="Delete">
+																<i class="fa fa-trash"></i>
+															</button>
 															@method('delete')
 															@csrf
 														</form>

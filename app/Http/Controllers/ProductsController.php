@@ -24,7 +24,7 @@ class ProductsController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth'); //use the default guard (web)
+        $this->middleware('auth:web,admin'); //use the default guard (web)
     }
 
     /**
