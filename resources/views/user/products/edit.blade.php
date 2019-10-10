@@ -34,7 +34,7 @@
 
 								{{-- insert code here --}}
 								<h1 class="text-center">Edit {{$item->product_name}}</h1>
-								<form action="{{ route('products.update', [$item]) }}" method="post">
+								<form action="{{ route('products.update', [$item]) }}" method="post" enctype="multipart/form-data">
 									{{csrf_field()}}
 									{{method_field('PUT')}}
 
@@ -160,9 +160,10 @@
 
 										{{-- adding new images here --}}
 										<div class="form-group">
-											<label for="images">Add new images</label>
-											<input id= "uploadImage" type="file" name="images[]" class="form-control" multiple/>
+											<label for="images">Add new Images</label>
+											<input type="file" name="images[]" class="form-control" multiple/>
 										</div>
+
 										<ul id="showUploadedFiles"></ul>
 										
 
@@ -173,7 +174,7 @@
 										</div>
 												
 									
-									<fieldset> 
+									</fieldset> 
 									
 									
 								
@@ -271,53 +272,8 @@
 		}
 	}
 
-	function uploadNewImages(){
-		var uploadFiles = document.getElementById("uploadImage");
-		var ul = document.getElementById("showUploadedFiles");
-
-		ul.innerHTML = "";
-		glob_fileUploads = [];
-
-		for(var i = 0; i < uploadFiles.files.length; i++){
-			var fileName = uploadFiles.files[i].name;
-			var li = document.createElement("li");
-
-			glob_fileUploads[i] = uploadFiles.files[i];
-
-			li.appendChild(document.createTextNode(fileName));
-			ul.appendChild(li);
-		}
-	}
-
-	function closeUpload(){
-		var uploadFiles = document.getElementById("uploadImage");
-
-		// check if it has values
-		if(glob_fileUploads.length == 0){
-			document.getElementById("uploadImage").value = "";
-			console.log("file is empty");
-		}else{
-			console.log("there is files");
-
-		//	var uploadImageString;
-
-		// 	for(var i = 0; i < glob_fileUploads.length; i++){
-		// //		uploadImageArray.push(glob_fileUploads[i].name);
-		// 		 console.log(glob_fileUploads[i].name);
-		// 	}
-		
-			
-			console.log(glob_fileUploads[0].name);
-	
-
-			document.getElementById("uploadImage").value = glob_fileUploads[0];
-		}
 
 
-
-
-		
-	}
 
 	
 </script>

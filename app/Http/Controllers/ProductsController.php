@@ -12,6 +12,7 @@ use App\product;
 use Auth;
 use App\ProductImage;
 use Image;
+use File;
 
 
 
@@ -148,29 +149,79 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-      return $request;
+       $product = product::find($id);
+
+      // get the values taht are to be deleted
+      $updatedValues = array();
+      if($request->has('imagesDelete'))
+      {
+        $productimages = $product->images;
+        $requestimages = $request->imagesDelete;
+
+        // turn values into arrays for comparison
+        $databaseValArray = json_decode($productimages, true);
+        $imagesDelArray = explode(",", $requestimages);
+      
+        // compare arrays then delete duplicates
+        $updatedValues = array_merge(array_diff($databaseValArray, $imagesDelArray));
+
+        // delete images from folder
+        foreach($imagesDelArray as $imageDel)
+        {  
+          if(File::exists(public_path('/uploads/products/'. $imageDel))) {
+            File::delete(public_path('/uploads/products/'. $imageDel));
+          }
+        }
+      }else{
+        // keep old valyes
+        $updatedValues = $databaseValArray;
+      }
+
+      $images_array = array();
+      if($request->has('images'))
+      {
+          foreach($request->images as $image)
+          {      
+              $filename = time() . "-". $image->getClientOriginalName();
+              $images_array[] = $filename;
+              Image::make($image)->resize(null, 300, function($constraint){
+                $constraint->aspectRatio();
+              })->save( public_path('/uploads/products/'. $filename) );
+          }
+          
+          $combineArray = array_merge($updatedValues, $images_array);
+          $product->images = json_encode($combineArray);
+      }else{
+        if(empty($updatedValues)){
+          $updatedValues[] = "defaultPhone.png";
+          $product->images = json_encode($updatedValues);
+        }
+
+
+        $product->images = json_encode($updatedValues);
+      }
+
 		$this->validate($request,[
 			"product_name"=>'required',
 			"price"=>'required',
 			"quantity"=> ['required', 'numeric', 'min:0'],
-			"rating"=> ['required', 'numeric'],
 			"brand"=>'required',
-      "condition"=>'required'
-		]);
-	
-		$product = product::find($id);
-		
+      "condition"=>'required',
+      "description" => 'required'
+    ]);
+      
+    // need to remove rating
+    $product->rating = 5;
+
 		$product->product_name = $request->product_name;
 		$product->price = $request->price;
 		$product->quantity = $request->quantity;
-		$product->rating = $request->rating;
 		$product->brand = $request->brand;
-		$product->condition = $request->condition;
+    $product->condition = $request->condition;
+    $product->description = $request->description;
 		$product->updated_at = new DateTime();
     $product->save();
     
-    
-		
     return redirect('products');
     }
 
