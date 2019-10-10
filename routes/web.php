@@ -15,17 +15,28 @@ Route::get('/', 'WelcomeController@welcome');
 
 Auth::routes();
 
-Route::resource('product-request', 'RequestController');
+//Product Search Routes (Matching)
+Route::resource('product-search', 'ProductSearchController');
+Route::post('/product-search/results/{id}', 'ProductSearchController@results')->name('product-search.results');
+
+
+// project routes
+Route::get('/details/{product}', 'ProductsController@details')->name('product.details');
+// test method
+Route::resource('products', 'ProductsController');
 Route::post('search', 'ProductsController@searchProduct')->name('product.search');
 
-Route::resource('products', 'ProductsController');
+// product images
+Route::get('/product-image','Product_ImageController@create')->name('image.create');
+Route::post('/product-image','Product_ImageController@store')->name('image.store');
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/settings', 'HomeController@settings')->name('settings');
 Route::post('/update', 'HomeController@update')->name('update');
 Route::get('/user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 
-Route::get('/product-requests', 'HomeController@product_requests')->name('product-requests');
+
 
 Route::prefix('admin')->name('admin.')->group(function(){
     //Administrator Products Routes
