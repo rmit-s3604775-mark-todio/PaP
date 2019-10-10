@@ -33,7 +33,6 @@
                                 @endif
 
                                 {{-- insert code here --}}
-                                <a class="btn btn-primary" href="{{ route('products.index') }}">Go back</a>
                                 <div class="card">
                                 <h1 class="card-header">{{$item->product_name}}</h1>
 
@@ -50,7 +49,7 @@
                                         <div class="carousel-inner">
                                             @foreach (json_decode($item->images) as $image)
                                                 @if ($loop->first)
-                                                <div class="carousel-item active product-container text-center">
+                                                    <div class="carousel-item active product-container text-center">
                                                         <img class="product-item" src="/uploads/products/{{ $image }}" alt="{{$loop->iteration}} slide">
                                                     </div>
                                                 @else
