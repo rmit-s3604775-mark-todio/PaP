@@ -1,5 +1,3 @@
-{{-- this is a comment --}}
-{{-- navigation bar --}}
 @extends('layouts.app')
 @section('content')
 <div class="container">

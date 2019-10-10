@@ -1,3 +1,5 @@
+{{-- this is a comment --}}
+{{-- navigation bar --}}
 @extends('layouts.app')
 @section('content')
 <div class="container">
@@ -29,17 +31,17 @@
                                         {{ session('status') }}
                                     </div>
                                 @endif
-
-                                <h3>Create New Product Search</h3>
-                                <form action="{{ route('product-search.store') }}" method="post">
+				  
+								<h1 class="text-center">Edit Product Search</h1>
+								<form action="{{ route('product-search.update', $req) }}" method="post">
                                     @csrf
-                                    @method("post")
+                                    @method("put")
 
                                     <div class="form-group row">
                                         <label for="product_name" class="col-md-4 col-form-label text-md-right">Product Name</label>
 
                                         <div class="col-md-5">
-                                            <input type="text" name="product_name" id="product_name" class="form-control @error('product_name') is-invalid @enderror" value="{{ old('product_name') }}" required/>
+                                            <input type="text" name="product_name" id="product_name" class="form-control @error('product_name') is-invalid @enderror" value="{{$req->product_name}}" required/>
                                         </div>
                                         @error('product_name')
                                             <span class="invalid-feedback" role="alert">
@@ -53,9 +55,17 @@
 
                                         <div class="col-md-5">
                                             <select name="brand" id="brand" class="form-control @error('brand') is-invalid @enderror">
-                                                <option selected disabled hidden>Please Select...</option>
-                                                @foreach ($brands as $brand)
-                                                <option value="{{ $brand->brand }}">{{ $brand->brand }}</option>
+												@if ($req->brand == null)
+													<option vlaue="" selected>None</option>
+												@else
+													<option vlaue="">None</option>
+												@endif
+												@foreach ($brands as $brand)
+													@if ($brand->brand == $req->brand)
+														<option value="{{ $brand->brand }}" selected>{{ $brand->brand }}</option>
+													@else
+														<option value="{{ $brand->brand }}">{{ $brand->brand }}</option>
+													@endif
                                                 @endforeach
                                             </select>
                                         </div>
@@ -71,9 +81,18 @@
 
                                         <div class="col-md-5">
                                             <select name="condition" id="condition" class="form-control @error('condition') is-invalid @enderror">
-                                                <option selected disabled hidden>Please Select...</option>
-                                                @foreach ($conditions as $condition)
-                                                <option value="{{ $condition->condition }}">{{ $condition->condition }}</option>
+												@if ($req->condition == null)
+													<option vlaue="" selected>None</option>
+												@else
+													<option vlaue="">None</option>
+												@endif
+												@foreach ($conditions as $condition)
+												@if ($condition->condition == $req->condition)
+												<option value="{{ $condition->condition }}" selected>{{ $condition->condition }}</option>
+												@else
+												<option value="{{ $condition->condition }}">{{ $condition->condition }}</option>
+												@endif
+                                                
                                                 @endforeach
                                             </select>
                                         </div>
@@ -88,7 +107,7 @@
                                         <label for="min_price" class="col-md-4 col-form-label text-md-right">Min Price</label>
 
                                         <div class="col-md-5">
-                                            <input type="number" name="min_price" id="min_price" class="form-control @error('min_price') is-invalid @enderror" value="{{ old('min_price') }}"/>
+                                            <input type="number" name="min_price" id="min_price" class="form-control @error('min_price') is-invalid @enderror" value="{{ $req->min_price }}"/>
                                         </div>
                                         @error('min_price')
                                             <span class="invalid-feedback" role="alert">
@@ -101,7 +120,7 @@
                                         <label for="max_price" class="col-md-4 col-form-label text-md-right">Max Price</label>
 
                                         <div class="col-md-5">
-                                            <input type="number" name="max_price" id="max_price" class="form-control @error('max_price') is-invalid @enderror" value="{{ old('max_price') }}"/>
+                                            <input type="number" name="max_price" id="max_price" class="form-control @error('max_price') is-invalid @enderror" value="{{ $req->max_price }}"/>
                                         </div>
                                         @error('max_price')
                                             <span class="invalid-feedback" role="alert">
@@ -118,6 +137,14 @@
                                         </div>
                                     </div>
                                 </form>
+								
+								@if (count($errors)>0)
+								<div class="alert alert-danger">
+								@foreach($errors->all() as $error)
+									<pre>{{$error}}</pre>
+								@endforeach
+								</div>
+								@endif
                             </div>
                         </div>
                     </div>
@@ -126,5 +153,4 @@
         </div>
     </div>
 </div>
-   
 @endsection

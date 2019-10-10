@@ -97,7 +97,7 @@
 										<a class="dropdown-item" href="{{ route('products.index') }}">
                                             <i class="fa fa-mobile fa-fw"></i>{{ __('Products') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('product-request.index') }}">
+                                        <a class="dropdown-item" href="{{ route('product-search.index') }}">
                                             <i class="fa fa-search fa-fw"></i>{{ __('Product Search') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
@@ -120,7 +120,7 @@
 										<a class="dropdown-item" href="{{ route('products.index') }}">
                                             <i class="fa fa-mobile fa-fw"></i>{{ __('Products') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('product-request.index') }}">
+                                        <a class="dropdown-item" href="{{ route('product-search.index') }}">
                                             <i class="fa fa-search fa-fw"></i>{{ __('Product Search') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('user.logout') }}">
