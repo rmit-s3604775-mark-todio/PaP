@@ -62,7 +62,7 @@ class ProductsController extends Controller
 		$this->validate($request,[
 			"product_name"=>'required',
 			"price"=>'required',
-			"quantity"=>'required',
+			"quantity"=>'required, min:1',
 			"brand"=>'required',
       "quantity"=>'required',
       "description"=>'required'
@@ -150,8 +150,8 @@ class ProductsController extends Controller
 		$this->validate($request,[
 			"product_name"=>'required',
 			"price"=>'required',
-			"quantity"=>'required',
-			"rating"=>'required',
+			"quantity"=> ['required', 'numeric', 'min:0'],
+			"rating"=> ['required', 'numeric'],
 			"brand"=>'required',
       "condition"=>'required'
 		]);
