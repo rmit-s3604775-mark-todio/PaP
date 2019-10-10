@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Auth;
 use Image;
 use App\product;
+use App\ProductRequest;
 use App\User;
 use App\Admin;
 
@@ -81,7 +82,12 @@ class AdminController extends Controller
      */
     public function userDestroy($id)
     {
+        //Need to manually delete all the products and ProductRequests
+        //As the users have no foreign keys to the products and users
+        product::where('user_id', $id)->delete();
+        ProductRequest::where('user_id', $id)->delete();
         User::where('id', '=', $id)->delete();
+
         $users = User::paginate(15);
         return back()->withStatus('Deleted')->with(compact('users'));
     }
