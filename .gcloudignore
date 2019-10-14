@@ -17,3 +17,8 @@
 
 # PHP Composer dependencies:
 /vendor/
+
+/node_modules/
+
+# Folder of images for documentation
+/documentation/
