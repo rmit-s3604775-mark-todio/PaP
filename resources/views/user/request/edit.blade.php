@@ -107,7 +107,7 @@
                                         <label for="min_price" class="col-md-4 col-form-label text-md-right">Min Price</label>
 
                                         <div class="col-md-5">
-                                            <input type="number" name="min_price" id="min_price" class="form-control @error('min_price') is-invalid @enderror" value="{{ $req->min_price }}"/>
+                                            <input type="number" step="any" min="0" name="min_price" id="min_price" class="form-control @error('min_price') is-invalid @enderror" value="{{ $req->min_price }}"/>
                                         </div>
                                         @error('min_price')
                                             <span class="invalid-feedback" role="alert">
@@ -120,7 +120,7 @@
                                         <label for="max_price" class="col-md-4 col-form-label text-md-right">Max Price</label>
 
                                         <div class="col-md-5">
-                                            <input type="number" name="max_price" id="max_price" class="form-control @error('max_price') is-invalid @enderror" value="{{ $req->max_price }}"/>
+                                            <input type="number" step="any" min="0" name="max_price" id="max_price" class="form-control @error('max_price') is-invalid @enderror" value="{{ $req->max_price }}"/>
                                         </div>
                                         @error('max_price')
                                             <span class="invalid-feedback" role="alert">
