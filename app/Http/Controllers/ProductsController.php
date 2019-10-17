@@ -251,7 +251,7 @@ class ProductsController extends Controller
             'search' => ['required'],
         ]);
 
-        $products = Product::search($request->search)->paginate(15);
+        $products = Product::search($request->search)->where('user_id', Auth::user()->id)->paginate(15);
         return view('user.products.index', compact('products'));
     }
 }
