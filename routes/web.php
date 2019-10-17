@@ -22,7 +22,6 @@ Route::post('/product-search/results/{id}', 'ProductSearchController@results')->
 
 // project routes
 Route::get('/details/{product}', 'ProductsController@details')->name('product.details');
-// test method
 Route::resource('products', 'ProductsController');
 Route::post('search', 'ProductsController@searchProduct')->name('product.search');
 
@@ -30,14 +29,12 @@ Route::post('search', 'ProductsController@searchProduct')->name('product.search'
 Route::get('/product-image','Product_ImageController@create')->name('image.create');
 Route::post('/product-image','Product_ImageController@store')->name('image.store');
 
-
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/settings', 'HomeController@settings')->name('settings');
 Route::post('/update', 'HomeController@update')->name('update');
 Route::get('/user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 
-
-
+//Administrator Routes
 Route::prefix('admin')->name('admin.')->group(function(){
     //Administrator Products Routes
     //These are the routes that allow the administrator to access and modify the products
