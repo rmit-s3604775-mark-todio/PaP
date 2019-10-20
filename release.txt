@@ -1,0 +1,7 @@
+Release
+vsersion: 1.6
+
+Issues With Release
+1.	Create products form allows negative quantity. Must make quantity 1 or higher.
+2.	If there is an error in the form it returns the form with all fields cleared. on each input add the field value="{{ old('') }}". See admin/settings.blade.php for example.
+3.	Product Prices can’t have decimal places.
