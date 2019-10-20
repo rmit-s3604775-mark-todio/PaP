@@ -99,13 +99,17 @@ The search for the application uses TNT search driver with the Laravel scout wra
 [TNT Search Driver README.md](https://github.com/teamtnt/laravel-scout-tntsearch-driver/blob/master/README.md) </br>
 [TNT Search README.md](https://github.com/teamtnt/tntsearch/blob/master/README.md)
 
-
+**********
 
 Github Url: https://github.com/rmit-s3604775-mark-todio/PaP
+
 AWS Deployment: http://peopleandphones-env.pum4zqwj55.us-east-2.elasticbeanstalk.com
 
 AWS DRS Connection Details=
 Endpoint: aaav69ar1erlb3.cagfobn23fqn.us-east-2.rds.amazonaws.com
+
 Port: 3306
+
 Username: root
+
 Password: 7hvwaEG7q0jxi3vt
