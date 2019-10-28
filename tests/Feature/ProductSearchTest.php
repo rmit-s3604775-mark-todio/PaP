@@ -20,6 +20,8 @@ class ProductSearchTest extends TestCase
     {
         parent::setUp();
         $this->user = factory(User::class)->create();
+        $this->artisan('db:seed --class=BrandSeeder');
+        $this->artisan('db:seed --class=ConditionSeeder');
     }
 
     /**
