@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-    <img id="menu-avatar" class="avatar" src="/uploads/avatars/{{ Auth::user()->avatar }}">
+    <img class="avatar avatar-lg" src="/uploads/avatars/{{ Auth::user()->avatar }}">
 </div>
 <div class="row main-menu">
     <div class="col">
