@@ -16,3 +16,7 @@ use Illuminate\Foundation\Inspiring;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->describe('Display an inspiring quote');
+
+Artisan::command('description', function () {
+    $this->comment("PaP - People and Phones is a web based application designed to connect People with people that are selling phones");
+})->describe('Description of application');

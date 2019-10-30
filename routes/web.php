@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'WelcomeController@welcome');
+Route::post('search', 'WelcomeController@search')->name('search');
 
 Auth::routes();
 
@@ -22,8 +23,8 @@ Route::post('/product-search/results/{id}', 'ProductSearchController@results')->
 
 // project routes
 Route::get('/details/{product}', 'ProductsController@details')->name('product.details');
-Route::resource('products', 'ProductsController');
-Route::post('search', 'ProductsController@searchProduct')->name('product.search');
+Route::resource('/products', 'ProductsController');
+Route::post('/products/search', 'ProductsController@searchProduct')->name('product.search');
 
 // product images
 Route::get('/product-image','Product_ImageController@create')->name('image.create');
