@@ -15,6 +15,7 @@ class DefaultUser extends Seeder
             'name' => 'User',
             'username' => 'TestUser',
             'email' => 'user@user.com',
+            'email_verified_at' => now(),
             'address_line_1' => 'Test Lane',
             'state_province' => 'Test',
             'city' => 'Testing',
