@@ -6,6 +6,9 @@ use App\product;
 
 class WelcomeController extends Controller
 {
+    /**
+     * Return the welcome (Landing Page) view.
+     */
     public function welcome()
     {
         $phones = product::orderBy('created_at', 'desc')->take(10)->get();
@@ -13,7 +16,7 @@ class WelcomeController extends Controller
     }
 
     /**
-     * Search for products and return the products view.
+     * Search for products and return the guestSearch view.
      */
     public function search(Request $request)
     {
