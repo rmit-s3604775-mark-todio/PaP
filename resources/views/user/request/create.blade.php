@@ -53,10 +53,20 @@
 
                                         <div class="col-md-5">
                                             <select name="brand" id="brand" class="form-control @error('brand') is-invalid @enderror">
-                                                <option selected disabled hidden>Please Select...</option>
-                                                @foreach ($brands as $brand)
-                                                <option value="{{ $brand->brand }}">{{ $brand->brand }}</option>
-                                                @endforeach
+                                                @if (old("brand") == null)
+													<option value="" selected>None</option>
+                                                    @foreach ($brands as $brand)
+													<option value="{{ $brand->brand }}">{{ $brand->brand }}</option>
+													@endforeach
+												@else
+													@foreach ($brands as $brand)
+													@if (old("brand") == $brand->brand)
+													<option value="{{ $brand->brand }}" selected>{{ $brand->brand }}</option>
+													@else
+													<option value="{{ $brand->brand }}">{{ $brand->brand }}</option>
+												    @endif
+													@endforeach
+												@endif
                                             </select>
                                         </div>
                                         @error('brand')
@@ -71,10 +81,20 @@
 
                                         <div class="col-md-5">
                                             <select name="condition" id="condition" class="form-control @error('condition') is-invalid @enderror">
-                                                <option selected disabled hidden>Please Select...</option>
-                                                @foreach ($conditions as $condition)
-                                                <option value="{{ $condition->condition }}">{{ $condition->condition }}</option>
-                                                @endforeach
+                                                @if(old("condition") == null)
+													<option value="" selected>None</option>
+													@foreach ($conditions as $condition)
+													<option value="{{ $condition->condition }}">{{ $condition->condition }}</option>
+													@endforeach
+												@else
+													@foreach ($conditions as $condition)
+													@if(old("condition") == $condition->condition)
+													<option value="{{ $condition->condition }}" selected>{{ $condition->condition }}</option>
+													@else
+													<option value="{{ $condition->condition }}">{{ $condition->condition }}</option>
+													@endif
+													@endforeach
+												@endif
                                             </select>
                                         </div>
                                         @error('condition')
