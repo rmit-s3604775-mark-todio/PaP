@@ -25,7 +25,11 @@ class ProductsController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:web,admin'); //use the default guard (web)
+        $this->middleware('auth:web')->except([
+            'show',
+            'destroy',
+        ]);
+        $this->middleware('auth:web,admin')->only(['destroy', 'show']);
     }
 
     /**
@@ -119,8 +123,8 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        $prod = DB::table('products')->get();
-		return "show function";
+        $item = product::find($id);
+        return view('user.phones.details', compact('item'));
     }
 
     /**
@@ -226,15 +230,15 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-		DB::table('products')->where('id', '=', $id)->delete();
-		return redirect('phones');
+        DB::table('products')->where('id', '=', $id)->delete();
+
+        if(Auth::guard('web')->check()) {
+            return redirect()->route('phones.index');
+        }elseif(Auth::guard('admin')->check()) {
+            return redirect()->route('admin.phone');
+        }
     }
     
-    public function details($id)
-    {
-        $item = product::find($id);
-        return view('user.phones.details', compact('item'));
-    }
     /**
      * Search for phones and return the phones view.
      */

@@ -40,7 +40,6 @@ Route::prefix('admin')->name('admin.')->group(function(){
     //Administrator Phone Routes
     //These are the routes that allow the administrator to access and modify the Phones
     Route::get('/phone', 'AdminController@products')->name('phone');
-    Route::delete('/phone/{phone}', 'AdminController@productDestroy')->name('phone.destroy');
     Route::post('/phone/search', 'AdminController@productSearch')->name('phone.search');
 
     //Administrator User Routes

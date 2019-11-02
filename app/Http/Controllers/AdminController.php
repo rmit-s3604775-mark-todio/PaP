@@ -138,19 +138,6 @@ class AdminController extends Controller
     }
 
     /**
-     * Destroy phone
-     * 
-     * @param int $id id of the phone to delete
-     * @return view admin.phones
-     */
-    public function productDestroy($id)
-    {
-        product::where('id', '=', $id)->delete();
-        $phones = product::paginate(15);
-        return back()->withStatus('Deleted')->with(compact('phones'));
-    }
-
-    /**
      * phone Search
      * 
      * Return the admin phones page with the search results.

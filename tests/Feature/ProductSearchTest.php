@@ -37,7 +37,7 @@ class ProductSearchTest extends TestCase
      */
     public function testCreateProductSearchWhenLoggedInTest()
     {
-        $response = $this->actingAs($this->user)->post(route('product-search.store'), [
+        $response = $this->actingAs($this->user)->post(route('phone-search.store'), [
             'product_name' => 'Test',
             'brand' => '',
             'condition' => '',
@@ -54,7 +54,7 @@ class ProductSearchTest extends TestCase
      */
     public function testProductNameRequired()
     {
-        $response = $this->actingAs($this->user)->post(route('product-search.store'), [
+        $response = $this->actingAs($this->user)->post(route('phone-search.store'), [
             'product_name' => '',
             'brand' => '',
             'condition' => '',
@@ -70,7 +70,7 @@ class ProductSearchTest extends TestCase
      */
     public function testProductMinPriceNotLessThenZero()
     {
-        $response = $this->actingAs($this->user)->post(route('product-search.store'), [
+        $response = $this->actingAs($this->user)->post(route('phone-search.store'), [
             'product_name' => 'Test',
             'brand' => '',
             'condition' => '',
@@ -86,7 +86,7 @@ class ProductSearchTest extends TestCase
      */
     public function testProductMinPriceLessThanMaxPrice()
     {
-        $response = $this->actingAs($this->user)->post(route('product-search.store'), [
+        $response = $this->actingAs($this->user)->post(route('phone-search.store'), [
             'product_name' => 'Test',
             'brand' => '',
             'condition' => '',
@@ -102,7 +102,7 @@ class ProductSearchTest extends TestCase
      */
     public function testProductMaxPrice()
     {
-        $response = $this->actingAs($this->user)->post(route('product-search.store'), [
+        $response = $this->actingAs($this->user)->post(route('phone-search.store'), [
             'product_name' => 'Test',
             'brand' => '',
             'condition' => '',
@@ -119,7 +119,7 @@ class ProductSearchTest extends TestCase
      */
     public function testProductMinPrice()
     {
-        $response = $this->actingAs($this->user)->post(route('product-search.store'), [
+        $response = $this->actingAs($this->user)->post(route('phone-search.store'), [
             'product_name' => 'Test',
             'brand' => '',
             'condition' => '',
@@ -136,7 +136,7 @@ class ProductSearchTest extends TestCase
      */
     public function testDeleteProductSearchTest()
     {
-        $response = $this->actingAs($this->user)->post(route('product-search.store'), [
+        $response = $this->actingAs($this->user)->post(route('phone-search.store'), [
             'product_name' => 'Test',
             'brand' => '',
             'condition' => '',
@@ -148,7 +148,7 @@ class ProductSearchTest extends TestCase
         $this->assertCount(1, ProductRequest::all());
         $ps = ProductRequest::first();
 
-        $response = $this->delete(route('product-search.destroy', $ps->id));
+        $response = $this->delete(route('phone-search.destroy', $ps->id));
 
         $this->assertCount(0, ProductRequest::all());
     }

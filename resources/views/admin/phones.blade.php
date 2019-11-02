@@ -75,14 +75,14 @@
 														<td>{{$phone->condition}}</td>
 														<td>{{$phone->rating}}</td>
 														<td>
-															<a href="{{ url('/details', [$phone])}}" data-toggle="tooltip" title="Details">
+															<a href="{{ route('phones.show', [$phone])}}" data-toggle="tooltip" title="Details">
 																<button class="btn btn-secondary" >
 																	<i class="fa fa-info"></i>
 																</button>
 															</a>
 														</td>
 														
-														<td><form action="{{ route('admin.phone.destroy', [$phone]) }}" method="post">
+														<td><form action="{{ route('phones.destroy', [$phone]) }}" method="post">
 															<button class="btn btn-danger" type="submit" data-toggle="tooltip" title="Delete">
 																<i class="fa fa-trash"></i>
 															</button>

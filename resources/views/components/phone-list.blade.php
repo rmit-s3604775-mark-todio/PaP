@@ -9,10 +9,10 @@
                                 <img src="/uploads/products/{{array_values(json_decode($phone->images))[0]}}" alt="phone-{{$phone->id}}-image" class="mr-lg-5" style="max-height: 200px">
                             </div>
                             <div class="media-body">
-                                <a href="{{ route('phone.details', [$phone])}}" class="stretched-link">
+                                <a href="{{ route('phones.show', [$phone])}}" class="stretched-link">
                                     <h5 class="mt-0 font-weight-bold mb-2">{{$phone->product_name}}</h5>
                                 </a>
-                                <p class="font-italic text-muted mb-0 small">{{$phone->description}}</p>
+                                <p class="font-italic text-muted mb-0 small">{{ str_limit(nl2br(e($phone->description)), $limit = 150, $end = '...') }}</p>
                                 <div class="justify-content-left d-flex align-items mt-1">
                                     <p class="font-weight-bold my-2">Brand:&nbsp;</p>
                                     <p class="inline font-italic my-2">{{$phone->brand}}</p>
