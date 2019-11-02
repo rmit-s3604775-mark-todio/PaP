@@ -34,12 +34,12 @@
 
 								<div class="row">
                                     <div class="col">
-                                        <h3>Products</h3>
+                                        <h3>Phones</h3>
                                     </div>
                                     <div class="col">
                                         <div class="row float-right">
                                             <div class="col">
-                                                <form class="searchForm d-inline" action="{{ route('product.search') }}" method="POST">
+                                                <form class="searchForm d-inline" action="{{ route('phone.search') }}" method="POST">
                                                     @csrf
                                                     <input id="search" class="input-search @error('search') is-invalid @enderror" type="text" name="search" placeholder="Search for..." required />
                                                     <button type="submit" class="submit-search">Search</button>
@@ -49,7 +49,7 @@
                                                         </span>
                                                     @enderror								
                                                 </form>
-                                                <a href="{{ route('products.create') }}">
+                                                <a href="{{ route('phones.create') }}">
                                                     <button class="fa fa-plus btn btn-create"></button>
                                                 </a>
                                             </div>	
@@ -61,7 +61,7 @@
 									<div class="col">
 										<table class="table">
 											<tr class="table-active">
-												<th>Product Name</th>
+												<th>Phone Name</th>
 												<th>Price</th>
 												<th>Quantity</th>
 												<th>Brand</th>
@@ -71,31 +71,31 @@
 												<th></th>
 												<th></th>
 											</tr>
-											@if (!$products->isEmpty())
-												@foreach($products as $product)
+											@if (!$phones->isEmpty())
+												@foreach($phones as $phone)
 													<tr class="table-default">
-														<td>{{$product->product_name}}</td>
-														<td>${{$product->price}}</td>
-														<td>{{$product->quantity}}</td>
-														<td>{{$product->brand}}</td>
-														<td>{{$product->condition}}</td>
-														<td>{{$product->rating}}</td>
+														<td>{{$phone->product_name}}</td>
+														<td>${{$phone->price}}</td>
+														<td>{{$phone->quantity}}</td>
+														<td>{{$phone->brand}}</td>
+														<td>{{$phone->condition}}</td>
+														<td>{{$phone->rating}}</td>
 														<td>
-															<a href="{{ url('/details', [$product])}}" data-toggle="tooltip" title="Details">
+															<a href="{{ url('/details', [$phone])}}" data-toggle="tooltip" title="Details">
 																<button class="btn btn-secondary" >
 																	<i class="fa fa-info"></i>
 																</button>
 															</a>
 														</td>
 														<td>
-															<a href="{{ route('products.edit', [$product])}}" data-toggle="tooltip" title="Edit">
+															<a href="{{ route('phones.edit', [$phone])}}" data-toggle="tooltip" title="Edit">
 																<button class="btn btn-secondary">
 																	<i class="fa fa-edit"></i>
 																</button>
 															</a>
 														</td>
 														
-														<td><form action="{{ url('/products', [$product]) }}" method="post">
+														<td><form action="{{ url('/phones', [$phone]) }}" method="post">
 															@csrf
 															@method('delete')
 															
@@ -112,16 +112,16 @@
 										</table>
 									</div>
 								</div>
-								@if ($products->isEmpty())
+								@if ($phones->isEmpty())
 								<div class="row">
 									<div class="col text-center">
-										<h3>No Products Found</h3>
+										<h3>No Phones Found</h3>
 									</div>
 								</div>
 								@endif
 								<div class="row justify-content-center">
 									<div class="links">
-										{{ $products->links() }}
+										{{ $phones->links() }}
 									</div>
 								</div>
 
@@ -133,13 +133,13 @@
 									  <!-- Modal content-->
 									  <div class="modal-content">
 										<div class="modal-header">
-											<h4 class="modal-title">Edit product</h4>
+											<h4 class="modal-title">Edit Phone</h4>
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
 										</div>
 										<div class="modal-body">
-											<form class="form-horizontal" action="/products" method="post">
+											<form class="form-horizontal" action="{{route('phones.store')}}" method="post">
 											{{csrf_field()}}
-												Product Name: <input type="text" name="product_name"></input><br>
+												Phone Name: <input type="text" name="product_name"><br>
 												Price: <input type="number" name="product_name"><br>
 												Quantity: <input type="number" name="product_name"><br>
 												<button type="submit" name="body" class="btn btn-success" value="edit">Submit</button>

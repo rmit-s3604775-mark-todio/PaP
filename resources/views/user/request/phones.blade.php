@@ -39,7 +39,7 @@
                                 @endif
                                 <div class="row">
                                     <div class="col">
-                                        <h3>Product Searches</h3>
+                                        <h3>Phone Searches</h3>
                                     </div>
                                     <div class="col">
                                         <div class="row float-right">
@@ -54,7 +54,7 @@
                                                         </span>
                                                     @enderror								
                                                 </form> --}}
-                                                <a href="{{ route('product-search.create') }}">
+                                                <a href="{{ route('phone-search.create') }}">
                                                     <button class="fa fa-plus btn btn-create"></button>
                                                 </a>
                                             </div>	
@@ -65,7 +65,7 @@
                                     <div class="col">
                                         <table class="table">
                                             <tr class="table-active">
-                                                <th>Product Name</th>
+                                                <th>Phone Name</th>
                                                 <th>Brand</th>
                                                 <th>Condition</th>
                                                 <th>Min Price</th>
@@ -92,7 +92,7 @@
                                                 </td>
     
                                                 <td>
-                                                    <form action="{{ route('product-search.results', $request->id) }}" method="post">
+                                                    <form action="{{ route('phone-search.results', $request->id) }}" method="post">
                                                         @csrf
                                                         <button type="submit" class="btn btn-secondary" data-toggle="tooltip" title="Results">
                                                             <i class="fa fa-list"></i>
@@ -100,7 +100,7 @@
                                                     </form>
                                                 </td>
                                                 <td>
-                                                    <form action="{{ route('product-search.edit', $request->id) }}" method="get">
+                                                    <form action="{{ route('phone-search.edit', $request->id) }}" method="get">
                                                         @csrf
                                                         <button type="submit" class="btn btn-secondary" data-toggle="tooltip" title="Edit">
                                                             <i class="fa fa-edit"></i>
@@ -109,7 +109,7 @@
                                                 </td>
                                                 
                                                 <td>
-                                                    <form action="{{route('product-search.destroy', $request->id)}}" method="POST">
+                                                    <form action="{{route('phone-search.destroy', $request->id)}}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger" data-toggle="tooltip" title="Delete">

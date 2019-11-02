@@ -32,13 +32,13 @@
                                     </div>
                                 @endif
 				  
-								<h1 class="text-center">Edit Product Search</h1>
-								<form action="{{ route('product-search.update', $req) }}" method="post">
+								<h1 class="text-center">Edit Phone Search</h1>
+								<form action="{{ route('phone-search.update', $req) }}" method="post">
                                     @csrf
                                     @method("put")
 
                                     <div class="form-group row">
-                                        <label for="product_name" class="col-md-4 col-form-label text-md-right">Product Name</label>
+                                        <label for="product_name" class="col-md-4 col-form-label text-md-right">Phone Name</label>
 
                                         <div class="col-md-5">
                                             <input type="text" name="product_name" id="product_name" class="form-control @error('product_name') is-invalid @enderror" value="{{$req->product_name}}" required/>

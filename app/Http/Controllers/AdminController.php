@@ -82,7 +82,7 @@ class AdminController extends Controller
      */
     public function userDestroy($id)
     {
-        //Need to manually delete all the products and ProductRequests
+        //Need to manually delete all the phones and ProductRequests
         //As the users have no foreign keys to the products and users
         product::where('user_id', $id)->delete();
         ProductRequest::where('user_id', $id)->delete();
@@ -133,30 +133,30 @@ class AdminController extends Controller
      */
     public function products()
     {
-        $products = product::paginate(15);
-        return view('admin.products', compact('products'));
+        $phones = product::paginate(15);
+        return view('admin.phones', compact('phones'));
     }
 
     /**
-     * Destroy Product
+     * Destroy phone
      * 
-     * @param int $id id of the product to delete
-     * @return view admin.products
+     * @param int $id id of the phone to delete
+     * @return view admin.phones
      */
     public function productDestroy($id)
     {
         product::where('id', '=', $id)->delete();
-        $products = product::paginate(15);
-        return back()->withStatus('Deleted')->with(compact('products'));
+        $phones = product::paginate(15);
+        return back()->withStatus('Deleted')->with(compact('phones'));
     }
 
     /**
-     * Product Search
+     * phone Search
      * 
-     * Return the admin products page with the search results.
+     * Return the admin phones page with the search results.
      * 
      * @param Request $request
-     * @return view admin.products
+     * @return view admin.phones
      */
     public function productSearch(Request $request)
     {
@@ -164,8 +164,8 @@ class AdminController extends Controller
             'search' => ['required'],
         ]);
 
-        $products = Product::search($request->search)->paginate(15);
-        return view('admin.products', compact('products'));
+        $phones = Product::search($request->search)->paginate(15);
+        return view('admin.phones', compact('phones'));
     }
 
     /**

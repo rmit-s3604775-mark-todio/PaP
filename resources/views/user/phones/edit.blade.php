@@ -34,13 +34,13 @@
 
 								{{-- insert code here --}}
 								<h1 class="text-center">Edit {{$item->product_name}}</h1>
-								<form action="{{ route('products.update', [$item]) }}" method="post" enctype="multipart/form-data">
+								<form action="{{ route('phones.update', [$item]) }}" method="post" enctype="multipart/form-data">
 									{{csrf_field()}}
 									{{method_field('PUT')}}
 
 									<fieldset>
 										<div class="form-group">
-												<label for="product_name">Product name</label>
+												<label for="product_name">Phone name</label>
 												<input type="text" name="product_name" class="form-control" value="{!! $item->product_name !!}">
 										</div> 
 									

@@ -74,8 +74,8 @@
                                         <a class="dropdown-item" href="{{ route('admin.administrators') }}">
                                             <i class="fa fa-user-o fa-fw"></i>{{ __('Administrators') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('admin.product') }}">
-                                            <i class="fa fa-mobile fa-fw"></i>{{ __('Products') }}
+                                        <a class="dropdown-item" href="{{ route('admin.phone') }}">
+                                            <i class="fa fa-mobile fa-fw"></i>{{ __('Phones') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('admin.messages') }}">
                                             <i class="fa fa-paper-plane-o fa-fw"></i>{{ __('Messages') }}
@@ -94,11 +94,11 @@
                                         <a class="dropdown-item" href="{{ route('settings') }}">
                                             <i class="fa fa-cog fa-fw"></i>{{ __('Settings') }}
                                         </a>
-										<a class="dropdown-item" href="{{ route('products.index') }}">
-                                            <i class="fa fa-mobile fa-fw"></i>{{ __('Products') }}
+										<a class="dropdown-item" href="{{ route('phones.index') }}">
+                                            <i class="fa fa-mobile fa-fw"></i>{{ __('Phones') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('product-search.index') }}">
-                                            <i class="fa fa-search fa-fw"></i>{{ __('Product Search') }}
+                                        <a class="dropdown-item" href="{{ route('phone-search.index') }}">
+                                            <i class="fa fa-search fa-fw"></i>{{ __('Phone Search') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
@@ -117,11 +117,11 @@
                                         <a class="dropdown-item" href="{{ route('settings') }}">
                                             <i class="fa fa-cog fa-fw"></i>{{ __('Settings') }}
                                         </a>
-										<a class="dropdown-item" href="{{ route('products.index') }}">
-                                            <i class="fa fa-mobile fa-fw"></i>{{ __('Products') }}
+										<a class="dropdown-item" href="{{ route('phones.index') }}">
+                                            <i class="fa fa-mobile fa-fw"></i>{{ __('Phones') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('product-search.index') }}">
-                                            <i class="fa fa-search fa-fw"></i>{{ __('Product Search') }}
+                                        <a class="dropdown-item" href="{{ route('phone-search.index') }}">
+                                            <i class="fa fa-search fa-fw"></i>{{ __('Phone Search') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('user.logout') }}">
                                             <i class="fa fa-sign-out fa-fw"></i>{{ __('Logout') }}
@@ -141,8 +141,8 @@
                                         <a class="dropdown-item" href="{{ route('admin.administrators') }}">
                                             <i class="fa fa-user-o fa-fw"></i>{{ __('Administrators') }}
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('admin.product') }}">
-                                            <i class="fa fa-mobile fa-fw"></i>{{ __('Products') }}
+                                        <a class="dropdown-item" href="{{ route('admin.phone') }}">
+                                            <i class="fa fa-mobile fa-fw"></i>{{ __('Phones') }}
                                         </a>
                                         <a class="dropdown-item" href="{{ route('admin.messages') }}">
                                             <i class="fa fa-paper-plane-o fa-fw"></i>{{ __('Messages') }}

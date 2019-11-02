@@ -36,8 +36,8 @@ class ProductsController extends Controller
     public function index()
     {
 		$user = Auth::user();
-		$products = product::where('user_id', $user->id)->paginate(10);
-        return view('user.products.index', compact('products'));
+		$phones = product::where('user_id', $user->id)->paginate(10);
+        return view('user.phones.index', compact('phones'));
     }
 
     /**
@@ -48,7 +48,7 @@ class ProductsController extends Controller
     public function create()
     {
         // create an item here and view it on view page
-		return view('user.products.create', [ 'brands' => DB::table('brands')->get(), 'conditions' => DB::table('conditions')->get()]);
+		return view('user.phones.create', [ 'brands' => DB::table('brands')->get(), 'conditions' => DB::table('conditions')->get()]);
     }
 
     /**
@@ -59,56 +59,56 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-		$product = new product;
+		$phone = new product;
 		$this->validate($request,[
 			"product_name"=>'required',
 			"price"=>'required',
 			"quantity"=>'required, min:1',
 			"brand"=>'required',
-      "quantity"=>'required',
-      "description"=>'required'
-    ]);
+            "quantity"=>'required',
+            "description"=>'required'
+        ]);
 
-    $images_array = array();
+        $images_array = array();
     
-    $user = Auth::user();
-    $product->user_id = $user->id;
+        $user = Auth::user();
+        $phone->user_id = $user->id;
     
-    if($request->has('images'))
-    {
-        foreach($request->images as $image)
-        {       
-            $filename =  time() . "-". $image->getClientOriginalName();
-            $images_array[] = $filename;
-            Image::make($image)->resize(null, 300, function($constraint){
-              $constraint->aspectRatio();
-            })->save( public_path('/uploads/products/'. $filename) );
+        if($request->has('images'))
+        {
+            foreach($request->images as $image)
+            {       
+                $filename =  time() . "-". $image->getClientOriginalName();
+                $images_array[] = $filename;
+                Image::make($image)->resize(null, 300, function($constraint){
+                    $constraint->aspectRatio();
+                })->save( public_path('/uploads/products/'. $filename) );
+            }
+            $phone->images = json_encode($images_array);
         }
-        $product->images = json_encode($images_array);
-    }
-    else
-    {
-        $images_array[] = "defaultPhone.png";
-        $product->images = json_encode($images_array);
-    }
+        else
+        {
+            $images_array[] = "defaultPhone.png";
+            $phone->images = json_encode($images_array);
+        }
 		
 		
 	
-    // $product->user_id = $user->id;
+        // $phone->user_id = $user->id;
     
     
-		$product->brand = $request->brand;
-    $product->condition = $request->condition;
-		$product->product_name = $request->product_name;
-		$product->price = $request->price;
-		$product->quantity = $request->quantity;
-		$product->created_at = new DateTime();
-    $product->updated_at = new DateTime();
-    $product->description = $request->description;
-		$product->rating = 5;
-    $product->save();
+		$phone->brand = $request->brand;
+        $phone->condition = $request->condition;
+		$phone->product_name = $request->product_name;
+		$phone->price = $request->price;
+		$phone->quantity = $request->quantity;
+		$phone->created_at = new DateTime();
+        $phone->updated_at = new DateTime();
+        $phone->description = $request->description;
+		$phone->rating = 5;
+        $phone->save();
 
-		 return redirect('products');
+		 return redirect('phones');
     }
 
     /**
@@ -131,13 +131,8 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-		// show edit page
         $item = product::find($id);
-     //   return $item;
-
-
-        return view('user.products.edit', [ 'brands' => DB::table('brands')->get(), 'conditions' => DB::table('conditions')->get()], compact('item'));
-		
+        return view('user.phones.edit', [ 'brands' => DB::table('brands')->get(), 'conditions' => DB::table('conditions')->get()], compact('item'));
     }
 
     /**
@@ -149,79 +144,78 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-       $product = product::find($id);
+        $phone = product::find($id);
 
-      // get the values taht are to be deleted
-      $updatedValues = array();
-      if($request->has('imagesDelete'))
-      {
-        $productimages = $product->images;
-        $requestimages = $request->imagesDelete;
+        // get the values taht are to be deleted
+        $updatedValues = array();
+        if($request->has('imagesDelete'))
+        {
+            $phoneimages = $phone->images;
+            $requestimages = $request->imagesDelete;
 
-        // turn values into arrays for comparison
-        $databaseValArray = json_decode($productimages, true);
-        $imagesDelArray = explode(",", $requestimages);
+            // turn values into arrays for comparison
+            $databaseValArray = json_decode($phoneimages, true);
+            $imagesDelArray = explode(",", $requestimages);
       
-        // compare arrays then delete duplicates
-        $updatedValues = array_merge(array_diff($databaseValArray, $imagesDelArray));
+            // compare arrays then delete duplicates
+            $updatedValues = array_merge(array_diff($databaseValArray, $imagesDelArray));
 
-        // delete images from folder
-        foreach($imagesDelArray as $imageDel)
-        {  
-          if(File::exists(public_path('/uploads/products/'. $imageDel))) {
-            File::delete(public_path('/uploads/products/'. $imageDel));
-          }
-        }
-      }else{
-        // keep old valyes
-        $updatedValues = $databaseValArray;
-      }
-
-      $images_array = array();
-      if($request->has('images'))
-      {
-          foreach($request->images as $image)
-          {      
-              $filename = time() . "-". $image->getClientOriginalName();
-              $images_array[] = $filename;
-              Image::make($image)->resize(null, 300, function($constraint){
-                $constraint->aspectRatio();
-              })->save( public_path('/uploads/products/'. $filename) );
-          }
-          
-          $combineArray = array_merge($updatedValues, $images_array);
-          $product->images = json_encode($combineArray);
-      }else{
-        if(empty($updatedValues)){
-          $updatedValues[] = "defaultPhone.png";
-          $product->images = json_encode($updatedValues);
+            // delete images from folder
+            foreach($imagesDelArray as $imageDel)
+            {  
+                if(File::exists(public_path('/uploads/products/'. $imageDel))) {
+                    File::delete(public_path('/uploads/products/'. $imageDel));
+                }
+            }
         }else{
-          $product->images = json_encode($updatedValues);
+            // keep old valyes
+            $updatedValues = $databaseValArray;
         }
-      }
+
+        $images_array = array();
+        if($request->has('images'))
+        {
+            foreach($request->images as $image)
+            {      
+                $filename = time() . "-". $image->getClientOriginalName();
+                $images_array[] = $filename;
+                Image::make($image)->resize(null, 300, function($constraint){
+                    $constraint->aspectRatio();
+                })->save( public_path('/uploads/products/'. $filename) );
+            }
+          
+            $combineArray = array_merge($updatedValues, $images_array);
+            $phone->images = json_encode($combineArray);
+        }else{
+            if(empty($updatedValues)){
+                $updatedValues[] = "defaultPhone.png";
+                $phone->images = json_encode($updatedValues);
+            }else{
+                $phone->images = json_encode($updatedValues);
+            }
+        }
 
 		$this->validate($request,[
 			"product_name"=>'required',
 			"price"=>'required',
 			"quantity"=> ['required', 'numeric', 'min:0'],
 			"brand"=>'required',
-      "condition"=>'required',
-      "description" => 'required'
-    ]);
+            "condition"=>'required',
+            "description" => 'required'
+        ]);
       
-    // need to remove rating
-    $product->rating = 5;
-
-		$product->product_name = $request->product_name;
-		$product->price = $request->price;
-		$product->quantity = $request->quantity;
-		$product->brand = $request->brand;
-    $product->condition = $request->condition;
-    $product->description = $request->description;
-		$product->updated_at = new DateTime();
-    $product->save();
+        // need to remove rating
+        $phone->rating = 5;
+		$phone->product_name = $request->product_name;
+		$phone->price = $request->price;
+		$phone->quantity = $request->quantity;
+		$phone->brand = $request->brand;
+        $phone->condition = $request->condition;
+        $phone->description = $request->description;
+		$phone->updated_at = new DateTime();
+        $phone->save();
     
-    return redirect('products');
+        return redirect('phones');
     }
 
     /**
@@ -233,17 +227,16 @@ class ProductsController extends Controller
     public function destroy($id)
     {
 		DB::table('products')->where('id', '=', $id)->delete();
-		
-		return redirect('products');
+		return redirect('phones');
     }
     
     public function details($id)
     {
-      $item = product::find($id);
-      return view('user.products.details', compact('item'));
+        $item = product::find($id);
+        return view('user.phones.details', compact('item'));
     }
     /**
-     * Search for products and return the products view.
+     * Search for phones and return the phones view.
      */
     public function searchProduct(Request $request)
     {
@@ -251,7 +244,7 @@ class ProductsController extends Controller
             'search' => ['required'],
         ]);
 
-        $products = Product::search($request->search)->where('user_id', Auth::user()->id)->paginate(15);
-        return view('user.products.index', compact('products'));
+        $phones = Product::search($request->search)->where('user_id', Auth::user()->id)->paginate(15);
+        return view('user.phones.index', compact('phones'));
     }
 }

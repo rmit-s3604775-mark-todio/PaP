@@ -9,7 +9,7 @@
                                 <img src="/uploads/products/{{array_values(json_decode($phone->images))[0]}}" alt="phone-{{$phone->id}}-image" class="mr-lg-5" style="max-height: 200px">
                             </div>
                             <div class="media-body">
-                                <a href="{{ route('product.details', [$phone])}}" class="stretched-link">
+                                <a href="{{ route('phone.details', [$phone])}}" class="stretched-link">
                                     <h5 class="mt-0 font-weight-bold mb-2">{{$phone->product_name}}</h5>
                                 </a>
                                 <p class="font-italic text-muted mb-0 small">{{$phone->description}}</p>
@@ -29,13 +29,13 @@
                             @auth
                                 @if ($phone->user_id == Auth::user()->id)
                                     <div class="justify-content-right d-flex align-items mt-1">
-                                        <a href="{{ route('products.edit', [$phone])}}" data-toggle="tooltip" title="Edit" style="z-index: 1">
+                                        <a href="{{ route('phones.edit', [$phone])}}" data-toggle="tooltip" title="Edit" style="z-index: 1">
                                             <button class="btn btn-secondary">
                                                 <i class="fa fa-edit"></i>
                                             </button>
                                         </a>
                                         
-                                        <form action="{{ route('products.destroy', [$phone]) }}" method="post" style="z-index: 1">
+                                        <form action="{{ route('phones.destroy', [$phone]) }}" method="post" style="z-index: 1">
                                             @csrf
                                             @method('delete')
                                             
@@ -58,7 +58,7 @@
 @if ($phones->isEmpty())
 <div class="row">
     <div class="col text-center">
-        <h3>No Products Found</h3>
+        <h3>No Phones Found</h3>
     </div>
 </div>
 @endif

@@ -31,13 +31,13 @@
                                 @endif
 
 						  <div>
-								<h1>Create new item</h1>
+								<h1>Create new Phone Listing</h1>
 								
-								<form class="form-horizontal" action="/products" method="post" enctype="multipart/form-data">
+								<form class="form-horizontal" action="{{route('phones.store')}}" method="post" enctype="multipart/form-data">
 								{{csrf_field()}}
 									<fieldset>
 										<div class="form-group">
-											<label for="product_name">Product Name</label>
+											<label for="product_name">Phone Name</label>
 											<input type="text" name="product_name" class="form-control">
 										</div>
 

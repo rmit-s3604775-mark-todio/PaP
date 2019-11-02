@@ -30,13 +30,13 @@
                                     </div>
                                 @endif
 
-                                <h3>Create New Product Search</h3>
-                                <form action="{{ route('product-search.store') }}" method="post">
+                                <h3>Create New Phone Search</h3>
+                                <form action="{{ route('phone-search.store') }}" method="post">
                                     @csrf
                                     @method("post")
 
                                     <div class="form-group row">
-                                        <label for="product_name" class="col-md-4 col-form-label text-md-right">Product Name</label>
+                                        <label for="product_name" class="col-md-4 col-form-label text-md-right">Phone Name</label>
 
                                         <div class="col-md-5">
                                             <input type="text" name="product_name" id="product_name" class="form-control @error('product_name') is-invalid @enderror" value="{{ old('product_name') }}" required/>
