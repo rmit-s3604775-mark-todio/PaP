@@ -18,12 +18,23 @@ class MessageBoardController extends Controller
         $this->middleware('auth:web'); //use the web guard
     }
 
+    /**
+     * Returns the message board view
+     * 
+     * @return View
+     */
     public function messageBoard()
     {
         $messages = Message::latest()->take(100)->with('user')->paginate(15);
         return view('message-board', compact('messages'));
     }
 
+    /**
+     * Validates and saves the posted message to the database
+     * 
+     * @param Request $request request that has been posted.
+     * @return View
+     */
     public function submit(Request $request)
     {
         $this->validate($request,[
