@@ -16,10 +16,13 @@ Route::post('search', 'WelcomeController@search')->name('search');
 
 Auth::routes();
 
+//message board
+Route::get('/message-board', 'MessageBoardController@messageBoard')->name('message-board');
+Route::post('/message-board', 'MessageBoardController@submit')->name('message-board.submit');
+
 //Phone Search Routes (Matching)
 Route::resource('phone-search', 'ProductSearchController');
 Route::post('/phone-search/results/{id}', 'ProductSearchController@results')->name('phone-search.results');
-
 
 //Phone routes
 Route::get('/details/{phone}', 'ProductsController@details')->name('phone.details');

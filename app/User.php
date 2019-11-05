@@ -48,4 +48,11 @@ class User extends Authenticatable
     public function requests() {
         return $this->hasMany('App\ProductRequest');
     }
+
+    /**
+     * Relationship with the Request Model
+     */
+    public function messages() {
+        return $this->hasMany('App\Message');
+    }
 }
