@@ -55,11 +55,6 @@
 										</div> 
 
 										<div class="form-group">
-												<label for="quantity">Quantity</label>
-												<input type="number" name="quantity" class="form-control" value={{$item->quantity}}>
-										</div> 
-
-										<div class="form-group">
 											<label for="brand">Brand</label>
 											<select name="brand" id="brand">
 												<option value="{{ $item->brand }}" selected hidden>{{ $item->brand }}</option>
