@@ -38,7 +38,7 @@
 								</div>
 								<form action="{{ route('phones.update', [$item]) }}" method="post" enctype="multipart/form-data">
 									@csrf
-									@method('POST')
+									@method('PUT')
 
 									<div class="form-group row">
 										<label for="product_name" class="col-md-4 col-form-label text-md-right">Phone Name</label>
