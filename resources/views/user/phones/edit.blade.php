@@ -30,62 +30,175 @@
                                     <div class="alert alert-success" role="alert">
                                         {{ session('status') }}
                                     </div>
-                                @endif
-
-								{{-- insert code here --}}
-								<h1 class="text-center">Edit {{$item->product_name}}</h1>
+								@endif
+								<div class="row">
+									<div class="col-md-5">
+										<h3>Edit {{$item->product_name}}</h3>
+									</div>
+								</div>
 								<form action="{{ route('phones.update', [$item]) }}" method="post" enctype="multipart/form-data">
-									{{csrf_field()}}
-									{{method_field('PUT')}}
+									@csrf
+									@method('PUT')
+
+									<div class="form-group row">
+										<label for="product_name" class="col-md-4 col-form-label text-md-right">Phone Name</label>
+
+										<div class="col-md-5">
+											@if ($errors->any())
+											<input type="text" name="product_name" id="product_name" class="form-control @error('product_name') is-invalid @enderror" value="{{ old('product_name') }}" required/>
+											@else
+											<input type="text" name="product_name" id="product_name" class="form-control @error('product_name') is-invalid @enderror" value="{{$item->product_name}}" required/>
+											@endif
+										</div>
+										@error('product_name')
+											<span class="invalid-feedback" role="alert">
+												<strong>{{ $message }}</strong>
+											</span>
+										@enderror
+									</div>
+
+									<div class="form-group row">
+										<label for="brand" class="col-md-4 col-form-label text-md-right">Brand</label>
+
+										<div class="col-md-5">
+											<select name="brand" id="brand" class="form-control @error('brand') is-invalid @enderror">
+                                                @if ($errors->any())
+                                                    @foreach ($brands as $brand)
+                                                        @if (old("brand") == $brand->brand)
+                                                            <option value="{{ $brand->brand }}" selected>{{ $brand->brand }}</option>
+                                                        @else
+                                                            <option value="{{ $brand->brand }}">{{ $brand->brand }}</option>
+                                                        @endif
+                                                    @endforeach
+												@else
+                                                    @foreach ($brands as $brand)
+                                                        @if ($brand->brand == $item->brand)
+                                                            <option value="{{ $brand->brand }}" selected>{{ $brand->brand }}</option>
+                                                        @else
+                                                            <option value="{{ $brand->brand }}">{{ $brand->brand }}</option>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+											</select>
+										</div>
+										@error('brand')
+											<span class="invalid-feedback" role="alert">
+												<strong>{{ $message }}</strong>
+											</span>
+										@enderror
+									</div>
+
+									<div class="form-group row">
+										<label for="condition" class="col-md-4 col-form-label text-md-right">Condition</label>
+
+										<div class="col-md-5">
+											<select name="condition" id="condition" class="form-control @error('condition') is-invalid @enderror">
+                                                @if ($errors->any())
+                                                    @foreach ($conditions as $condition)
+                                                        @if (old("condition") == $condition->condition)
+                                                            <option value="{{ $condition->condition }}" selected>{{ $condition->condition }}</option>
+                                                        @else
+                                                            <option value="{{ $condition->condition }}">{{ $condition->condition }}</option>
+                                                        @endif
+                                                    @endforeach
+                                                @else
+                                                    @foreach ($conditions as $condition)
+                                                        @if ($condition->condition == $item->condition)
+                                                            <option value="{{ $condition->condition }}" selected>{{ $condition->condition }}</option>
+                                                        @else
+                                                            <option value="{{ $condition->condition }}">{{ $condition->condition }}</option>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            </select>
+										</div>
+										@error('condition')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+									</div>
+
+									<div class="form-group row">
+										<label for="quantity" class="col-md-4 col-form-label text-md-right">Quantity</label>
+
+										<div class="col-md-5">
+											@if ($errors->any())
+												<input type="number" min="1" name="quantity" id="quantity" class="form-control @error('quantity') is-invalid @enderror" value="{{ old('quantity') }}" required/>
+											@else
+												<input type="number" min="1" name="quantity" id="quantity" class="form-control @error('quantity') is-invalid @enderror" value="{{$item->quantity}}" required/>
+											@endif
+										</div>
+										@error('quantity')
+											<span class="invalid-feedback" role="alert">
+												<strong>{{ $message }}</strong>
+											</span>
+										@enderror
+									</div>
+
+									<div class="form-group row">
+										<label for="price" class="col-md-4 col-form-label text-md-right">Price</label>
+
+										<div class="col-md-5">
+											@if ($errors->any())
+												<input type="number" step="any" min="0" name="price" id="price" class="form-control @error('price') is-invalid @enderror" value="{{ old('price') }}" required/>
+											@else
+												<input type="number" step="any" min="0" name="price" id="price" class="form-control @error('price') is-invalid @enderror" value="{{$item->price}}" required/>
+											@endif
+										</div>
+										@error('price')
+											<span class="invalid-feedback" role="alert">
+												<strong>{{ $message }}</strong>
+											</span>
+										@enderror
+									</div>
+
+									<div class="form-group row">
+										<label for="description" class="col-md-4 col-form-label text-md-right">Description</label>
+
+										<div class="col-md-5">
+											@if ($errors->any())
+												<textarea rows="6" name="description" class="form-control @error('description') is-invalid @enderror" required>{{old('description')}}</textarea>
+											@else
+												<textarea rows="6" name="description" class="form-control @error('description') is-invalid @enderror" required>{{$item->description}}</textarea>
+											@endif
+										</div>
+										@error('description')
+											<span class="invalid-feedback" role="alert">
+												<strong>{{ $message }}</strong>
+											</span>
+										@enderror
+									</div>
+
+									<div class="form-group row">
+										<div class="col-md-5 offset-md-4">
+											<!-- Button trigger modal -->
+											<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModel">
+												Delete Images
+											</button>
+											<ul id="showDeletedFiles"></ul>
+											<input type="string[]" id="imagesDelete" name="imagesDelete" hidden/>
+										</div>
+									</div>
+
+									<div class="form-group row">
+										<label for="images" class="col-md-4 col-form-label text-md-right">Add New Images</label>
+
+										<div class="col-md-5">
+											<input type="file" name="images[]" class="form-control" multiple/>
+											<ul id="showUploadedFiles"></ul>
+										</div>
+									</div>
+
+									<div class="form-group row">
+										<div class="col-md-5 offset-md-4">
+											<button type="submit" class="btn btn-primary">
+                                                {{ __('Submit') }}
+                                            </button>
+										</div>
+									</div>
 
 									<fieldset>
-										<div class="form-group">
-												<label for="product_name">Phone name</label>
-												<input type="text" name="product_name" class="form-control" value="{!! $item->product_name !!}">
-										</div> 
-									
-										<div class="form-group">
-												<label for="price">Price</label>
-												<input type="number" name="price" class="form-control" value={{$item->price}}>
-										</div> 
-
-										<div class="form-group">
-												<label for="quantity">Quantity</label>
-												<input type="number" name="quantity" class="form-control" value={{$item->quantity}}>
-										</div> 
-
-										<div class="form-group">
-											<label for="brand">Brand</label>
-											<select name="brand" id="brand">
-												<option value="{{ $item->brand }}" selected hidden>{{ $item->brand }}</option>
-												@foreach ($brands as $brand)
-												<option value="{{ $brand->brand }}">{{ $brand->brand }}</option>
-												@endforeach
-											</select>
-										</div>
-
-										<div class="form-group">
-											<label for="condition">Condition</label>
-											<select name="condition" id="condition">
-												<option value="{{ $item->condition }}" selected hidden>{{ $item->condition }}</option>
-												@foreach ($conditions as $condition)
-												<option value="{{ $condition->condition }}">{{ $condition->condition }}</option>
-												@endforeach
-											</select>
-										</div>
-
-										<div class="form-group">
-											<label for="description">Description</label>
-										<textarea rows="4" name="description" class="form-control">{{$item->description}}</textarea>
-										</div>
-
-										
-
-
-										<!-- Button trigger modal -->
-										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModel">
-											Delete Images
-										</button>
 										
 										<!-- Modal -->
 										<div class="modal fade" id="deleteModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -98,47 +211,32 @@
 														</button>
 													</div>
 
-
 													<div class="modal-body">
 														{{-- gallery --}}
 														<div class="row">
-																<div class="col-md-12">
-																			<div class="mdb-lightbox">
-																				
-
-																				@foreach (json_decode($item->images) as $image)
-																					@if($loop->index % 3 == 0 )
-																					@if($loop->index % 3 == 0 & $loop->index != 0)
-																						</div>
-																					@endif
-																					<div class="row justify-content-center">
-																						<figure class="col-md-3 ml-1 mr-1" style="border: 1px black solid;" value="{{ $image }}" id="image_{{$loop->iteration}}" onclick="selectedImage({{$loop->iteration}})">
-																								<img alt="picture" src="/uploads/products/{{ $image }}" class="img-fluid">
-																						</figure>
-
-																						@else
-																						<figure class="col-md-3 ml-1 mr-1" style="border: 1px black solid;" value="{{ $image }}" id="image_{{$loop->iteration}}" onclick="selectedImage({{$loop->iteration}})">
-																					
-																								<img alt="picture" src="/uploads/products/{{ $image }}" class="img-fluid">
-																								
-																						</figure>
-																					@endif
-
-																					@if($loop->last)
-																						</div>
-																					@endif
-																					
-																				@endforeach
-
-																					
-
+															<div class="col-md-12">
+																<div class="mdb-lightbox">
+																	@foreach (json_decode($item->images) as $image)
+																		@if($loop->index % 3 == 0 )
+																			@if($loop->index % 3 == 0 & $loop->index != 0)
+																				</div>
+																			@endif
+																			<div class="row justify-content-center">
+																				<figure class="col-md-3 ml-1 mr-1" style="border: 1px black solid;" value="{{ $image }}" id="image_{{$loop->iteration}}" onclick="selectedImage({{$loop->iteration}})">
+																					<img alt="picture" src="/uploads/products/{{ $image }}" class="img-fluid">
+																				</figure>
+																		@else
+																				<figure class="col-md-3 ml-1 mr-1" style="border: 1px black solid;" value="{{ $image }}" id="image_{{$loop->iteration}}" onclick="selectedImage({{$loop->iteration}})">
+																					<img alt="picture" src="/uploads/products/{{ $image }}" class="img-fluid">
+																				</figure>
+																		@endif
+																		@if($loop->last)
 																			</div>
-
-
-																		
-																</div>
+																		@endif
+																	@endforeach
+																</div>		
+															</div>
 														</div>
-
 													</div>
 
 													<div class="modal-footer">
@@ -149,32 +247,16 @@
 											</div>
 										</div>
 
-										<ul id="showDeletedFiles"></ul>
+										
 
-										<input type="string[]" id="imagesDelete" name="imagesDelete" hidden/>
-
-										{{-- adding new images here --}}
+										{{-- adding new images here
 										<div class="form-group">
 											<label for="images">Add new Images</label>
 											<input type="file" name="images[]" class="form-control" multiple/>
-										</div>
+										</div> --}}
 
-										<ul id="showUploadedFiles"></ul>
-										
-
-
-
-										<div class="col text-center">
-											<button type="submit" class="btn btn-success mx-auto">Submit</button>
-										</div>
-												
 									
 									</fieldset> 
-									
-									
-								
-								
-								
 								</form>
 								
 								@if (count($errors)>0)
@@ -184,13 +266,6 @@
 								@endforeach
 								</div>
 								@endif
-
-								
-						
-									  
-									</div>
-								  </div>
-								</div>
                             </div>
                         </div>
                     </div>
@@ -263,11 +338,6 @@
 			ul.appendChild(li);
 		}
 	}
-
-
-
-
-	
 </script>
 
 @endsection
