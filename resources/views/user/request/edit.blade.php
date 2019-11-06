@@ -32,7 +32,7 @@
                                     </div>
                                 @endif
 				  
-								<h1 class="text-center">Edit Phone Search</h1>
+								<h3>Edit Phone Search</h3>
 								<form action="{{ route('phone-search.update', $req) }}" method="post">
                                     @csrf
                                     @method("put")

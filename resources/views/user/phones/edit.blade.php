@@ -33,12 +33,12 @@
 								@endif
 								<div class="row">
 									<div class="col-md-5">
-										<h3>Edit {{$item->product_name}}</h3>
+										<h3>Edit Phone</h3>
 									</div>
 								</div>
 								<form action="{{ route('phones.update', [$item]) }}" method="post" enctype="multipart/form-data">
 									@csrf
-									@method('PUT')
+									@method('POST')
 
 									<div class="form-group row">
 										<label for="product_name" class="col-md-4 col-form-label text-md-right">Phone Name</label>
@@ -61,7 +61,7 @@
 										<label for="brand" class="col-md-4 col-form-label text-md-right">Brand</label>
 
 										<div class="col-md-5">
-											<select name="brand" id="brand" class="form-control @error('brand') is-invalid @enderror">
+											<select name="brand" id="brand" class="form-control @error('brand') is-invalid @enderror" required>
                                                 @if ($errors->any())
                                                     @foreach ($brands as $brand)
                                                         @if (old("brand") == $brand->brand)
@@ -92,7 +92,7 @@
 										<label for="condition" class="col-md-4 col-form-label text-md-right">Condition</label>
 
 										<div class="col-md-5">
-											<select name="condition" id="condition" class="form-control @error('condition') is-invalid @enderror">
+											<select name="condition" id="condition" class="form-control @error('condition') is-invalid @enderror" required>
                                                 @if ($errors->any())
                                                     @foreach ($conditions as $condition)
                                                         @if (old("condition") == $condition->condition)
@@ -246,16 +246,6 @@
 												</div>
 											</div>
 										</div>
-
-										
-
-										{{-- adding new images here
-										<div class="form-group">
-											<label for="images">Add new Images</label>
-											<input type="file" name="images[]" class="form-control" multiple/>
-										</div> --}}
-
-									
 									</fieldset> 
 								</form>
 								
