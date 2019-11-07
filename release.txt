@@ -2,6 +2,7 @@ Release
 vsersion: 1.6
 
 Issues With Release
-1.	Create products form allows negative quantity. Must make quantity 1 or higher.
-2.	If there is an error in the form it returns the form with all fields cleared. on each input add the field value="{{ old('') }}". See admin/settings.blade.php for example.
-3.	Product Prices can’t have decimal places.
+GitHub Issue No., Name, Description
+#48, Edit Phone Images Deletes defaultPhone.png, When editing the phone images the user can delete the defaultPhone image.
+#47, Edit Phone Images, When editing phone without image originally and then add one via edit it doesn't delete the default phone image from the list of images.
+#45, Phone Details page slide has two control arrows, On the Phone description page the slide has two control arrows on each side.
