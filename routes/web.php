@@ -12,22 +12,23 @@
 */
 
 Route::get('/', 'WelcomeController@welcome');
+Route::post('search', 'WelcomeController@search')->name('search');
 
 Auth::routes();
 
-//Product Search Routes (Matching)
-Route::resource('product-search', 'ProductSearchController');
-Route::post('/product-search/results/{id}', 'ProductSearchController@results')->name('product-search.results');
+//Phone Search Routes (Matching)
+Route::resource('phone-search', 'ProductSearchController');
+Route::post('/phone-search/results/{id}', 'ProductSearchController@results')->name('phone-search.results');
 
 
-// project routes
-Route::get('/details/{product}', 'ProductsController@details')->name('product.details');
-Route::resource('products', 'ProductsController');
-Route::post('search', 'ProductsController@searchProduct')->name('product.search');
+//Phone routes
+Route::get('/details/{phone}', 'ProductsController@details')->name('phone.details');
+Route::resource('/phones', 'ProductsController');
+Route::post('/phones/search', 'ProductsController@searchProduct')->name('phone.search');
 
-// product images
-Route::get('/product-image','Product_ImageController@create')->name('image.create');
-Route::post('/product-image','Product_ImageController@store')->name('image.store');
+//Phone images
+Route::get('/phone-image','Product_ImageController@create')->name('image.create');
+Route::post('/phone-image','Product_ImageController@store')->name('image.store');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/settings', 'HomeController@settings')->name('settings');
@@ -36,11 +37,10 @@ Route::get('/user/logout', 'Auth\LoginController@userLogout')->name('user.logout
 
 //Administrator Routes
 Route::prefix('admin')->name('admin.')->group(function(){
-    //Administrator Products Routes
-    //These are the routes that allow the administrator to access and modify the products
-    Route::get('/product', 'AdminController@products')->name('product');
-    Route::delete('/product/{product}', 'AdminController@productDestroy')->name('product.destroy');
-    Route::post('/product/search', 'AdminController@productSearch')->name('product.search');
+    //Administrator Phone Routes
+    //These are the routes that allow the administrator to access and modify the Phones
+    Route::get('/phone', 'AdminController@products')->name('phone');
+    Route::post('/phone/search', 'AdminController@productSearch')->name('phone.search');
 
     //Administrator User Routes
     //These are the routes that allow the administrator to access and modify the users

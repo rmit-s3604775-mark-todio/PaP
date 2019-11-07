@@ -33,11 +33,11 @@
 
                                 <div class="row">
 									<div class="col">
-										<h3>Products</h3>
+										<h3>Phones</h3>
 									</div>
 									<div class="row">
                                         <div class="col justify-content-right">
-                                            <form class="searchForm" action="{{ route('admin.product.search') }}" method="post">
+                                            <form class="searchForm" action="{{ route('admin.phone.search') }}" method="post">
                                                 @csrf
                                                 <div class="col">
                                                     <input id="search" class="input-search @error('search') is-invalid @enderror" type="text" name="search" placeholder="Search for..." required />
@@ -56,7 +56,7 @@
 									<div class="col">
 										<table class="table">
 											<tr class="table-active">
-												<th>Product Name</th>
+												<th>Phone Name</th>
 												<th>Price</th>
 												<th>Quantity</th>
 												<th>Brand</th>
@@ -65,24 +65,24 @@
 												<th></th>
 												<th></th>
 											</tr>
-											@if (!$products->isEmpty())
-												@foreach($products as $product)
+											@if (!$phones->isEmpty())
+												@foreach($phones as $phone)
 													<tr class="table-default">
-														<td>{{$product->product_name}}</td>
-														<td>${{$product->price}}</td>
-														<td>{{$product->quantity}}</td>
-														<td>{{$product->brand}}</td>
-														<td>{{$product->condition}}</td>
-														<td>{{$product->rating}}</td>
+														<td>{{$phone->product_name}}</td>
+														<td>${{$phone->price}}</td>
+														<td>{{$phone->quantity}}</td>
+														<td>{{$phone->brand}}</td>
+														<td>{{$phone->condition}}</td>
+														<td>{{$phone->rating}}</td>
 														<td>
-															<a href="{{ url('/details', [$product])}}" data-toggle="tooltip" title="Details">
+															<a href="{{ route('phones.show', [$phone])}}" data-toggle="tooltip" title="Details">
 																<button class="btn btn-secondary" >
 																	<i class="fa fa-info"></i>
 																</button>
 															</a>
 														</td>
 														
-														<td><form action="{{ route('admin.product.destroy', [$product]) }}" method="post">
+														<td><form action="{{ route('phones.destroy', [$phone]) }}" method="post">
 															<button class="btn btn-danger" type="submit" data-toggle="tooltip" title="Delete">
 																<i class="fa fa-trash"></i>
 															</button>
@@ -96,16 +96,16 @@
 										</table>
 									</div>
 								</div>
-								@if ($products->isEmpty())
+								@if ($phones->isEmpty())
 								<div class="row">
 									<div class="col text-center">
-										<h3>No Products Found</h3>
+										<h3>No Phones Found</h3>
 									</div>
 								</div>
 								@endif
 								<div class="row justify-content-center">
 									<div class="links">
-										{{ $products->links() }}
+										{{ $phones->links() }}
 									</div>
 								</div>
                             </div>

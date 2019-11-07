@@ -34,7 +34,7 @@
                                 @endif
                                 <div class="row">
                                     <div class="col">
-                                        <h3>Product Search Matches</h3>
+                                        <h3>Phone Search Matches</h3>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -60,7 +60,7 @@
                                     <div class="col">
                                         <table class="table">
                                             <tr class="table-active">
-                                                <th>Product Name</th>
+                                                <th>Phone Name</th>
                                                 <th>Price</th>
                                                 <th>Quantity</th>
                                                 <th>Brand</th>
@@ -69,16 +69,16 @@
                                                 <th></th>
                                             </tr>
                                             @if (!$results->isEmpty())
-                                                @foreach($results as $product)
+                                                @foreach($results as $phone)
                                                     <tr class="table-default">
-                                                        <td>{{$product->product_name}}</td>
-                                                        <td>${{$product->price}}</td>
-                                                        <td>{{$product->quantity}}</td>
-                                                        <td>{{$product->brand}}</td>
-                                                        <td>{{$product->condition}}</td>
-                                                        <td>{{$product->rating}}</td>
+                                                        <td>{{$phone->product_name}}</td>
+                                                        <td>${{$phone->price}}</td>
+                                                        <td>{{$phone->quantity}}</td>
+                                                        <td>{{$phone->brand}}</td>
+                                                        <td>{{$phone->condition}}</td>
+                                                        <td>{{$phone->rating}}</td>
                                                         <td>
-                                                            <a href="{{ url('/details', [$product])}}" data-toggle="tooltip" title="Details">
+                                                            <a href="{{ url('/details', [$phone])}}" data-toggle="tooltip" title="Details">
                                                                 <button class="btn btn-secondary" >
                                                                     <i class="fa fa-info"></i>
                                                                 </button>
@@ -91,7 +91,7 @@
                                         @if ($results->isEmpty())
                                         <div class="row">
                                             <div class="col text-center">
-                                                <h3>No Products Found</h3>
+                                                <h3>No Phones Found</h3>
                                             </div>
                                         </div>
                                         @else

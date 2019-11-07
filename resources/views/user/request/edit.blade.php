@@ -32,16 +32,20 @@
                                     </div>
                                 @endif
 				  
-								<h1 class="text-center">Edit Product Search</h1>
-								<form action="{{ route('product-search.update', $req) }}" method="post">
+								<h3>Edit Phone Search</h3>
+								<form action="{{ route('phone-search.update', $req) }}" method="post">
                                     @csrf
                                     @method("put")
 
                                     <div class="form-group row">
-                                        <label for="product_name" class="col-md-4 col-form-label text-md-right">Product Name</label>
+                                        <label for="product_name" class="col-md-4 col-form-label text-md-right">Phone Name</label>
 
                                         <div class="col-md-5">
-                                            <input type="text" name="product_name" id="product_name" class="form-control @error('product_name') is-invalid @enderror" value="{{$req->product_name}}" required/>
+                                            @if ($errors->any())
+                                                <input type="text" name="product_name" id="product_name" class="form-control @error('product_name') is-invalid @enderror" value="{{ old('product_name') }}" required/>
+                                            @else
+                                                <input type="text" name="product_name" id="product_name" class="form-control @error('product_name') is-invalid @enderror" value="{{$req->product_name}}" required/>
+                                            @endif
                                         </div>
                                         @error('product_name')
                                             <span class="invalid-feedback" role="alert">
@@ -55,18 +59,33 @@
 
                                         <div class="col-md-5">
                                             <select name="brand" id="brand" class="form-control @error('brand') is-invalid @enderror">
-												@if ($req->brand == null)
-													<option vlaue="" selected>None</option>
-												@else
-													<option vlaue="">None</option>
-												@endif
-												@foreach ($brands as $brand)
-													@if ($brand->brand == $req->brand)
-														<option value="{{ $brand->brand }}" selected>{{ $brand->brand }}</option>
-													@else
-														<option value="{{ $brand->brand }}">{{ $brand->brand }}</option>
-													@endif
-                                                @endforeach
+                                                @if ($errors->any())
+                                                    @if (old("brand") == null)
+                                                        <option value="None" selected>None</option>
+                                                    @else
+                                                        <option value="None">None</option>
+                                                    @endif
+                                                    @foreach ($brands as $brand)
+                                                        @if (old("brand") == $brand->brand)
+                                                            <option value="{{ $brand->brand }}" selected>{{ $brand->brand }}</option>
+                                                        @else
+                                                            <option value="{{ $brand->brand }}">{{ $brand->brand }}</option>
+                                                        @endif
+                                                    @endforeach
+                                                @else
+                                                    @if ($req->brand == null)
+                                                        <option value="None" selected>None</option>
+                                                    @else
+                                                        <option value="None">None</option>
+                                                    @endif
+                                                    @foreach ($brands as $brand)
+                                                        @if ($brand->brand == $req->brand)
+                                                            <option value="{{ $brand->brand }}" selected>{{ $brand->brand }}</option>
+                                                        @else
+                                                            <option value="{{ $brand->brand }}">{{ $brand->brand }}</option>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
                                             </select>
                                         </div>
                                         @error('brand')
@@ -81,19 +100,33 @@
 
                                         <div class="col-md-5">
                                             <select name="condition" id="condition" class="form-control @error('condition') is-invalid @enderror">
-												@if ($req->condition == null)
-													<option vlaue="" selected>None</option>
-												@else
-													<option vlaue="">None</option>
-												@endif
-												@foreach ($conditions as $condition)
-												@if ($condition->condition == $req->condition)
-												<option value="{{ $condition->condition }}" selected>{{ $condition->condition }}</option>
-												@else
-												<option value="{{ $condition->condition }}">{{ $condition->condition }}</option>
-												@endif
-                                                
-                                                @endforeach
+                                                @if ($errors->any())
+                                                    @if (old("condition") == null)
+                                                        <option value="None" selected>None</option>
+                                                    @else
+                                                        <option value="None">None</option>
+                                                    @endif
+                                                    @foreach ($conditions as $condition)
+                                                        @if (old("condition") == $condition->condition)
+                                                            <option value="{{ $condition->condition }}" selected>{{ $condition->condition }}</option>
+                                                        @else
+                                                            <option value="{{ $condition->condition }}">{{ $condition->condition }}</option>
+                                                        @endif
+                                                    @endforeach
+                                                @else
+                                                    @if ($req->condition == null)
+                                                        <option value="None" selected>None</option>
+                                                    @else
+                                                        <option value="None">None</option>
+                                                    @endif
+                                                    @foreach ($conditions as $condition)
+                                                        @if ($condition->condition == $req->condition)
+                                                            <option value="{{ $condition->condition }}" selected>{{ $condition->condition }}</option>
+                                                        @else
+                                                            <option value="{{ $condition->condition }}">{{ $condition->condition }}</option>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
                                             </select>
                                         </div>
                                         @error('condition')
@@ -107,7 +140,11 @@
                                         <label for="min_price" class="col-md-4 col-form-label text-md-right">Min Price</label>
 
                                         <div class="col-md-5">
-                                            <input type="number" step="any" min="0" name="min_price" id="min_price" class="form-control @error('min_price') is-invalid @enderror" value="{{ $req->min_price }}"/>
+                                            @if ($errors->any())
+                                                <input type="number" step="any" min="0" name="min_price" id="min_price" class="form-control @error('min_price') is-invalid @enderror" value="{{ old("min_price") }}"/>
+                                            @else
+                                                <input type="number" step="any" min="0" name="min_price" id="min_price" class="form-control @error('min_price') is-invalid @enderror" value="{{ $req->min_price }}"/>
+                                            @endif
                                         </div>
                                         @error('min_price')
                                             <span class="invalid-feedback" role="alert">
@@ -120,7 +157,11 @@
                                         <label for="max_price" class="col-md-4 col-form-label text-md-right">Max Price</label>
 
                                         <div class="col-md-5">
-                                            <input type="number" step="any" min="0" name="max_price" id="max_price" class="form-control @error('max_price') is-invalid @enderror" value="{{ $req->max_price }}"/>
+                                            @if ($errors->any())
+                                                <input type="number" step="any" min="0" name="max_price" id="max_price" class="form-control @error('max_price') is-invalid @enderror" value="{{ old("max_price") }}"/>
+                                            @else
+                                                <input type="number" step="any" min="0" name="max_price" id="max_price" class="form-control @error('max_price') is-invalid @enderror" value="{{ $req->max_price }}"/>
+                                            @endif
                                         </div>
                                         @error('max_price')
                                             <span class="invalid-feedback" role="alert">

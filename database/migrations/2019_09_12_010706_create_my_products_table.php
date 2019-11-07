@@ -21,16 +21,12 @@ class CreateMyProductsTable extends Migration
             $table->string('images')->default('defaultPhone.png');
 			$table->decimal('price', 8,2);	// highest number 99,999,999.99
 			$table->integer('quantity');
-			
-			
 			$table->string('brand');
 			$table->foreign('brand')->references('brand')->on('brands');
             $table->string('condition');
             $table->foreign('condition')->references('condition')->on('conditions');
-            
-            $table->string('description');
+            $table->text('description');
             $table->double('rating');	// may need to change this data type
-            
             $table->timestamps();
         });
     }

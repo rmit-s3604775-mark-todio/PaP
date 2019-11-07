@@ -33,7 +33,7 @@ class ProductSearchController extends Controller
         $user = Auth::user();
         $requests = ProductRequest::where('user_id', $user->id)->paginate(15);
 
-        return view('user.request.products', compact('requests'));
+        return view('user.request.phones', compact('requests'));
     }
 
     /**
@@ -55,7 +55,7 @@ class ProductSearchController extends Controller
      */
     public function store(Request $request)
     {
-        $productRequest = new ProductRequest;
+        $phoneRequest = new ProductRequest;
         $this->validate($request, [ //This is for validating, basically like ensuring you put the right type or value.
             "product_name" => ['required'],
             "brand" => ['nullable', 'exists:brands,brand'],
@@ -66,29 +66,29 @@ class ProductSearchController extends Controller
 
         $user = Auth::user();
 
-        $productRequest->product_name = $request->product_name;
-        $productRequest->user_id = $user->id;
-        $productRequest->brand = $request->brand;
-        $productRequest->condition = $request->condition;
-        $productRequest->max_price = $request->max_price;
-        $productRequest->min_price = $request->min_price;
+        $phoneRequest->product_name = $request->product_name;
+        $phoneRequest->user_id = $user->id;
+        $phoneRequest->brand = $request->brand;
+        $phoneRequest->condition = $request->condition;
+        $phoneRequest->max_price = $request->max_price;
+        $phoneRequest->min_price = $request->min_price;
         
-        $productRequest->save();
-		return redirect()->route('product-search.index');
+        $phoneRequest->save();
+		return redirect()->route('phone-search.index');
 		
-        //return view('user.request.products'); (no need)
+        //return view('user.request.phones'); (no need)
     }
 
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\ProductRequest  $productRequest
+     * @param  \App\ProductRequest  $phoneRequest
      * @return \Illuminate\Http\Response
      */
-    public function show(ProductRequest $productRequest)
+    public function show(ProductRequest $phoneRequest)
     {
-        $req = DB::table('requests')->where($productRequest)->get();
+        $req = DB::table('requests')->where($phoneRequest)->get();
         return $req;
     }
 
@@ -153,7 +153,7 @@ class ProductSearchController extends Controller
 		
 		$req->save();
 		
-		return redirect()->route('product-search.index');
+		return redirect()->route('phone-search.index');
     }
 
     /**
@@ -166,39 +166,39 @@ class ProductSearchController extends Controller
     { //This is also my part (Ega). This will remove a data in Product request. This will also be removed from database
 		DB::table('requests')->where('id', $id)->delete();
 		
-		/**return redirect('products');*/
+		/**return redirect('phones');*/
 		
-		return redirect()->route('product-search.index');
+		return redirect()->route('phone-search.index');
     }
 
     /**
-     * Matching of products to product search (aka product request)
+     * Matching of phones to phone search (aka phone request)
      * 
      * @param ProductRequest $ps
      * @return Eloquent $results
      */
     public function match(ProductRequest $ps)
     {
-        $productConstraint = new product;
-        $productConstraint = $productConstraint->where('user_id', '!=', Auth::user()->id);
+        $phoneConstraint = new product;
+        $phoneConstraint = $phoneConstraint->where('user_id', '!=', Auth::user()->id);
 
         if($ps->max_price != null) {
-            $productConstraint = $productConstraint->where('price', '<=', 150);
+            $phoneConstraint = $phoneConstraint->where('price', '<=', 150);
         }
 
         if($ps->min_price != null) {
-            $productConstraint = $productConstraint->where('price', '>=', $ps->min_price);
+            $phoneConstraint = $phoneConstraint->where('price', '>=', $ps->min_price);
         }
 
         if($ps->brand != null) {
-            $productConstraint = $productConstraint->where('brand', $ps->brand);
+            $phoneConstraint = $phoneConstraint->where('brand', $ps->brand);
         }
 
         if($ps->condition != null) {
-            $productConstraint = $productConstraint->where('condition', $ps->condition);
+            $phoneConstraint = $phoneConstraint->where('condition', $ps->condition);
         }
 
-        $results = product::search($ps->product_name)->constrain($productConstraint);
+        $results = product::search($ps->product_name)->constrain($phoneConstraint);
         return $results;
     }
 

@@ -35,7 +35,7 @@
                                         {{ session('status') }}
                                     </div>
                                 @endif
-                                <h3>Top 10 Latest Phones</h3>
+
                                 @component('components.phone-list', ['phones' => $phones])
                                 @endcomponent
                             </div>

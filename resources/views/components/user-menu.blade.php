@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-    <img id="menu-avatar" class="avatar" src="/uploads/avatars/{{ Auth::user()->avatar }}">
+    <img class="avatar avatar-lg" src="/uploads/avatars/{{ Auth::guard('web')->user()->avatar }}">
 </div>
 <div class="row main-menu">
     <div class="col">
@@ -9,11 +9,11 @@
         <a href="{{ route('settings') }}" class="row menu-item">
             {{ __('Settings') }}
         </a>
-        <a href="{{ route('products.index') }}" class="row menu-item">
-            {{ __('Products') }}
+        <a href="{{ route('phones.index') }}" class="row menu-item">
+            {{ __('Phones') }}
         </a>
-        <a href="{{ route('product-search.index') }}" class="row menu-item">
-            {{ __('Product Searches') }}
+        <a href="{{ route('phone-search.index') }}" class="row menu-item">
+            {{ __('Phone Searches') }}
         </a>
         {{-- <a href="" class="row menu-item">
             {{  __('Reviews') }}

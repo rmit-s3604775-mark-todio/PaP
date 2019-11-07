@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-    <img class="avatar avatar-lg" src="/uploads/avatars/{{ Auth::user()->avatar }}">
+    <img class="avatar avatar-lg" src="/uploads/avatars/{{ Auth::guard('admin')->user()->avatar }}">
 </div>
 <div class="row main-menu">
     <div class="col">
@@ -15,8 +15,8 @@
         <a href="{{ route('admin.administrators') }}" class="row menu-item">
             {{ __('Administrators') }}
         </a>
-        <a href="{{ route('admin.product') }}" class="row menu-item">
-            {{  __('Products') }}
+        <a href="{{ route('admin.phone') }}" class="row menu-item">
+            {{  __('Phones') }}
         </a>
         <a href="{{ route('admin.messages') }}" class="row menu-item">
             {{ __('Messages') }}
