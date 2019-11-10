@@ -11,10 +11,12 @@
 Please see development guide to get started.
 
 # Default User
+**Login URL Extenstion:** /login
 **Email:** user@user.com
 **Password:** password
 
 # Default Admin
+**Login URL Extenstion:** /admin
 **Email:** admin@admin.com
 **Password:** password
 
