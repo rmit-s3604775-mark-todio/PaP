@@ -183,7 +183,7 @@ class ProductSearchController extends Controller
         $phoneConstraint = $phoneConstraint->where('user_id', '!=', Auth::user()->id);
 
         if($ps->max_price != null) {
-            $phoneConstraint = $phoneConstraint->where('price', '<=', 150);
+            $phoneConstraint = $phoneConstraint->where('price', '<=', $ps->max_price);
         }
 
         if($ps->min_price != null) {

@@ -148,6 +148,15 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request,[
+			"product_name"=>'required',
+			"price"=>'required',
+			"quantity"=> ['required', 'numeric', 'min:0'],
+			"brand"=>'required',
+            "condition"=>'required',
+            "description" => 'required'
+        ]);
+
         $phone = product::find($id);
 
         // get the values taht are to be deleted
@@ -167,7 +176,7 @@ class ProductsController extends Controller
             // delete images from folder
             foreach($imagesDelArray as $imageDel)
             {  
-                if(File::exists(public_path('/uploads/products/'. $imageDel))) {
+                if(File::exists(public_path('/uploads/products/'. $imageDel)) && $imageDel != 'defaultPhone.png') {
                     File::delete(public_path('/uploads/products/'. $imageDel));
                 }
             }
@@ -187,9 +196,13 @@ class ProductsController extends Controller
                     $constraint->aspectRatio();
                 })->save( public_path('/uploads/products/'. $filename) );
             }
-          
-            $combineArray = array_merge($updatedValues, $images_array);
-            $phone->images = json_encode($combineArray);
+
+            if(in_array("defaultPhone.png",$updatedValues)) {
+                $phone->images = json_encode($images_array);
+            }else{
+                $combineArray = array_merge($updatedValues, $images_array);
+                $phone->images = json_encode($combineArray);
+            }
         }else{
             if(empty($updatedValues)){
                 $updatedValues[] = "defaultPhone.png";
@@ -198,15 +211,6 @@ class ProductsController extends Controller
                 $phone->images = json_encode($updatedValues);
             }
         }
-
-		$this->validate($request,[
-			"product_name"=>'required',
-			"price"=>'required',
-			"quantity"=> ['required', 'numeric', 'min:0'],
-			"brand"=>'required',
-            "condition"=>'required',
-            "description" => 'required'
-        ]);
       
         // need to remove rating
         $phone->rating = 5;
