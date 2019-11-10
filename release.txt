@@ -1,8 +1,7 @@
 Release
-vsersion: 1.6
+vsersion: 2.1
 
 Issues With Release
 GitHub Issue No., Name, Description
-#48, Edit Phone Images Deletes defaultPhone.png, When editing the phone images the user can delete the defaultPhone image.
 #47, Edit Phone Images, When editing phone without image originally and then add one via edit it doesn't delete the default phone image from the list of images.
 #45, Phone Details page slide has two control arrows, On the Phone description page the slide has two control arrows on each side.
