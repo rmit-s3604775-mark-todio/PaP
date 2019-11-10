@@ -10,6 +10,14 @@
 **********
 Please see development guide to get started.
 
+# Default User
+**Email:** user@user.com
+**Password:** password
+
+# Default Admin
+**Email:** admin@admin.com
+**Password:** password
+
 # Github
 **URL:** https://github.com/rmit-s3604775-mark-todio/PaP<br/>
 
