@@ -156,7 +156,7 @@ class ProductsController extends Controller
             "condition"=>'required',
             "description" => 'required'
         ]);
-        
+
         $phone = product::find($id);
 
         // get the values taht are to be deleted
@@ -196,9 +196,13 @@ class ProductsController extends Controller
                     $constraint->aspectRatio();
                 })->save( public_path('/uploads/products/'. $filename) );
             }
-          
-            $combineArray = array_merge($updatedValues, $images_array);
-            $phone->images = json_encode($combineArray);
+
+            if(in_array("defaultPhone.png",$updatedValues)) {
+                $phone->images = json_encode($images_array);
+            }else{
+                $combineArray = array_merge($updatedValues, $images_array);
+                $phone->images = json_encode($combineArray);
+            }
         }else{
             if(empty($updatedValues)){
                 $updatedValues[] = "defaultPhone.png";
