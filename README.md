@@ -11,14 +11,14 @@
 Please see development guide to get started.
 
 # Default User
-**Login URL Extenstion:** /login
-**Email:** user@user.com
-**Password:** password
+**Login URL Extenstion:** /login<br/>
+**Email:** user@user.com<br/>
+**Password:** password<br/>
 
 # Default Admin
-**Login URL Extenstion:** /admin
-**Email:** admin@admin.com
-**Password:** password
+**Login URL Extenstion:** /admin<br/>
+**Email:** admin@admin.com<br/>
+**Password:** password<br/>
 
 # Github
 **URL:** https://github.com/rmit-s3604775-mark-todio/PaP<br/>
