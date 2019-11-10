@@ -3,5 +3,4 @@ vsersion: 2.1
 
 Issues With Release
 GitHub Issue No., Name, Description
-#47, Edit Phone Images, When editing phone without image originally and then add one via edit it doesn't delete the default phone image from the list of images.
 #45, Phone Details page slide has two control arrows, On the Phone description page the slide has two control arrows on each side.
